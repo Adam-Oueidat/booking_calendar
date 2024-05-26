@@ -1,5 +1,8 @@
+"use client";
 import { get } from "http";
 import Day from "./day";
+import Month from "./month";
+import { useState } from "react";
 
 function Calendar() {
   const date = new Date();
@@ -40,49 +43,43 @@ function Calendar() {
       days = 29;
     }
   }
-  function getWeekday(year: number, month: number, day: number) {
-    return new Date(year, month, day).getDay();
-  }
 
-  function getFirstDayOfMonth(year: number, month: number) {
-    return new Date(year, month, 0).getDay();
+  const [month, setMonth] = useState(currentMonth);
+  function nextMonth() {
+    setMonth((month + 1) % 12);
   }
-  let firstDayOfMonth = getFirstDayOfMonth(currentYear, currentMonth);
+  function previousMonth() {
+    if (month === 0) {
+      setMonth(11);
+    }else{
+    setMonth((month - 1) % 12);
+    }
+  }
 
   return (
     <>
       <div>
         <h2 className="text-2xl font-bold">
-          {monthNames[currentMonth]} {currentYear}
+          {monthNames[month]} {currentYear}
         </h2>
       </div>
-      <div className="grid grid-cols-7 gap-2">
-        {Array(firstDayOfMonth)
-          .fill(null)
-          .map((_, i) => (
-            <div key={`empty-${i}`} />
-          ))}
-        {Object.entries(calendarEvents[currentMonth + 1]).map(
-          ([date, event], i) => {
-            let weekday = getWeekday(currentYear, currentMonth, parseInt(date));
-            return (
-              <div key={i}>
-                <Day
-                  date={parseInt(date)}
-                  event={event as boolean}
-                  currentWeekday={weekday}
-                />
-              </div>
-            );
-          }
-        )}
-      </div>
+      <Month
+        currentMonth={month}
+        currentYear={currentYear}
+        calendarEvents={calendarEvents}
+      />
       <div>
         <div className="flex justify-between">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={previousMonth}
+          >
             Previous
           </button>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={nextMonth}
+          >
             Next
           </button>
         </div>

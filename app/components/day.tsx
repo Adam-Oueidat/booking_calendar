@@ -13,8 +13,8 @@ function Day({ date, event: initialEvent, currentWeekday }: DayProps) {
     setEvent(!currentEvent);
   }
   const divClass = currentEvent
-    ? "w-24 h-48 hover:bg-gray-700 bg-gray-500 p-2 rounded"
-    : "w-24 h-48 hover:bg-blue-700 bg-blue-500 p-2 rounded";
+    ? "w-24 h-24 hover:bg-gray-700 bg-gray-500 p-2 rounded"
+    : "w-24 h-24 hover:bg-blue-700 bg-blue-500 p-2 rounded";
 
   return (
     <>
