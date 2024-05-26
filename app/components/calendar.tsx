@@ -1,3 +1,4 @@
+import { get } from "http";
 import Day from "./day";
 
 function Calendar() {
@@ -17,6 +18,15 @@ function Calendar() {
     "November",
     "December",
   ];
+
+  let calendarEvents: { [key: number]: any } = {};
+  for (let i = 1; i <= 12; i++) {
+    calendarEvents[i] = {};
+    for (let j = 1; j <= daysInMonth[i - 1]; j++) {
+      calendarEvents[i][j] = false;
+    }
+  }
+
   const currentMonth = date.getMonth();
   const currentYear = date.getFullYear();
   let days = daysInMonth[currentMonth];
@@ -30,6 +40,14 @@ function Calendar() {
       days = 29;
     }
   }
+  function getWeekday(year: number, month: number, day: number) {
+    return new Date(year, month, day).getDay();
+  }
+
+  function getFirstDayOfMonth(year: number, month: number) {
+    return new Date(year, month, 0).getDay();
+  }
+  let firstDayOfMonth = getFirstDayOfMonth(currentYear, currentMonth);
 
   return (
     <>
@@ -39,11 +57,25 @@ function Calendar() {
         </h2>
       </div>
       <div className="grid grid-cols-7 gap-2">
-        {[...Array(days)].map((_x, i) => (
-          <div key={i}>
-            <Day value={i + 1} />
-          </div>
-        ))}
+        {Array(firstDayOfMonth)
+          .fill(null)
+          .map((_, i) => (
+            <div key={`empty-${i}`} />
+          ))}
+        {Object.entries(calendarEvents[currentMonth + 1]).map(
+          ([date, event], i) => {
+            let weekday = getWeekday(currentYear, currentMonth, parseInt(date));
+            return (
+              <div key={i}>
+                <Day
+                  date={parseInt(date)}
+                  event={event as boolean}
+                  currentWeekday={weekday}
+                />
+              </div>
+            );
+          }
+        )}
       </div>
       <div>
         <div className="flex justify-between">
