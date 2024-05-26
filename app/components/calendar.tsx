@@ -51,8 +51,8 @@ function Calendar() {
   function previousMonth() {
     if (month === 0) {
       setMonth(11);
-    }else{
-    setMonth((month - 1) % 12);
+    } else {
+      setMonth((month - 1) % 12);
     }
   }
 
