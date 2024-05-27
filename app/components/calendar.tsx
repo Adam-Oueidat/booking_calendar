@@ -45,12 +45,21 @@ function Calendar() {
   }
 
   const [month, setMonth] = useState(currentMonth);
+  const [year, setYear] = useState(currentYear);
+
   function nextMonth() {
-    setMonth((month + 1) % 12);
+    if (month === 11) {
+      setMonth(0);
+      setYear(year + 1);
+    } else {
+      setMonth((month + 1) % 12);
+    }
   }
+  
   function previousMonth() {
     if (month === 0) {
       setMonth(11);
+      setYear(year - 1);
     } else {
       setMonth((month - 1) % 12);
     }
@@ -59,13 +68,14 @@ function Calendar() {
   return (
     <>
       <div>
+        <h1 className="text-4xl text-wrap  font-extrabold">Kom bo hos oss</h1>
         <h2 className="text-2xl font-bold">
-          {monthNames[month]} {currentYear}
+          {monthNames[month]} {year}
         </h2>
       </div>
       <Month
         currentMonth={month}
-        currentYear={currentYear}
+        currentYear={year}
         calendarEvents={calendarEvents}
       />
       <div>
