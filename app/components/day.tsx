@@ -1,20 +1,54 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 interface DayProps {
   date: number;
   event: boolean;
   currentWeekday: number;
+  calendarEvents: { [key: number]: any };
 }
 
-function Day({ date, event: initialEvent, currentWeekday }: DayProps) {
+function Day({
+  date,
+  event: initialEvent,
+  currentWeekday,
+  calendarEvents,
+}: DayProps) {
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const [currentEvent, setEvent] = useState(initialEvent);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [calendarEvent, setCalendarEvents] = useState(calendarEvents);
 
-  function addEvent() {
-    setEvent(true);
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+function addEvent() {
+    const start = new Date(fromDate);
+    const end = new Date(toDate);
+    const newCalendarEvents = { ...calendarEvent };
+
+    for (let dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
+            const month = dt.getMonth();
+            const date = dt.getDate();
+            newCalendarEvents[month][date] = false;
+    }
+
+    setCalendarEvents(newCalendarEvents);
     setModalOpen(false);
-  }
+}
 
   function removeEvent() {
     setEvent(false);
@@ -50,6 +84,8 @@ function Day({ date, event: initialEvent, currentWeekday }: DayProps) {
               id="event-date-from"
               name="event-date-from"
               className=""
+              value={fromDate}
+              onChange={(e) => setFromDate(e.target.value)}
             />
 
             <label htmlFor="event-date-to">To: </label>
@@ -58,6 +94,8 @@ function Day({ date, event: initialEvent, currentWeekday }: DayProps) {
               id="event-date-to"
               name="event-date-to"
               className=""
+              value={toDate}
+              onChange={(e) => setToDate(e.target.value)}
             />
             {!currentEvent && (
               <button

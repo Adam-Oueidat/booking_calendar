@@ -35,6 +35,7 @@ const Month: React.FC<MonthProps> = ({currentMonth, currentYear, calendarEvents}
                   date={parseInt(date)}
                   event={event as boolean}
                   currentWeekday={weekday}
+                  calendarEvents={calendarEvents}
                 />
               </div>
             );
