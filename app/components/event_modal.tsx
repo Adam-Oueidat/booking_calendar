@@ -26,20 +26,6 @@ const EventModal: React.FC<EventModalProps> = ({
 
           <p>Event for {date}</p>
             <ModalForm />
-            {!currentEvent && (
-              <button className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded">
-                Add Event
-              </button>
-            )}
-            {currentEvent && (
-              <button
-                className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
-                onClick={removeEvent}
-              >
-                Remove event
-              </button>
-            )}
-
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
               onClick={closeModal}

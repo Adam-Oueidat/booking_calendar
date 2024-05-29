@@ -1,26 +1,30 @@
-import React from 'react';
-import Day from './day';
+import React from "react";
+import Day from "./day";
 
 interface MonthProps {
-    currentYear: number;
-    currentMonth: number;
-    calendarEvents: { [key: number]: any };
+  currentYear: number;
+  currentMonth: number;
+  calendarEvents: { [key: number]: any };
+  events: any;
 }
 
+const Month: React.FC<MonthProps> = ({
+  currentMonth,
+  currentYear,
+  calendarEvents,
+  events,
+}) => {
+  function getWeekday(year: number, month: number, day: number) {
+    return new Date(year, month, day).getDay();
+  }
 
-
-const Month: React.FC<MonthProps> = ({currentMonth, currentYear, calendarEvents}) => {
-    function getWeekday(year: number, month: number, day: number) {
-            return new Date(year, month, day).getDay();
-        }
-    
-        function getFirstDayOfMonth(year: number, month: number) {
-            return new Date(year, month, 0).getDay();
-        }
-        let firstDayOfMonth = getFirstDayOfMonth(currentYear, currentMonth);
-    return (
-        <>
-        <div className="grid grid-cols-7 gap-2">
+  function getFirstDayOfMonth(year: number, month: number) {
+    return new Date(year, month, 0).getDay();
+  }
+  let firstDayOfMonth = getFirstDayOfMonth(currentYear, currentMonth);
+  return (
+    <>
+      <div className="grid grid-cols-7 gap-2">
         {Array(firstDayOfMonth)
           .fill(null)
           .map((_, i) => (
@@ -32,18 +36,21 @@ const Month: React.FC<MonthProps> = ({currentMonth, currentYear, calendarEvents}
             return (
               <div key={i}>
                 <Day
+                  month={currentMonth}
+                  year={currentYear}
                   date={parseInt(date)}
                   event={event as boolean}
                   currentWeekday={weekday}
                   calendarEvents={calendarEvents}
+                  events={events}
                 />
               </div>
             );
           }
         )}
       </div>
-      </>
-    );
+    </>
+  );
 };
 
 export default Month;

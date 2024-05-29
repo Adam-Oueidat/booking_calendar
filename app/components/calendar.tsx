@@ -4,7 +4,7 @@ import Day from "./day";
 import Month from "./month";
 import { useState } from "react";
 
-function Calendar() {
+function Calendar({ events } : any) {
   const date = new Date();
   const daysInMonth = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
   const monthNames = [
@@ -77,6 +77,7 @@ function Calendar() {
         currentMonth={month}
         currentYear={year}
         calendarEvents={calendarEvents}
+        events={events}
       />
       <div>
         <div className="flex justify-between">

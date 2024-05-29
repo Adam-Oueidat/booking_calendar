@@ -22,5 +22,6 @@ export async function addEvent (state: void, formData: FormData) {
         endDate: toDate,
       },
     });
-    revalidatePath("/calendar");
+
+    revalidatePath("/");
   };
