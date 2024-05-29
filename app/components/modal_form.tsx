@@ -1,5 +1,5 @@
 import { useFormStatus } from "react-dom";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { addEvent } from "@/app/components/actions";
 
 const initialState = void 0;
@@ -7,7 +7,6 @@ const initialState = void 0;
 
 function SubmitButton() {
   const { pending } = useFormStatus();
-
   return (
     <button className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded">
       Add Event
@@ -16,7 +15,7 @@ function SubmitButton() {
 }
 
 export default function ModalForm() {
-  const [state, formAction] = useFormState(addEvent, initialState);
+  const [state, formAction] = useActionState(addEvent, initialState);
 
   return (
     <form action={formAction}>

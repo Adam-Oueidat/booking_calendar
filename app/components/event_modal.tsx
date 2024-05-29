@@ -13,9 +13,7 @@ interface EventModalProps {
 const EventModal: React.FC<EventModalProps> = ({
   currentEvent,
   closeModal,
-  removeEvent,
   date,
-  calendarEvents,
 }) => {
 
   return (
