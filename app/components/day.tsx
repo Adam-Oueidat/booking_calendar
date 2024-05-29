@@ -76,15 +76,11 @@ function addEvent() {
       </div>
       {isModalOpen && (
         <EventModal 
-            date={date}
-            fromDate={fromDate}
-            toDate={toDate}
-            setFromDate={setFromDate}
-            setToDate={setToDate}
             currentEvent={currentEvent}
-            addEvent={addEvent}
+            date={date}
             closeModal={closeModal}
             removeEvent={removeEvent}
+            calendarEvents={calendarEvents}
         />
       )}
     </>
