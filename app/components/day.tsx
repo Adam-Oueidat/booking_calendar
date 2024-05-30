@@ -55,15 +55,13 @@ function Day({
     const datesList = events.value;
     const jsonArray = JSON.parse(datesList);
     const currentDate = new Date(year, month, date).setHours(0, 0, 0, 0);
-    console.log("Current Date: ", currentDate);
     if (!jsonArray) {
       return false;
     }
     return jsonArray.some((event: any) => {
-        const startDate = new Date(event.startDate.replace('$D', '')).getTime();
-        const endDate = new Date(event.endDate.replace('$D', '')).getTime();
+        const startDate = new Date(event.startDate.replace('$D', '')).setHours(0, 0, 0, 0);
+        const endDate = new Date(event.endDate.replace('$D', '')).setHours(0, 0, 0, 0);
         if (currentDate >= startDate && currentDate <= endDate) {
-            console.log("Event found");
             return true;
           }
     });
