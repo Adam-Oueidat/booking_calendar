@@ -22,6 +22,14 @@ function Day({
 }: DayProps) {
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const [isModalOpen, setModalOpen] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState(false);
+
+  useEffect(() => {
+    // Calculate currentEvent here, after the component has mounted on the client
+    const newCurrentEvent = getCurrentEvent(); // Replace this with your actual logic
+    setCurrentEvent(newCurrentEvent);
+  }, []);
+
 
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
@@ -29,6 +37,8 @@ function Day({
         closeModal();
       }
     }
+
+    
 
     window.addEventListener("keydown", handleKeyDown);
 
@@ -45,18 +55,18 @@ function Day({
     const datesList = events.value;
     const jsonArray = JSON.parse(datesList);
     const currentDate = new Date(year, month, date).setHours(0, 0, 0, 0);
+    console.log("Current Date: ", currentDate);
     if (!jsonArray) {
       return false;
     }
-    jsonArray.forEach((event: any) => {
+    return jsonArray.some((event: any) => {
         const startDate = new Date(event.startDate.replace('$D', '')).getTime();
         const endDate = new Date(event.endDate.replace('$D', '')).getTime();
         if (currentDate >= startDate && currentDate <= endDate) {
+            console.log("Event found");
             return true;
           }
     });
-    
-    return false;
   }
   function clickHandler() {
     setModalOpen(true);
@@ -65,7 +75,6 @@ function Day({
   function closeModal() {
     setModalOpen(false);
   }
-  const currentEvent = getCurrentEvent();
   const divClass = currentEvent
     ? "w-24 h-24 hover:bg-gray-700 bg-gray-500 p-2 rounded"
     : "w-24 h-24 hover:bg-blue-700 bg-blue-500 p-2 rounded";
@@ -75,7 +84,7 @@ function Day({
       <div className={divClass} onClick={clickHandler}>
         <p>{date}</p>
         <p>{weekdays[currentWeekday]}</p>
-        <p>{currentEvent ? "Event" : "No Event"}</p>
+        <p>{currentEvent  ? "Event" : "No Event"}</p>
       </div>
       {isModalOpen && (
         <EventModal
