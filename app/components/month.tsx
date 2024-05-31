@@ -1,5 +1,6 @@
 import React from "react";
 import Day from "./day";
+import Link from "next/link";
 
 interface MonthProps {
   currentYear: number;

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import EventModal from "./event_modal";
+import ModalForm from "./modal_form";
 
 interface DayProps {
   events: any;
@@ -30,15 +31,12 @@ function Day({
     setCurrentEvent(newCurrentEvent);
   }, []);
 
-
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         closeModal();
       }
     }
-
-    
 
     window.addEventListener("keydown", handleKeyDown);
 
@@ -59,11 +57,21 @@ function Day({
       return false;
     }
     return jsonArray.some((event: any) => {
-        const startDate = new Date(event.startDate.replace('$D', '')).setHours(0, 0, 0, 0);
-        const endDate = new Date(event.endDate.replace('$D', '')).setHours(0, 0, 0, 0);
-        if (currentDate >= startDate && currentDate <= endDate) {
-            return true;
-          }
+      const startDate = new Date(event.startDate.replace("$D", "")).setHours(
+        0,
+        0,
+        0,
+        0
+      );
+      const endDate = new Date(event.endDate.replace("$D", "")).setHours(
+        0,
+        0,
+        0,
+        0
+      );
+      if (currentDate >= startDate && currentDate <= endDate) {
+        return true;
+      }
     });
   }
   function clickHandler() {
@@ -82,17 +90,22 @@ function Day({
       <div className={divClass} onClick={clickHandler}>
         <p>{date}</p>
         <p>{weekdays[currentWeekday]}</p>
-        <p>{currentEvent  ? "Event" : "No Event"}</p>
       </div>
-      {isModalOpen && (
-        <EventModal
-          currentEvent={currentEvent}
-          date={date}
-          closeModal={closeModal}
-          removeEvent={removeEvent}
-          calendarEvents={calendarEvents}
-        />
-      )}
+      <div className="flex justify-center items-center">
+        {isModalOpen && (
+          <EventModal
+            currentEvent={currentEvent}
+            date={date}
+            closeModal={closeModal}
+            removeEvent={removeEvent}
+            calendarEvents={calendarEvents}
+          >
+            <ModalForm
+              date={new Date(year, month, date).toISOString().split("T")[0]}
+            />
+          </EventModal>
+        )}
+      </div>
     </>
   );
 }
