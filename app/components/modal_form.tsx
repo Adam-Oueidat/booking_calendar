@@ -8,7 +8,10 @@ const initialState = void 0;
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <button className="bg-green-600 float-end hover:bg-green-800 text-white font-bold py-2 px-4 rounded">
+    <button
+      className="bg-green-600 float-end hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
+      disabled={pending}
+    >
       Add Event
     </button>
   );
