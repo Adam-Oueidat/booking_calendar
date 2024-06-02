@@ -7,7 +7,6 @@ interface EventModalProps {
   removeEvent: () => void;
   currentEvent: boolean;
   date: number;
-  calendarEvents: { [key: number]: any };
   children: React.ReactNode;
 }
 

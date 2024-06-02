@@ -8,6 +8,8 @@ interface DayProps {
   month: number;
   date: number;
   currentWeekday: number;
+  prevMonth?: boolean;
+  nextMonth?: boolean;
 }
 
 function Day({
@@ -15,8 +17,9 @@ function Day({
   month,
   year,
   date,
-  event: initialEvent,
   currentWeekday,
+  prevMonth = false,
+  nextMonth = false,
 }: DayProps) {
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const [isModalOpen, setModalOpen] = useState(false);
@@ -78,10 +81,13 @@ function Day({
   function closeModal() {
     setModalOpen(false);
   }
-  const divClass = currentEvent
+  const isBooked = currentEvent
     ? "w-24 h-24 hover:bg-gray-700 bg-gray-500 p-2 rounded"
     : "w-24 h-24 hover:bg-blue-700 bg-blue-500 p-2 rounded";
 
+  const notCurrentMonth = prevMonth || nextMonth ? "opacity-50" : "";
+
+  const divClass = `flex flex-col justify-center items-center ${isBooked} ${notCurrentMonth}`;
   return (
     <>
       <div className={divClass} onClick={clickHandler}>
@@ -95,7 +101,6 @@ function Day({
             date={date}
             closeModal={closeModal}
             removeEvent={removeEvent}
-            calendarEvents={calendarEvents}
           >
             <ModalForm
               date={new Date(year, month, date).toISOString().split("T")[0]}
