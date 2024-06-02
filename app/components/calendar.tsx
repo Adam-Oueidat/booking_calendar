@@ -2,7 +2,7 @@
 import { get } from "http";
 import Day from "./day";
 import Month from "./month";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Calendar({ events }: any) {
   const date = new Date();
@@ -27,6 +27,23 @@ function Calendar({ events }: any) {
       setMonth((month - 1) % 12);
     }
   }
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "ArrowLeft") {
+        previousMonth();
+      }
+      if (event.key === "ArrowRight") {
+        nextMonth();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [month, year]);
 
   return (
     <>

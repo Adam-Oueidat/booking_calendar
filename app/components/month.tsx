@@ -58,13 +58,9 @@ const Month: React.FC<MonthProps> = ({ month, year, events }) => {
   let startDayOfPreviousMonth = daysInPreviousMonth - firstDayOfMonth + 1;
 
   let lastDayOfWeek = getWeekday(year, month, getDaysInNextMonth(year, month));
-  let remainingDays = 6 - lastDayOfWeek;
-  let totalDays = firstDayOfMonth + getDaysInMonth(year, month) + remainingDays;
+  let totalDays = firstDayOfMonth + getDaysInMonth(year, month);
+  let remainingDays = 42 - totalDays;
 
-  // If totalDays is more than 42 (6 weeks), reduce the number of days from next month
-  if (totalDays > 42) {
-    remainingDays -= totalDays - 42;
-  }
   return (
     <>
       <div>
