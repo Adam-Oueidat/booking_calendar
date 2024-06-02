@@ -3,18 +3,38 @@ import Day from "./day";
 import Link from "next/link";
 
 interface MonthProps {
-  currentYear: number;
-  currentMonth: number;
-  calendarEvents: { [key: number]: any };
+  year: number;
+  month: number;
   events: any;
 }
 
-const Month: React.FC<MonthProps> = ({
-  currentMonth,
-  currentYear,
-  calendarEvents,
-  events,
-}) => {
+const Month: React.FC<MonthProps> = ({ month, year, events }) => {
+  function getMonthName(month: number) {
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    return monthNames[month];
+  }
+  function getDaysInMonth(year: number, month: number) {
+    if (month === 0) {
+      // if January
+      return new Date(year - 1, 12, 0).getDate(); // get days of December of previous year
+    } else {
+      return new Date(year, month, 0).getDate(); // get days of previous month
+    }
+  }
+
   function getWeekday(year: number, month: number, day: number) {
     return new Date(year, month, day).getDay();
   }
@@ -22,33 +42,54 @@ const Month: React.FC<MonthProps> = ({
   function getFirstDayOfMonth(year: number, month: number) {
     return new Date(year, month, 0).getDay();
   }
-  let firstDayOfMonth = getFirstDayOfMonth(currentYear, currentMonth);
+  let firstDayOfMonth = getFirstDayOfMonth(year, month);
+  let daysInPreviousMonth = getDaysInMonth(year, month - 1);
+  let startDayOfPreviousMonth = daysInPreviousMonth - firstDayOfMonth + 1;
   return (
     <>
+      <div>
+        <h1 className="text-4xl text-wrap  font-extrabold">Kom bo hos oss</h1>
+        <h2 className="text-2xl font-bold">
+          {getMonthName(month)} {year}
+        </h2>
+      </div>
       <div className="grid grid-cols-7 gap-2">
         {Array(firstDayOfMonth)
           .fill(null)
           .map((_, i) => (
-            <div key={`empty-${i}`} />
+            <div key={`prev-${i}`}>
+              <Day
+                month={month === 0 ? 11 : month - 1} // if January, set month to December
+                year={month === 0 ? year - 1 : year} // if January, set year to previous year
+                date={startDayOfPreviousMonth + i}
+                currentWeekday={getWeekday(
+                  year,
+                  month === 0 ? 11 : month - 1,
+                  startDayOfPreviousMonth + i
+                )}
+                events={events}
+              />
+            </div>
           ))}
-        {Object.entries(calendarEvents[currentMonth + 1]).map(
-          ([date, event], i) => {
-            let weekday = getWeekday(currentYear, currentMonth, parseInt(date));
-            return (
+        {(() => {
+          let daysInMonth = getDaysInMonth(month, year);
+          let days = [];
+          for (let i = 1; i <= daysInMonth; i++) {
+            let weekday = getWeekday(year, month, i);
+            days.push(
               <div key={i}>
                 <Day
-                  month={currentMonth}
-                  year={currentYear}
-                  date={parseInt(date)}
-                  event={event as boolean}
+                  month={month}
+                  year={year}
+                  date={i}
                   currentWeekday={weekday}
-                  calendarEvents={calendarEvents}
                   events={events}
                 />
               </div>
             );
           }
-        )}
+          return days;
+        })()}
       </div>
     </>
   );

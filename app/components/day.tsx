@@ -7,9 +7,7 @@ interface DayProps {
   year: number;
   month: number;
   date: number;
-  event: boolean;
   currentWeekday: number;
-  calendarEvents: { [key: number]: any };
 }
 
 function Day({
@@ -19,7 +17,6 @@ function Day({
   date,
   event: initialEvent,
   currentWeekday,
-  calendarEvents,
 }: DayProps) {
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const [isModalOpen, setModalOpen] = useState(false);
