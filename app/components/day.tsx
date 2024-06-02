@@ -7,7 +7,7 @@ interface DayProps {
   year: number;
   month: number;
   date: number;
-  currentWeekday: number;
+
   prevMonth?: boolean;
   nextMonth?: boolean;
 }
@@ -17,7 +17,6 @@ function Day({
   month,
   year,
   date,
-  currentWeekday,
   prevMonth = false,
   nextMonth = false,
 }: DayProps) {
@@ -82,17 +81,16 @@ function Day({
     setModalOpen(false);
   }
   const isBooked = currentEvent
-    ? "w-24 h-24 hover:bg-gray-700 bg-gray-500 p-2 rounded"
-    : "w-24 h-24 hover:bg-blue-700 bg-blue-500 p-2 rounded";
+    ? "w-24 h-20 hover:bg-gray-700 bg-gray-500 p-2 rounded"
+    : "w-24 h-20 hover:bg-blue-700 bg-blue-500 p-2 rounded";
 
   const notCurrentMonth = prevMonth || nextMonth ? "opacity-50" : "";
 
-  const divClass = `flex flex-col justify-center items-center ${isBooked} ${notCurrentMonth}`;
+  const divClass = `flex flex-col justify-start items-end p-2 ${isBooked} ${notCurrentMonth}`;
   return (
     <>
       <div className={divClass} onClick={clickHandler}>
         <p>{date}</p>
-        <p>{weekdays[currentWeekday]}</p>
       </div>
       <div className="flex justify-center items-center">
         {isModalOpen && (

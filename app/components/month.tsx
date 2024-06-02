@@ -44,20 +44,10 @@ const Month: React.FC<MonthProps> = ({ month, year, events }) => {
     return new Date(year, month, 0).getDay();
   }
 
-  function getDaysInNextMonth(year: number, month: number) {
-    if (month === 11) {
-      // if December
-      return new Date(year + 1, 1, 0).getDate(); // get days of January of next year
-    } else {
-      return new Date(year, month + 2, 0).getDate(); // get days of next month
-    }
-  }
-
   let firstDayOfMonth = getFirstDayOfMonth(year, month);
   let daysInPreviousMonth = getDaysInMonth(year, month - 1);
   let startDayOfPreviousMonth = daysInPreviousMonth - firstDayOfMonth + 1;
 
-  let lastDayOfWeek = getWeekday(year, month, getDaysInNextMonth(year, month));
   let totalDays = firstDayOfMonth + getDaysInMonth(year, month);
   let remainingDays = 42 - totalDays;
 
@@ -70,6 +60,14 @@ const Month: React.FC<MonthProps> = ({ month, year, events }) => {
         </h2>
       </div>
       <div className="grid grid-cols-7 gap-2">
+        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
+          <div
+            key={index}
+            className="text-center flex flex-end justify-end items-end font-bold"
+          >
+            {day}
+          </div>
+        ))}
         {Array(firstDayOfMonth)
           .fill(null)
           .map((_, i) => (
@@ -78,11 +76,6 @@ const Month: React.FC<MonthProps> = ({ month, year, events }) => {
                 month={month === 0 ? 11 : month - 1} // if January, set month to December
                 year={month === 0 ? year - 1 : year} // if January, set year to previous year
                 date={startDayOfPreviousMonth + i}
-                currentWeekday={getWeekday(
-                  year,
-                  month === 0 ? 11 : month - 1,
-                  startDayOfPreviousMonth + i
-                )}
                 events={events}
                 prevMonth={true}
               />
@@ -92,16 +85,9 @@ const Month: React.FC<MonthProps> = ({ month, year, events }) => {
           let daysInMonth = getDaysInMonth(year, month);
           let days = [];
           for (let i = 1; i <= daysInMonth; i++) {
-            let weekday = getWeekday(year, month, i);
             days.push(
               <div key={i}>
-                <Day
-                  month={month}
-                  year={year}
-                  date={i}
-                  currentWeekday={weekday}
-                  events={events}
-                />
+                <Day month={month} year={year} date={i} events={events} />
               </div>
             );
           }
@@ -115,11 +101,6 @@ const Month: React.FC<MonthProps> = ({ month, year, events }) => {
                 month={month === 11 ? 0 : month + 1} // if December, set month to January
                 year={month === 11 ? year + 1 : year} // if December, set year to next year
                 date={i + 1}
-                currentWeekday={getWeekday(
-                  year,
-                  month === 11 ? 0 : month + 1,
-                  i + 1
-                )}
                 events={events}
                 nextMonth={true}
               />
