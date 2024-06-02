@@ -5,10 +5,9 @@ import Link from "next/link";
 interface MonthProps {
   year: number;
   month: number;
-  events: any;
 }
 
-const Month: React.FC<MonthProps> = ({ month, year, events }) => {
+const Month: React.FC<MonthProps> = ({ month, year }) => {
   function getMonthName(month: number) {
     const monthNames = [
       "January",
@@ -76,7 +75,6 @@ const Month: React.FC<MonthProps> = ({ month, year, events }) => {
                 month={month === 0 ? 11 : month - 1} // if January, set month to December
                 year={month === 0 ? year - 1 : year} // if January, set year to previous year
                 date={startDayOfPreviousMonth + i}
-                events={events}
                 prevMonth={true}
               />
             </div>
@@ -87,7 +85,7 @@ const Month: React.FC<MonthProps> = ({ month, year, events }) => {
           for (let i = 1; i <= daysInMonth; i++) {
             days.push(
               <div key={i}>
-                <Day month={month} year={year} date={i} events={events} />
+                <Day month={month} year={year} date={i} />
               </div>
             );
           }
@@ -101,7 +99,6 @@ const Month: React.FC<MonthProps> = ({ month, year, events }) => {
                 month={month === 11 ? 0 : month + 1} // if December, set month to January
                 year={month === 11 ? year + 1 : year} // if December, set year to next year
                 date={i + 1}
-                events={events}
                 nextMonth={true}
               />
             </div>

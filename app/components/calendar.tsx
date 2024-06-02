@@ -4,7 +4,7 @@ import Day from "./day";
 import Month from "./month";
 import { useState, useEffect } from "react";
 
-function Calendar({ events }: any) {
+function Calendar() {
   const date = new Date();
 
   const [month, setMonth] = useState(date.getMonth());
@@ -47,7 +47,7 @@ function Calendar({ events }: any) {
 
   return (
     <>
-      <Month month={month} year={year} events={events} />
+      <Month month={month} year={year} />
       <div>
         <div className="flex justify-between">
           <button

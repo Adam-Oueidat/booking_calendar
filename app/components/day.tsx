@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import EventModal from "./event_modal";
 import ModalForm from "./modal_form";
+import { getCurrentEvent } from "@/app/components/actions";
 
 interface DayProps {
-  events: any;
   year: number;
   month: number;
   date: number;
@@ -13,21 +13,22 @@ interface DayProps {
 }
 
 function Day({
-  events,
   month,
   year,
   date,
   prevMonth = false,
   nextMonth = false,
 }: DayProps) {
-  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentEvent, setCurrentEvent] = useState(false);
 
   useEffect(() => {
-    // Calculate currentEvent here, after the component has mounted on the client
-    const newCurrentEvent = getCurrentEvent(); // Replace this with your actual logic
-    setCurrentEvent(newCurrentEvent);
+    const fetchCurrentEvent = async () => {
+      // Calculate currentEvent here, after the component has mounted on the client
+      const newCurrentEvent = await getCurrentEvent(year, month, date);
+      setCurrentEvent(newCurrentEvent);
+    };
+    fetchCurrentEvent();
   }, []);
 
   useEffect(() => {
@@ -48,31 +49,7 @@ function Day({
   function removeEvent() {
     setModalOpen(false);
   }
-  function getCurrentEvent(): boolean {
-    const datesList = events.value;
-    const jsonArray = JSON.parse(datesList);
-    const currentDate = new Date(year, month, date).setHours(0, 0, 0, 0);
-    if (!jsonArray) {
-      return false;
-    }
-    return jsonArray.some((event: any) => {
-      const startDate = new Date(event.startDate.replace("$D", "")).setHours(
-        0,
-        0,
-        0,
-        0
-      );
-      const endDate = new Date(event.endDate.replace("$D", "")).setHours(
-        0,
-        0,
-        0,
-        0
-      );
-      if (currentDate >= startDate && currentDate <= endDate) {
-        return true;
-      }
-    });
-  }
+
   function clickHandler() {
     setModalOpen(true);
   }
