@@ -1,4 +1,3 @@
-"use client";
 import { useFormStatus } from "react-dom";
 import { useActionState } from "react";
 import { addEvent } from "@/app/components/actions";
@@ -16,7 +15,6 @@ function SubmitButton() {
     </button>
   );
 }
-
 export default function ModalForm({ date }: { date: string }) {
   const [state, formAction] = useActionState(addEvent, initialState);
 

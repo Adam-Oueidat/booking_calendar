@@ -101,7 +101,7 @@ function Day({
             removeEvent={removeEvent}
           >
             <ModalForm
-              date={new Date(year, month, date).toISOString().split("T")[0]}
+              date={new Date(year, month, date + 1).toISOString().split("T")[0]}
             />
           </EventModal>
         )}
