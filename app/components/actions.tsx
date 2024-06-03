@@ -1,9 +1,9 @@
 "use server";
-import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { ObjectId } from "bson";
 import prisma from "@/app/lib/db";
-import { unstable_noStore as noStore } from "next/cache";
+import getAccessToken from "@/app/lib/availability/getAccessToken";
+import { start } from "repl";
 
 export async function addEvent(state: void, formData: FormData) {
   const from = formData.get("event-date-from");
@@ -20,6 +20,13 @@ export async function addEvent(state: void, formData: FormData) {
       endDate: toDate,
     },
   });
+
+  toDate.setDate(toDate.getDate() + 1);
+  console.log(
+    fromDate.toISOString().split("T")[0],
+    toDate.toISOString().split("T")[0]
+  );
+  createCalendarAppointment(fromDate, toDate);
 
   revalidatePath("/calendar");
 }
@@ -45,4 +52,57 @@ export async function getEventsForMonth(year: number, month: number) {
   });
 
   return eventsDict;
+}
+
+export default async function createCalendarAppointment(
+  fromDate: Date,
+  toDate: Date
+) {
+  const body = {
+    summary: "Test Adam",
+    location: "Hemma",
+    description: "Testar detta",
+    start: {
+      date: fromDate.toISOString().split("T")[0],
+      timeZone: "Europe/Stockholm",
+    },
+    end: {
+      date: toDate.toISOString().split("T")[0],
+      timeZone: "Europe/Stockholm",
+    },
+    attendees: [{ email: "ooueidat@gmail.com" }],
+    reminders: {
+      useDefault: false,
+      overrides: [
+        { method: "email", minutes: 24 * 60 },
+        { method: "popup", minutes: 10 },
+      ],
+    },
+  };
+
+  if (!process.env.GOOGLE_CALENDAR_API_URL) {
+    throw new Error("GOOGLE_OAUTH_SECRET not set");
+  }
+  const apiUrl = new URL(process.env.GOOGLE_CALENDAR_API_URL);
+
+  apiUrl.searchParams.set("sendNotifications", "true");
+  apiUrl.searchParams.set("conferenceDataVersion", "1");
+  console.log("fetching data from google calendar api");
+
+  const response = await fetch(apiUrl, {
+    cache: "no-cache",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${await getAccessToken()}`,
+    },
+    body: JSON.stringify(body),
+  });
+  if (!response.ok) {
+    console.log("response from google calendar api", response);
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  console.log("response from google calendar api", response);
+  return response;
 }
