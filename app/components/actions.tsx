@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { ObjectId } from "bson";
 import prisma from "@/app/lib/db";
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function addEvent(state: void, formData: FormData) {
   const from = formData.get("event-date-from");
@@ -23,33 +24,25 @@ export async function addEvent(state: void, formData: FormData) {
   revalidatePath("/calendar");
 }
 
-export async function getCurrentEvent(
-  year: number,
-  month: number,
-  date: number
-): Promise<boolean> {
+export async function getEventsForMonth(year: number, month: number) {
   const events = await prisma.event.findMany();
   const jsonArray = JSON.parse(JSON.stringify(events));
-  const currentDate = new Date(year, month, date).setHours(0, 0, 0, 0);
-  if (!jsonArray) {
-    return false;
-  }
-  return jsonArray.some((event: any) => {
-    const startDate = new Date(event.startDate.replace("$D", "")).setHours(
-      0,
-      0,
-      0,
-      0
-    );
-    const endDate = new Date(event.endDate.replace("$D", "")).setHours(
-      0,
-      0,
-      0,
-      0
-    );
-    if (currentDate >= startDate && currentDate <= endDate) {
-      return true;
+
+  const eventsDict: { [date: number]: boolean } = {};
+
+  jsonArray.forEach((event: any) => {
+    const startDate = new Date(event.startDate.replace("$D", ""));
+    const endDate = new Date(event.endDate.replace("$D", ""));
+
+    if (startDate.getFullYear() === year && startDate.getMonth() === month) {
+      for (let date = startDate.getDate(); date <= endDate.getDate(); date++) {
+        if (!eventsDict[date]) {
+          eventsDict[date] = false;
+        }
+        eventsDict[date] = true;
+      }
     }
-    return false; // Add this line to handle the case when the condition is not met
   });
+
+  return eventsDict;
 }

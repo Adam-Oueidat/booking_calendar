@@ -1,6 +1,7 @@
 import React from "react";
 import Day from "./day";
-import Link from "next/link";
+import { getEventsForMonth } from "@/app/components/actions";
+import { useEffect, useState } from "react";
 
 interface MonthProps {
   year: number;
@@ -25,6 +26,19 @@ const Month: React.FC<MonthProps> = ({ month, year }) => {
     ];
     return monthNames[month];
   }
+  const [currentEvents, setCurrentEvents] = useState<{
+    [date: number]: boolean;
+  }>({});
+
+  useEffect(() => {
+    const fetchCurrentEvents = async () => {
+      const events = await getEventsForMonth(year, month);
+      setCurrentEvents(events);
+    };
+
+    fetchCurrentEvents();
+  }, [month, year]);
+
   function getDaysInMonth(year: number, month: number) {
     month = month + 1;
     if (month === 0) {
@@ -33,10 +47,6 @@ const Month: React.FC<MonthProps> = ({ month, year }) => {
     } else {
       return new Date(year, month, 0).getDate(); // get days of previous month
     }
-  }
-
-  function getWeekday(year: number, month: number, day: number) {
-    return new Date(year, month, day).getDay();
   }
 
   function getFirstDayOfMonth(year: number, month: number) {
@@ -85,7 +95,12 @@ const Month: React.FC<MonthProps> = ({ month, year }) => {
           for (let i = 1; i <= daysInMonth; i++) {
             days.push(
               <div key={i}>
-                <Day month={month} year={year} date={i} />
+                <Day
+                  month={month}
+                  year={year}
+                  date={i}
+                  currentEvent={currentEvents[i]}
+                />
               </div>
             );
           }
