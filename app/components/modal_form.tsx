@@ -1,13 +1,19 @@
 import { useFormStatus } from "react-dom";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { addEvent } from "@/app/components/actions";
 
 const initialState = void 0;
+type ModalFormProps = {
+  date: string;
+  closeModal: () => void;
+};
 
-function SubmitButton() {
+function SubmitButton({ closeModal }: { closeModal: () => void }) {
   const { pending } = useFormStatus();
   return (
     <button
+      type="submit"
+      value="submit"
       className="bg-green-600 float-end hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
       disabled={pending}
     >
@@ -15,7 +21,7 @@ function SubmitButton() {
     </button>
   );
 }
-export default function ModalForm({ date }: { date: string }) {
+export default function ModalForm({ date, closeModal }: ModalFormProps) {
   const [state, formAction] = useActionState(addEvent, initialState);
 
   return (
@@ -39,7 +45,7 @@ export default function ModalForm({ date }: { date: string }) {
         defaultValue={date}
       />
 
-      <SubmitButton />
+      <SubmitButton closeModal={closeModal} />
     </form>
   );
 }

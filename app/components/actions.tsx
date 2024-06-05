@@ -1,9 +1,10 @@
 "use server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { ObjectId } from "bson";
 import prisma from "@/app/lib/db";
 import getAccessToken from "@/app/lib/availability/getAccessToken";
 import { start } from "repl";
+import { redirect } from "next/navigation";
 
 export async function addEvent(state: void, formData: FormData) {
   const from = formData.get("event-date-from");
@@ -22,13 +23,10 @@ export async function addEvent(state: void, formData: FormData) {
   });
 
   toDate.setDate(toDate.getDate() + 1);
-  console.log(
-    fromDate.toISOString().split("T")[0],
-    toDate.toISOString().split("T")[0]
-  );
   createCalendarAppointment(fromDate, toDate);
 
-  revalidatePath("/calendar");
+  revalidatePath("/");
+  redirect("/");
 }
 
 export async function getEventsForMonth(year: number, month: number) {
@@ -80,7 +78,6 @@ export default async function createCalendarAppointment(
 
   apiUrl.searchParams.set("sendNotifications", "true");
   apiUrl.searchParams.set("conferenceDataVersion", "1");
-  console.log("fetching data from google calendar api");
 
   const response = await fetch(apiUrl, {
     cache: "no-cache",
@@ -92,10 +89,8 @@ export default async function createCalendarAppointment(
     body: JSON.stringify(body),
   });
   if (!response.ok) {
-    console.log("response from google calendar api", response);
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  console.log("response from google calendar api", response);
   return response;
 }

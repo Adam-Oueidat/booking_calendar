@@ -75,11 +75,10 @@ function Day({
             date={date}
             closeModal={closeModal}
             removeEvent={removeEvent}
-          >
-            <ModalForm
-              date={new Date(year, month, date + 1).toISOString().split("T")[0]}
-            />
-          </EventModal>
+            dateString={
+              new Date(year, month, date + 1).toISOString().split("T")[0]
+            }
+          />
         )}
       </div>
     </>

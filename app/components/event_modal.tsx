@@ -1,4 +1,3 @@
-import { revalidatePath } from "next/cache";
 import React from "react";
 import ModalForm from "./modal_form";
 
@@ -6,13 +5,13 @@ interface EventModalProps {
   closeModal: () => void;
   removeEvent: () => void;
   date: number;
-  children: React.ReactNode;
+  dateString: string;
 }
 
 export default function EventModal({
   closeModal,
   date,
-  children,
+  dateString,
 }: EventModalProps) {
   return (
     <>
@@ -20,7 +19,7 @@ export default function EventModal({
         <div className="bg-blue-300 w-1/2 h-1/2 p-8 rounded-lg">
           <h1 className="text-2xl font-bold">Event</h1>
           <p>Event for {date}</p>
-          {children}
+          <ModalForm date={dateString} closeModal={closeModal} />
           <div>
             <button
               className="bg-red-500 hover:bg-red-700 text-white float-end font-bold py-2 px-4 rounded"
