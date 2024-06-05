@@ -71,13 +71,6 @@ export default async function createCalendarAppointment(
       timeZone: "Europe/Stockholm",
     },
     attendees: [{ email: "ooueidat@gmail.com" }],
-    reminders: {
-      useDefault: false,
-      overrides: [
-        { method: "email", minutes: 24 * 60 },
-        { method: "popup", minutes: 10 },
-      ],
-    },
   };
 
   if (!process.env.GOOGLE_CALENDAR_API_URL) {

@@ -48,7 +48,14 @@ const Month: React.FC<MonthProps> = ({ month, year }) => {
       return new Date(year, month, 0).getDate(); // get days of previous month
     }
   }
-
+  function isToday(date: number) {
+    const today = new Date();
+    return (
+      today.getFullYear() === year &&
+      today.getMonth() === month &&
+      today.getDate() === date
+    );
+  }
   function getFirstDayOfMonth(year: number, month: number) {
     return new Date(year, month, 0).getDay();
   }
@@ -68,7 +75,7 @@ const Month: React.FC<MonthProps> = ({ month, year }) => {
           {getMonthName(month)} {year}
         </h2>
       </div>
-      <div className="grid grid-cols-7 gap-2">
+      <div className="grid grid-cols-7 gap-0.5">
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
           <div
             key={index}
@@ -99,6 +106,7 @@ const Month: React.FC<MonthProps> = ({ month, year }) => {
                   month={month}
                   year={year}
                   date={i}
+                  isToday={isToday(i)}
                   currentEvent={currentEvents[i]}
                 />
               </div>

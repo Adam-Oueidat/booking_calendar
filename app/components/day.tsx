@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import EventModal from "./event_modal";
 import ModalForm from "./modal_form";
 
-interface DayProps {
+type DayProps = {
   year: number;
   month: number;
   date: number;
   prevMonth?: boolean;
   nextMonth?: boolean;
   currentEvent?: boolean;
-}
-
+  isToday?: boolean;
+};
 function Day({
   month,
   year,
@@ -18,6 +18,7 @@ function Day({
   prevMonth = false,
   nextMonth = false,
   currentEvent = false,
+  isToday = false,
 }: DayProps) {
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -47,20 +48,26 @@ function Day({
   function closeModal() {
     setModalOpen(false);
   }
-  const isBooked = currentEvent
-    ? "w-24 h-20 bg-gray-500 p-2 rounded"
-    : "w-24 h-20 hover:bg-blue-700 bg-blue-500 p-2 rounded";
 
+  const isBooked = currentEvent
+    ? "w-24 h-20 bg-gray-500"
+    : "w-24 h-20 hover:bg-blue-700 bg-blue-500";
+
+  const isTodayClass = isToday
+    ? "bg-red-500 w-7 h-7 bg-center rounded-full flex justify-center items-center"
+    : "w-7 h-7 bg-center rounded-full flex justify-center items-center";
   const notCurrentMonth = prevMonth || nextMonth ? "opacity-50" : "";
 
-  const divClass = `flex flex-col justify-start items-end p-2 ${isBooked} ${notCurrentMonth}`;
+  const divClass = `flex flex-col justify-start items-end p-1 ${isBooked} ${notCurrentMonth}`;
   return (
     <>
       <div
         className={divClass}
         onClick={currentEvent ? undefined : clickHandler}
       >
-        <p>{date}</p>
+        <div className={isTodayClass}>
+          <p>{date}</p>
+        </div>
       </div>
       <div className="flex justify-center items-center">
         {isModalOpen && (
