@@ -58,7 +58,7 @@ function Day({
     : "w-7 h-7 bg-center rounded-full flex justify-center items-center";
   const notCurrentMonth = prevMonth || nextMonth ? "opacity-50" : "";
 
-  const divClass = `flex flex-col justify-start items-end p-1 ${isBooked} ${notCurrentMonth} `;
+  const divClass = `flex flex-col justify-start items-end p-1 ${isBooked} ${notCurrentMonth}`;
   return (
     <>
       <div

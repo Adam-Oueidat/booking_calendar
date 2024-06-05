@@ -16,7 +16,7 @@ export default function EventModal({
 }: EventModalProps) {
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
         <div className="bg-blue-300 w-1/2 h-1/2 p-8 rounded-lg">
           <h1 className="text-2xl font-bold">Event</h1>
           <p>Event for {date}</p>
