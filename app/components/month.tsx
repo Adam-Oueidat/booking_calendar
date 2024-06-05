@@ -8,7 +8,7 @@ interface MonthProps {
   month: number;
 }
 
-const Month: React.FC<MonthProps> = ({ month, year }) => {
+export default function Month({ month, year }: MonthProps) {
   function getMonthName(month: number) {
     const monthNames = [
       "January",
@@ -48,6 +48,7 @@ const Month: React.FC<MonthProps> = ({ month, year }) => {
       return new Date(year, month, 0).getDate(); // get days of previous month
     }
   }
+  
   function isToday(date: number) {
     const today = new Date();
     return (
@@ -129,6 +130,4 @@ const Month: React.FC<MonthProps> = ({ month, year }) => {
       </div>
     </>
   );
-};
-
-export default Month;
+}
