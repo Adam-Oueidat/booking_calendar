@@ -71,7 +71,7 @@ export default function Month({ month, year }: MonthProps) {
   return (
     <>
       <div>
-        <h1 className="text-4xl text-wrap  font-extrabold">Kom bo hos oss</h1>
+        <h1 className="text-4xl text-wrap font-extrabold">Kom bo hos oss</h1>
         <h2 className="text-2xl font-bold">
           {getMonthName(month)} {year}
         </h2>

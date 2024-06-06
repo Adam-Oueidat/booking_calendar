@@ -3,7 +3,6 @@ import { revalidatePath } from "next/cache";
 import { ObjectId } from "bson";
 import prisma from "@/src/lib/db";
 import getAccessToken from "@/src/lib/availability/getAccessToken";
-import { redirect, useRouter } from "next/navigation";
 
 export async function addEvent(
   state: boolean,

@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import EventModal from "./event_modal";
-import ModalForm from "./modal_form";
-import Link from "next/link";
 
 type DayProps = {
   year: number;
@@ -12,7 +10,7 @@ type DayProps = {
   currentEvent?: boolean;
   isToday?: boolean;
 };
-function Day({
+export default function Day({
   month,
   year,
   date,
@@ -51,19 +49,20 @@ function Day({
   }
 
   const isBooked = currentEvent
-    ? "w-24 h-20 bg-gray-500"
-    : "w-24 h-20 hover:bg-blue-700 bg-blue-500";
+    ? "bg-gray-500"
+    : "hover:bg-blue-700 bg-blue-500";
 
-  const isTodayClass = isToday
-    ? "bg-red-500 w-7 h-7 bg-center rounded-full flex justify-center items-center"
-    : "w-7 h-7 bg-center rounded-full flex justify-center items-center";
+  const todayClass =
+    "w-7 h-7 bg-center rounded-full flex justify-center items-center";
+  const isTodayClass = isToday ? `bg-red-500 ${todayClass}` : todayClass;
   const notCurrentMonth = prevMonth || nextMonth ? "opacity-50" : "";
 
-  const divClass = `flex flex-col justify-start items-end p-1 border ${isBooked} ${notCurrentMonth}`;
+  let divClassDayResponsive = `w-full sm:w-12 sm:h-8 md:w-12 md:h-8 lg:w-20 lg:h-16 xl:w-24 xl:h-20`;
+  const divClassDay = `flex flex-col justify-start items-end p-1 border ${divClassDayResponsive} ${isBooked} ${notCurrentMonth}`;
   return (
     <>
       <div
-        className={divClass}
+        className={divClassDay}
         onClick={currentEvent ? undefined : clickHandler}
       >
         <div className={isTodayClass}>
@@ -85,4 +84,3 @@ function Day({
     </>
   );
 }
-export default Day;

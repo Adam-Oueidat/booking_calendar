@@ -3,7 +3,7 @@
 import Month from "./month";
 import { useState, useEffect } from "react";
 
-function Calendar() {
+export default function Calendar() {
   const date = new Date();
 
   const [month, setMonth] = useState(date.getMonth());
@@ -67,4 +67,4 @@ function Calendar() {
   );
 }
 
-export default Calendar;
+  
