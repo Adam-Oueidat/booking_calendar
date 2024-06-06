@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Calendar from "@/src/components/calendar";
+import Image from "next/image";
+import backgroundImage from "@/src/images/nyhavn.jpg";
 
-export default function Home() {
+export default function CalendarPage() {
   return (
     <>
       <div className="font-sans flex left-8 top-8 relative float-left p-2">

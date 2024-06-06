@@ -16,6 +16,7 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--background) url("../images/nyhavn.jpg");
   font-synthesis: none;
+  background-image: "../images/nyhavn.jpg";
 }
