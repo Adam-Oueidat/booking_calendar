@@ -38,7 +38,7 @@ export default function Month({ month, year }: MonthProps) {
 
     fetchCurrentEvents();
   }, [month, year]);
-
+  
   function getDaysInMonth(year: number, month: number) {
     month = month + 1;
     if (month === 0) {

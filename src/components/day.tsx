@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import EventModal from "./event_modal";
 import ModalForm from "./modal_form";
+import Link from "next/link";
 
 type DayProps = {
   year: number;

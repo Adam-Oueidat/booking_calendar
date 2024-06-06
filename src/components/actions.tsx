@@ -1,12 +1,14 @@
 "use server";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { ObjectId } from "bson";
 import prisma from "@/src/lib/db";
 import getAccessToken from "@/src/lib/availability/getAccessToken";
-import { start } from "repl";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
-export async function addEvent(state: void, formData: FormData) {
+export async function addEvent(
+  state: boolean,
+  formData: FormData
+): Promise<boolean> {
   const from = formData.get("event-date-from");
   const to = formData.get("event-date-to");
 
@@ -25,8 +27,9 @@ export async function addEvent(state: void, formData: FormData) {
   toDate.setDate(toDate.getDate() + 1);
   createCalendarAppointment(fromDate, toDate);
 
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath("/calendar");
+
+  return !state;
 }
 
 export async function getEventsForMonth(year: number, month: number) {
