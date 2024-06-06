@@ -1,6 +1,6 @@
 import { useFormStatus } from "react-dom";
 import { useActionState, useEffect } from "react";
-import { addEvent } from "@/app/components/actions";
+import { addEvent } from "@/src/components/actions";
 
 const initialState = void 0;
 type ModalFormProps = {

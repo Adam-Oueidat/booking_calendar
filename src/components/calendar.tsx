@@ -1,6 +1,5 @@
 "use client";
-import { get } from "http";
-import Day from "./day";
+
 import Month from "./month";
 import { useState, useEffect } from "react";
 

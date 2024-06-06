@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Calendar from "../components/calendar";
+import Calendar from "@/src/components/calendar";
 
 export default function Home() {
   return (

@@ -1,8 +1,8 @@
 "use server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { ObjectId } from "bson";
-import prisma from "@/app/lib/db";
-import getAccessToken from "@/app/lib/availability/getAccessToken";
+import prisma from "@/src/lib/db";
+import getAccessToken from "@/src/lib/availability/getAccessToken";
 import { start } from "repl";
 import { redirect } from "next/navigation";
 

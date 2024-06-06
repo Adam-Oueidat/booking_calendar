@@ -1,6 +1,6 @@
 import React from "react";
 import Day from "./day";
-import { getEventsForMonth } from "@/app/components/actions";
+import { getEventsForMonth } from "@/src/components/actions";
 import { useEffect, useState } from "react";
 
 interface MonthProps {
@@ -48,7 +48,7 @@ export default function Month({ month, year }: MonthProps) {
       return new Date(year, month, 0).getDate(); // get days of previous month
     }
   }
-  
+
   function isToday(date: number) {
     const today = new Date();
     return (
