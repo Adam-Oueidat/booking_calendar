@@ -38,7 +38,7 @@ export default function Month({ month, year }: MonthProps) {
 
     fetchCurrentEvents();
   }, [month, year]);
-  
+
   function getDaysInMonth(year: number, month: number) {
     month = month + 1;
     if (month === 0) {
@@ -76,7 +76,7 @@ export default function Month({ month, year }: MonthProps) {
           {getMonthName(month)} {year}
         </h2>
       </div>
-      <div className="grid grid-cols-7 gap-0.5">
+      <div className="grid grid-cols-7">
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
           <div
             key={index}
