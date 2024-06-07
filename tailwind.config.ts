@@ -16,6 +16,16 @@ const config: Config = {
         sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
       },
+      animation: {
+        "open-close": "open-close 3s linear",
+      },
+      keyframes: {
+        "open-close": {
+          "0%": { width: "100%", marginLeft: "50%", marginRight: "50%" },
+          "50%": { width: "50%", marginLeft: "0%", marginRight: "0%" },
+          "100%": { width: "100%", marginLeft: "50%", marginRight: "50%" },
+        },
+      },
     },
   },
   plugins: [],
