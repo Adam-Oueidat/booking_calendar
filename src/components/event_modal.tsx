@@ -17,8 +17,13 @@ export default function EventModal({
     <>
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
         <div className="bg-blue-300 sm:w-1/4 p-10 rounded-lg">
-          <h1 className="text-2xl font-bold">Event</h1>
-          <p>Event for {date}</p>
+          <button
+            className="bg-red-500 hover:bg-red-700 text-white float-end font-bold py-2 px-4 rounded"
+            onClick={closeModal}
+          >
+            X
+          </button>
+          <h1 className="text-2xl font-bold">Add event</h1>
           <ModalForm date={dateString} closeModal={closeModal} />
         </div>
       </div>

@@ -40,7 +40,8 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
             <div>
               <input
                 type="text"
-                className="bg-blue-200 rounded text-gray-900 "
+                className="bg-blue-200 rounded text-gray-900"
+                style={{ width: "8.8rem", height: "2rem" }}
               />
             </div>
 
@@ -49,7 +50,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
               type="date"
               id="event-date-from"
               name="event-date-from"
-              className="bg-blue-200 p-2 rounded text-gray-700 max-w-sm"
+              className="bg-blue-200 p-2 rounded text-gray-700"
               style={{ width: "8.8rem" }}
               defaultValue={date}
             />
@@ -65,12 +66,6 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
           </div>
           <div className="relative bottom-0 right-0">
             <SubmitButton />
-            <button
-              className="bg-red-500 hover:bg-red-700 text-white float-end font-bold py-2 px-4 rounded"
-              onClick={closeModal}
-            >
-              Close
-            </button>
           </div>
         </form>
       </div>
