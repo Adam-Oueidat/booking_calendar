@@ -49,7 +49,8 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
               type="date"
               id="event-date-from"
               name="event-date-from"
-              className="bg-blue-200 p-2 rounded text-gray-700"
+              className="bg-blue-200 p-2 rounded text-gray-700 max-w-sm"
+              style={{ width: "8.8rem" }}
               defaultValue={date}
             />
             <label htmlFor="event-date-to">To: </label>
@@ -58,6 +59,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
               id="event-date-to"
               name="event-date-to"
               className="bg-blue-200 p-2 rounded text-gray-700"
+              style={{ width: "8.8rem" }}
               defaultValue={date}
             />
           </div>
