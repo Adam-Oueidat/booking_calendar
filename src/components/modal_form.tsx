@@ -32,27 +32,46 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   }, [state]);
 
   return (
-    <form action={formAction}>
-      <label htmlFor="event-date-from">From: </label>
+    <>
+      <div className="flex items-center">
+        <form action={formAction} className="space-y-4 h-full w-full">
+          <div className="grid grid-col-1 space-x-4">
+            <label className="p-2">Namn:</label>
+            <div>
+              <input
+                type="text"
+                className="bg-blue-200 rounded text-gray-900 "
+              />
+            </div>
 
-      <input
-        type="date"
-        id="event-date-from"
-        name="event-date-from"
-        className="bg-blue-200 p-2 rounded text-gray-700"
-        defaultValue={date}
-      />
-
-      <label htmlFor="event-date-to">To: </label>
-      <input
-        type="date"
-        id="event-date-to"
-        name="event-date-to"
-        className="bg-blue-200 p-2 rounded text-gray-700"
-        defaultValue={date}
-      />
-
-      <SubmitButton />
-    </form>
+            <label htmlFor="event-date-from">From: </label>
+            <input
+              type="date"
+              id="event-date-from"
+              name="event-date-from"
+              className="bg-blue-200 p-2 rounded text-gray-700"
+              defaultValue={date}
+            />
+            <label htmlFor="event-date-to">To: </label>
+            <input
+              type="date"
+              id="event-date-to"
+              name="event-date-to"
+              className="bg-blue-200 p-2 rounded text-gray-700"
+              defaultValue={date}
+            />
+          </div>
+          <div className="relative bottom-0 right-0">
+            <SubmitButton />
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white float-end font-bold py-2 px-4 rounded"
+              onClick={closeModal}
+            >
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
