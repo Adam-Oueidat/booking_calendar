@@ -21,9 +21,9 @@ const config: Config = {
       },
       keyframes: {
         "open-close": {
-          "0%": { width: "100%", marginLeft: "50%", marginRight: "50%" },
-          "50%": { width: "50%", marginLeft: "0%", marginRight: "0%" },
-          "100%": { width: "100%", marginLeft: "50%", marginRight: "50%" },
+          "0%": { width: "100%", marginLeft: "0%", marginRight: "0%" },
+          "50%": { width: "50%", marginLeft: "50%", marginRight: "50%" },
+          "100%": { width: "100%", marginLeft: "0%", marginRight: "0%" },
         },
       },
     },
