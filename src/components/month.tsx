@@ -29,11 +29,14 @@ export default function Month({ month, year }: MonthProps) {
   const [currentEvents, setCurrentEvents] = useState<{
     [date: number]: boolean;
   }>({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchCurrentEvents = async () => {
       const events = await getEventsForMonth(year, month);
       setCurrentEvents(events);
+      setIsLoading(false);
     };
 
     fetchCurrentEvents();
@@ -68,6 +71,33 @@ export default function Month({ month, year }: MonthProps) {
   let totalDays = firstDayOfMonth + getDaysInMonth(year, month);
   let remainingDays = 42 - totalDays;
 
+  if (isLoading) {
+    return (
+      <div>
+        <div>
+          <h1 className="text-4xl text-wrap font-extrabold">Kom bo hos oss</h1>
+          <h2 className="text-2xl font-bold">
+            {getMonthName(month)} {year}
+          </h2>
+        </div>
+        <div className="grid grid-cols-7">
+          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
+            (day, index) => (
+              <div
+                key={index}
+                className="text-center flex flex-end justify-end items-end font-bold"
+              >
+                {day}
+              </div>
+            )
+          )}
+          <div className="fixed inset-0 flex justify-center items-center">
+            <div className="font-bold text-center">Loading...</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <div>

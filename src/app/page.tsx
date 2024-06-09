@@ -12,6 +12,9 @@ export default async function HomePage() {
           <Card title="This is a title for card 1" />
           <Card title="This is a title for card 2" />
           <Card title="This is a title for card 3" />
+          <Card title="This is a title for card 1" />
+          <Card title="This is a title for card 2" />
+          <Card title="This is a title for card 3" />
         </div>
         <button className="bg-blue-500 border-blue-500 hover:bg-blue-800 rounded-md  font-bold py-2 px-4">
           <Link href="/calendar">Book a date now!</Link>
