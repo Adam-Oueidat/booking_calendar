@@ -96,3 +96,13 @@ export default async function createCalendarAppointment(
 
   return response;
 }
+
+export async function getCardInformation() {
+  const cardInformation = await prisma.cardInformation.findMany();
+  const jsonArray = JSON.parse(JSON.stringify(cardInformation));
+  const cardInformationDict: { [date: number]: {} } = {};
+  jsonArray.forEach((cardInformation: any) => {
+    cardInformationDict[cardInformation.id] = cardInformation;
+  });
+  return cardInformationDict;
+}
