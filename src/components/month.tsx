@@ -80,20 +80,9 @@ export default function Month({ month, year }: MonthProps) {
             {getMonthName(month)} {year}
           </h2>
         </div>
-        <div className="grid grid-cols-7">
-          {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
-            (day, index) => (
-              <div
-                key={index}
-                className="text-center flex flex-end justify-end items-end font-bold"
-              >
-                {day}
-              </div>
-            )
-          )}
-          <div className="fixed inset-0 flex justify-center items-center">
-            <div className="font-bold text-center">Loading...</div>
-          </div>
+
+        <div className="fixed inset-0 flex justify-center items-center">
+          <div className="font-bold text-center">Loading...</div>
         </div>
       </div>
     );
