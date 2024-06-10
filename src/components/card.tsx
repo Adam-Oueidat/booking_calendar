@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type CardProps = {
   title: string;
@@ -15,8 +16,8 @@ export default function Card({ title, cardInfo }: CardProps) {
               <div className="flex items-center justify-center">
                 <Image
                   src={cardInfo[1].imageUrl}
-                  width={150}
-                  height={200}
+                  width={400}
+                  height={600}
                   className="flex items-center justify-center w-full h-full rounded-xl"
                   alt={cardInfo[1].title}
                 />
@@ -29,7 +30,7 @@ export default function Card({ title, cardInfo }: CardProps) {
               <div className="flex min-h-full flex-col items-center justify-center">
                 <p className="text-base">{cardInfo[1].shortDescription}</p>
                 <button className="mt-2 rounded-md bg-neutral-800 py-1 px-2 text-sm hover:bg-neutral-900">
-                  Read More
+                  <Link href={cardInfo[1].imageUrls}>Read more</Link>
                 </button>
               </div>
             </div>
