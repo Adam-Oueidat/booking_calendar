@@ -8,6 +8,18 @@ const nextConfig = {
         port: '',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.visitdenmark.se',
+        port: '',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'files.guidedanmark.org',
+        port: '',
+        pathname: '**',
+      }
     ],
   },};
 

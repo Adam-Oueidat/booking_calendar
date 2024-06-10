@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Card from "@/src/components/card";
 import { getCardInformation } from "../components/actions";
+import Image from "next/image";
 
 export default async function HomePage() {
   const cardInformation = await getCardInformation();
@@ -16,7 +17,7 @@ export default async function HomePage() {
             />
           ))}
         </div>
-        <button className="bg-blue-500 border-blue-500 hover:bg-blue-800 rounded-md  font-bold py-2 px-4">
+        <button className="bg-gray-500/80 border-black hover:bg-gray-800 rounded-md  font-bold py-2 px-4">
           <Link href="/calendar">Book a date now!</Link>
         </button>
       </div>

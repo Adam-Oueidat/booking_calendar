@@ -9,15 +9,15 @@ export default function Card({ title, cardInfo }: CardProps) {
   return (
     <>
       <div className="flex items-center justify-center ">
-        <div className="group h-40 w-80 [perspective:1000px]">
+        <div className="group h-80 w-60 [perspective:1000px]">
           <div className="relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
             <div className="grid grid-cols-1 absolute inset-0 rounded-xl bg-black/40 ">
               <div className="flex items-center justify-center">
                 <Image
                   src={cardInfo[1].imageUrl}
-                  width={75}
-                  height={125}
-                  className="flex items-center justify-center"
+                  width={150}
+                  height={200}
+                  className="flex items-center justify-center w-full h-full rounded-xl"
                   alt={cardInfo[1].title}
                 />
               </div>
