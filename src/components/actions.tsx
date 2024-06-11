@@ -10,6 +10,7 @@ export async function addEvent(
 ): Promise<boolean> {
   const from = formData.get("event-date-from");
   const to = formData.get("event-date-to");
+  const email = formData.get("email");
 
   const fromDate = new Date(from as string);
   const toDate = new Date(to as string);
@@ -24,7 +25,7 @@ export async function addEvent(
   });
 
   toDate.setDate(toDate.getDate() + 1);
-  createCalendarAppointment(fromDate, toDate);
+  createCalendarAppointment(fromDate, toDate, email?.toString() as string);
 
   revalidatePath("/calendar");
 
@@ -56,7 +57,8 @@ export async function getEventsForMonth(year: number, month: number) {
 
 export default async function createCalendarAppointment(
   fromDate: Date,
-  toDate: Date
+  toDate: Date,
+  email: string
 ) {
   const body = {
     summary: "Test Adam",
@@ -70,15 +72,24 @@ export default async function createCalendarAppointment(
       date: toDate.toISOString().split("T")[0],
       timeZone: "Europe/Stockholm",
     },
-    attendees: [{ email: "ooueidat@gmail.com" }],
+    attendees: [{ email: "ooueidat@gmail.com" }, { email: email }],
+    reminders: {
+      useDefault: false,
+      overrides: [
+        { method: "email", minutes: 24 * 60 },
+        { method: "popup", minutes: 10 },
+      ],
+    },
   };
+
+  console.log(body);
 
   if (!process.env.GOOGLE_CALENDAR_API_URL) {
     throw new Error("GOOGLE_OAUTH_SECRET not set");
   }
   const apiUrl = new URL(process.env.GOOGLE_CALENDAR_API_URL);
 
-  apiUrl.searchParams.set("sendNotifications", "true");
+  apiUrl.searchParams.set("sendUpdates", "all");
   apiUrl.searchParams.set("conferenceDataVersion", "1");
 
   const response = await fetch(apiUrl, {
