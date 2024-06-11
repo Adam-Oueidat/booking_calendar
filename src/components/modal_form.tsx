@@ -35,7 +35,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
     <>
       <div className="flex items-center">
         <form action={formAction} className="space-y-4 h-full w-full">
-          <div className="grid grid-col-1 space-x-4">
+          <div className="grid grid-cols-2 space-x-4 space-y-4 gap-2">
             <label className="p-2">Namn:</label>
             <div>
               <input
@@ -43,19 +43,20 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
                 id="name"
                 name="name"
                 placeholder="Skriv ditt namn"
-                className="bg-blue-200 rounded text-gray-900"
+                className="bg-blue-200 rounded text-gray-900 p-2.5"
                 style={{ width: "8.8rem", height: "2rem" }}
                 required={true}
               />
             </div>
-            <label className="p-2">Email:</label>
+            <label className="">Email:</label>
             <div>
               <input
                 type="text"
                 id="email"
                 name="email"
                 placeholder="Skriv ditt mail"
-                className="bg-blue-200 rounded text-gray-900"
+                className="bg-blue-200 rounded text-gray-900 border p-2.5"
+                //className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 style={{ width: "8.8rem", height: "2rem" }}
                 required={true}
               />
