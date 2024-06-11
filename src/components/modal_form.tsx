@@ -36,6 +36,18 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
       <div className="flex items-center">
         <form action={formAction} className="space-y-4 h-full w-full">
           <div className="grid grid-col-1 space-x-4">
+            <label className="p-2">Namn:</label>
+            <div>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Skriv ditt namn"
+                className="bg-blue-200 rounded text-gray-900"
+                style={{ width: "8.8rem", height: "2rem" }}
+                required={true}
+              />
+            </div>
             <label className="p-2">Email:</label>
             <div>
               <input

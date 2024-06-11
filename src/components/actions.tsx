@@ -11,6 +11,7 @@ export async function addEvent(
   const from = formData.get("event-date-from");
   const to = formData.get("event-date-to");
   const email = formData.get("email");
+  const name = formData.get("name");
 
   const fromDate = new Date(from as string);
   const toDate = new Date(to as string);
@@ -25,7 +26,12 @@ export async function addEvent(
   });
 
   toDate.setDate(toDate.getDate() + 1);
-  createCalendarAppointment(fromDate, toDate, email?.toString() as string);
+  createCalendarAppointment(
+    fromDate,
+    toDate,
+    email?.toString() as string,
+    name?.toString() as string
+  );
 
   revalidatePath("/calendar");
 
@@ -58,12 +64,13 @@ export async function getEventsForMonth(year: number, month: number) {
 export default async function createCalendarAppointment(
   fromDate: Date,
   toDate: Date,
-  email: string
+  email: string,
+  name: string
 ) {
   const body = {
-    summary: "Test Adam",
-    location: "Hemma",
-    description: "Testar detta",
+    summary: `${name} i Köpenhamn`,
+    location: "Copenhage, Denmark",
+    description: "Tänk vad kul!",
     start: {
       date: fromDate.toISOString().split("T")[0],
       timeZone: "Europe/Stockholm",
@@ -81,8 +88,6 @@ export default async function createCalendarAppointment(
       ],
     },
   };
-
-  console.log(body);
 
   if (!process.env.GOOGLE_CALENDAR_API_URL) {
     throw new Error("GOOGLE_OAUTH_SECRET not set");
