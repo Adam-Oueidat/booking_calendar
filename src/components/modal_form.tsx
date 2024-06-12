@@ -34,9 +34,11 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   return (
     <>
       <form action={formAction}>
-        <div className="grid gap-6 mb-6 grid-cols-1 ">
+        <div className="grid gap-2 mb-6 lg:grid-cols-2 w-full">
           <div>
-            <label className="block mb-2 text-sm font-medium p-2 ">Namn:</label>
+            <label className="block mb-0.5 text-sm font-medium p-2 ">
+              Namn:
+            </label>
             <input
               type="text"
               id="name"
@@ -47,13 +49,15 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
             />
           </div>
           <div>
-            <label className="block mb-2 text-sm font-medium p-2">Email:</label>
+            <label className="block mb-0.5 text-sm font-medium p-2">
+              Email:
+            </label>
             <input
               type="text"
               id="email"
               name="email"
               placeholder="Skriv ditt mail"
-              className="bg-blue-200 rounded border text-gray-900 p-2.5 w-full text-sm"
+              className="bg-blue-200 rounded border mb-2 text-gray-900 p-2.5 w-full text-sm"
               //className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required={true}
             />
