@@ -33,7 +33,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
 
   return (
     <>
-      <form action={formAction} className="">
+      <form action={formAction}>
         <div className="grid gap-6 mb-6 grid-cols-1 ">
           <div>
             <label className="block mb-2 text-sm font-medium p-2 ">Namn:</label>
