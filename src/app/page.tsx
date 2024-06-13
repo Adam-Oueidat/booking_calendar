@@ -17,9 +17,6 @@ export default async function HomePage() {
             />
           ))}
         </div>
-        <button className="bg-gray-500/80 border-black hover:bg-gray-800 rounded-md  font-bold py-2 px-4">
-          <Link href="/calendar">Book a date now!</Link>
-        </button>
       </div>
     </>
   );
