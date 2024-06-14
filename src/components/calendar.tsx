@@ -47,21 +47,19 @@ export default function Calendar() {
   return (
     <>
       <Month month={month} year={year} />
-      <div>
-        <div className="flex justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={previousMonth}
-          >
-            Previous
-          </button>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={nextMonth}
-          >
-            Next
-          </button>
-        </div>
+      <div className="flex justify-between">
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={previousMonth}
+        >
+          Previous
+        </button>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={nextMonth}
+        >
+          Next
+        </button>
       </div>
     </>
   );

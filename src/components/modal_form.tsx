@@ -1,7 +1,6 @@
 import { useFormStatus } from "react-dom";
 import { useActionState, useEffect } from "react";
 import { addEvent } from "@/src/components/actions";
-import { revalidatePath } from "next/cache";
 
 const initialState = false;
 type ModalFormProps = {
@@ -57,7 +56,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
               id="email"
               name="email"
               placeholder="Skriv ditt mail"
-              className="bg-blue-200 rounded border mb-2 text-gray-900 p-2.5 w-full text-sm"
+              className="bg-blue-200 rounded border text-gray-900 p-2.5 w-full text-sm"
               required={true}
             />
           </div>
