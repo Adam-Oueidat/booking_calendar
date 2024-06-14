@@ -15,7 +15,7 @@ export default function Card({ title, cardInfo }: CardProps) {
             src={cardInfo[1].imageUrl}
             width={400}
             height={600}
-            className="flex object-cover items-center justify-center w-full h-full rounded-t-xl h-2/3"
+            className="flex object-cover items-center justify-center w-full rounded-t-xl h-2/3"
             alt={cardInfo[1].title}
           />
           <div className="flex items-center justify-center text-center rounded-b-lg h-1/3 bg-black/40">

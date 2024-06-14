@@ -81,7 +81,7 @@ export default function Month({ month, year }: MonthProps) {
           <h2 className="lg:text-2xl font-bold sm:text-s">
             {getMonthName(month)} {year}
           </h2>
-        </div>x
+        </div>
         <div className="fixed inset-0 flex justify-center items-center font-bold text-center">
           Loading...
         </div>

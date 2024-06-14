@@ -65,9 +65,7 @@ export default function Day({
         className={divClassDay}
         onClick={currentEvent ? undefined : clickHandler}
       >
-        <div className={isTodayClass}>
-          <p>{date}</p>
-        </div>
+        <p className={isTodayClass}>{date}</p>
       </div>
       <div className="flex justify-center items-center">
         {isModalOpen && (
