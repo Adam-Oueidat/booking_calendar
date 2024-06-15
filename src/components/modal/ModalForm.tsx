@@ -1,8 +1,8 @@
 import { useFormStatus } from "react-dom";
 import { useActionState, useEffect } from "react";
 import { addEvent } from "@/src/components/actions";
-import DateInput from "@/src/components/modal_form/DateInput";
-import TextInput from "@/src/components/modal_form/TextInput";
+import DateInput from "@/src/components/modal/DateInput";
+import TextInput from "@/src/components/modal/TextInput";
 
 const initialState = false;
 type ModalFormProps = {

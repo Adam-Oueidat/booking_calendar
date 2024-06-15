@@ -10,7 +10,6 @@ interface EventModalProps {
 
 export default function EventModal({
   closeModal,
-  date,
   dateString,
 }: EventModalProps) {
   return (

@@ -1,7 +1,5 @@
-import Link from "next/link";
-import Card from "@/src/components/Card";
+import Card from "@/src/components/Calendar/Card";
 import { getCardInformation } from "../components/actions";
-import Image from "next/image";
 
 export default async function HomePage() {
   const cardInformation = await getCardInformation();
