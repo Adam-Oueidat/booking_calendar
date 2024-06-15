@@ -91,8 +91,7 @@ export default function Month({ month, year }: MonthProps) {
   return (
     <>
       <div>
-        <h1 className="text-4xl text-wrap font-extrabold">Kom bo hos oss</h1>
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-2xl font-bold text-red-800">
           {getMonthName(month)} {year}
         </h2>
       </div>
@@ -100,7 +99,7 @@ export default function Month({ month, year }: MonthProps) {
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
           <div
             key={index}
-            className="text-center flex flex-end justify-end items-end font-bold"
+            className="text-center flex flex-end justify-end items-end font-bold text-white"
           >
             {day}
           </div>

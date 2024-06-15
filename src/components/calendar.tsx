@@ -1,5 +1,6 @@
 "use client";
 
+import NavigateMonthButton from "@/src/components/NavigateMonthButton";
 import Month from "./month";
 import { useState, useEffect } from "react";
 
@@ -45,22 +46,20 @@ export default function Calendar() {
   }, [month, year]);
 
   return (
-    <>
+    <div className="grid">
       <Month month={month} year={year} />
-      <div>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={previousMonth}
+      <div className=" flex justify-end items-end">
+        <NavigateMonthButton onClick={previousMonth}>{"<"}</NavigateMonthButton>
+        <NavigateMonthButton
+          onClick={() => {
+            setMonth(date.getMonth());
+            setYear(date.getFullYear());
+          }}
         >
-          Previous
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={nextMonth}
-        >
-          Next
-        </button>
+          Today
+        </NavigateMonthButton>
+        <NavigateMonthButton onClick={nextMonth}>{">"}</NavigateMonthButton>
       </div>
-    </>
+    </div>
   );
 }
