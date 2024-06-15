@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LoginComponent from "./authorization/Login";
 
 export default function Header() {
   return (
@@ -15,6 +16,7 @@ export default function Header() {
             <Link href="#" className="text-sm font-semibold leading-6">
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
+            <LoginComponent />
           </div>
         </nav>
       </header>

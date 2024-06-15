@@ -1,7 +1,7 @@
 "use client";
 
-import NavigateMonthButton from "@/src/components/Calendar/NavigateMonthButton";
-import Month from "@/src/components/Calendar/Month";
+import NavigateMonthButton from "@/src/components/calendar/NavigateMonthButton";
+import Month from "@/src/components/calendar/Month";
 import { useState, useEffect } from "react";
 
 export default function Calendar() {

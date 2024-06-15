@@ -1,5 +1,5 @@
 import React from "react";
-import Day from "./Day";
+import Day from "@/src/components/calendar/Day";
 import { getEventsForMonth } from "@/src/components/actions";
 import { useEffect, useState } from "react";
 

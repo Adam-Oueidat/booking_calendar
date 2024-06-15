@@ -1,4 +1,4 @@
-import Card from "@/src/components/Calendar/Card";
+import Card from "@/src/components/calendar/Card";
 import { getCardInformation } from "../components/actions";
 
 export default async function HomePage() {
