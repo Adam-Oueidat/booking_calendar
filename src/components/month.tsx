@@ -1,5 +1,5 @@
 import React from "react";
-import Day from "./day";
+import Day from "./Day";
 import { getEventsForMonth } from "@/src/components/actions";
 import { useEffect, useState } from "react";
 
@@ -73,18 +73,8 @@ export default function Month({ month, year }: MonthProps) {
 
   if (isLoading) {
     return (
-      <div>
-        <div>
-          <h1 className="lg:text-4xl text-wrap font-extrabold sm:text-base">
-            Kom bo hos oss
-          </h1>
-          <h2 className="lg:text-2xl font-bold sm:text-s">
-            {getMonthName(month)} {year}
-          </h2>
-        </div>
-        <div className="fixed inset-0 flex justify-center items-center font-bold text-center">
-          Loading...
-        </div>
+      <div className="fixed inset-0 flex justify-center items-center font-bold text-center">
+        Loading...
       </div>
     );
   }

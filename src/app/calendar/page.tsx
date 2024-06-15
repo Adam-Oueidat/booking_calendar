@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Calendar from "@/src/components/calendar";
+import Calendar from "@/src/components/Calendar";
 import Image from "next/image";
 import backgroundImage from "@/src/images/nyhavn.jpg";
 

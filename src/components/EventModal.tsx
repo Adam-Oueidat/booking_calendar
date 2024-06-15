@@ -1,5 +1,5 @@
 import React from "react";
-import ModalForm from "./modal_form";
+import ModalForm from "./ModalForm";
 
 interface EventModalProps {
   closeModal: () => void;

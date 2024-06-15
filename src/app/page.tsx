@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Card from "@/src/components/card";
+import Card from "@/src/components/Card";
 import { getCardInformation } from "../components/actions";
 import Image from "next/image";
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import EventModal from "./event_modal";
+import EventModal from "./EventModal";
 
 type DayProps = {
   year: number;
