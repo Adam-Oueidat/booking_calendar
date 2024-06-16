@@ -11,7 +11,6 @@ export default function TextInput({
   label,
   id,
   name,
-  defaultValue,
   placeholder,
   requiredValue,
 }: TextInputProps) {

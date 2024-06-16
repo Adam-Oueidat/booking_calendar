@@ -2,11 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 type CardProps = {
-  title: string;
   cardInfo?: any;
 };
 
-export default function Card({ title, cardInfo }: CardProps) {
+export default function Card({ cardInfo }: CardProps) {
   return (
     <>
       <div className="flex items-center justify-center group h-80 w-60 [perspective:1000px]">

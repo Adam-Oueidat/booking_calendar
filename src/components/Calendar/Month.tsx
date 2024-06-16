@@ -64,12 +64,12 @@ export default function Month({ month, year }: MonthProps) {
     return new Date(year, month, 0).getDay();
   }
 
-  let firstDayOfMonth = getFirstDayOfMonth(year, month);
-  let daysInPreviousMonth = getDaysInMonth(year, month - 1);
-  let startDayOfPreviousMonth = daysInPreviousMonth - firstDayOfMonth + 1;
+  const firstDayOfMonth = getFirstDayOfMonth(year, month);
+  const daysInPreviousMonth = getDaysInMonth(year, month - 1);
+  const startDayOfPreviousMonth = daysInPreviousMonth - firstDayOfMonth + 1;
 
-  let totalDays = firstDayOfMonth + getDaysInMonth(year, month);
-  let remainingDays = 42 - totalDays;
+  const totalDays = firstDayOfMonth + getDaysInMonth(year, month);
+  const remainingDays = 42 - totalDays;
 
   if (isLoading) {
     return (
@@ -107,8 +107,8 @@ export default function Month({ month, year }: MonthProps) {
             </div>
           ))}
         {(() => {
-          let daysInMonth = getDaysInMonth(year, month);
-          let days = [];
+          const daysInMonth = getDaysInMonth(year, month);
+          const days = [];
           for (let i = 1; i <= daysInMonth; i++) {
             days.push(
               <div key={i}>
