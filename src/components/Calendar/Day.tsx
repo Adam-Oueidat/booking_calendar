@@ -50,7 +50,7 @@ export default function Day({
 
   const isBooked = currentEvent
     ? "bg-gray-500"
-    : "hover:bg-violet-700 bg-violet-500";
+    : "hover:bg-neutral-800 bg-neutral-600";
 
   const todayClass =
     "w-7 h-7 bg-center rounded-full flex justify-center items-center";
