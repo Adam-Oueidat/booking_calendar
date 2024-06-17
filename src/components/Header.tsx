@@ -15,18 +15,23 @@ export default function Header() {
           <div className="flex lg:flex-1">
             <Link href="/calendar">Calendar</Link>
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link href="/login" className="text-sm font-semibold leading-6">
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </div>
+
           <SessionProvider>
             {status === "authenticated" ? (
-              <div>
-                <a onClick={() => signOut()}>Logout</a>
+              <div className="hidden lg:flex lg:justify-end ">
+                <button
+                  className="text-sm font-semibold leading-6"
+                  onClick={() => signOut()}
+                >
+                  Logout
+                </button>
               </div>
             ) : (
-              ""
+              <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                <Link href="/login" className="text-sm font-semibold leading-6">
+                  Log in <span aria-hidden="true">&rarr;</span>
+                </Link>
+              </div>
             )}
           </SessionProvider>
         </nav>
