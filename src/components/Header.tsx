@@ -1,7 +1,10 @@
-import Link from "next/link";
-import LoginComponent from "./authorization/Login";
+"use client";
 
+import Link from "next/link";
+import { auth } from "@/auth";
+import { signOut, useSession, SessionProvider } from "next-auth/react";
 export default function Header() {
+  const { data: session, status } = useSession();
   return (
     <>
       <header className="bg-gray-500 opacity-50">
@@ -17,6 +20,15 @@ export default function Header() {
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
           </div>
+          <SessionProvider>
+            {status === "authenticated" ? (
+              <div>
+                <a onClick={() => signOut()}>Logout</a>
+              </div>
+            ) : (
+              ""
+            )}
+          </SessionProvider>
         </nav>
       </header>
     </>
