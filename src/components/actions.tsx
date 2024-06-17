@@ -3,11 +3,18 @@ import { revalidatePath } from "next/cache";
 import { ObjectId } from "bson";
 import prisma from "@/src/lib/db";
 import getAccessToken from "@/src/lib/availability/getAccessToken";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export async function addEvent(
   state: boolean,
   formData: FormData
 ): Promise<boolean> {
+  // Check for session, if not logged in redirect to login page
+  const session = await auth();
+  if (!session) {
+    redirect("/login");
+  }
   const from = formData.get("event-date-from");
   const to = formData.get("event-date-to");
   const email = formData.get("email");
