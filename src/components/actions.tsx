@@ -36,7 +36,7 @@ export async function addEvent(
   createCalendarAppointment(
     fromDate,
     toDate,
-    email?.toString() as string,
+    session.user?.email as string,
     name?.toString() as string
   );
 
@@ -76,7 +76,7 @@ export default async function createCalendarAppointment(
 ) {
   const body = {
     summary: `${name} i Köpenhamn`,
-    location: "Copenhage, Denmark",
+    location: "Copenhagen, Denmark",
     description: "Tänk vad kul!",
     start: {
       date: fromDate.toISOString().split("T")[0],
