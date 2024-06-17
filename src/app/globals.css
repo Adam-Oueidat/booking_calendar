@@ -16,9 +16,8 @@
 
 body {
   color: var(--foreground);
-  background: var(--background) url("../images/nyhavn.jpg");
   font-synthesis: none;
-  background-image: "../images/nyhavn.jpg";
+  background-image: linear-gradient( black, gray);
 }
 
 .my-rotate-y-180 {

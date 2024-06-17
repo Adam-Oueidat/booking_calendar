@@ -7,7 +7,7 @@ export default function Header() {
   const { data: session, status } = useSession();
   return (
     <>
-      <header className="bg-gray-500 opacity-50">
+      <header className="bg-gray-800 opacity-70">
         <nav className="mx-auto flex items-left justify-center p-6 lg:px-8 max-w-7xl">
           <div className="flex lg:flex-1 space-x-4">
             <Link href="/">Home</Link>
