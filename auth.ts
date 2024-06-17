@@ -1,33 +1,39 @@
-import NextAuth, { User, NextAuthConfig } from "next-auth";
-import GitHubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google";
+// import NextAuth, { User, NextAuthConfig } from "next-auth";
+// import GoogleProvider from "next-auth/providers/google";
 
-// Define authentication options using NextAuthOptions interface
-const authOptions: NextAuthConfig = {
-  // Customize authentication pages
-  pages: {
-    signIn: "/login", // Redirect users to "/login" when signing in
-  },
-  // Configure session management
-  session: {
-    strategy: "jwt", // Use JSON Web Tokens (JWT) for session management
-  },
-  // added secret key
-  secret: process.env.NEXT_PUBLIC_SECRET,
-  // Configure authentication providers
+// // Define authentication options using NextAuthOptions interface
+// const authOptions: NextAuthConfig = {
+//   // Customize authentication pages
+//   pages: {
+//     signIn: "/login", // Redirect users to "/login" when signing in
+//   },
+//   // Configure session management
+//   session: {
+//     strategy: "jwt", // Use JSON Web Tokens (JWT) for session management
+//   },
+//   // added secret key
+//   secret: process.env.NEXT_PUBLIC_SECRET,
+//   // Configure authentication providers
+//   providers: [
+//     GoogleProvider({
+//       // Configure Google authentication provider with environment variables
+//       clientId: process.env.GOOGLE_OAUTH_CLIENT_ID,
+//       clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+//     }),
+//   ],
+// };
+
+// export const { auth, handlers, signIn, signOut } = NextAuth(authOptions);
+
+import NextAuth from "next-auth";
+import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
+
+export const { auth, handlers, signIn, signOut } = NextAuth({
   providers: [
-    GoogleProvider({
-      // Configure Google authentication provider with environment variables
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    Google({
+      clientId: process.env.GOOGLE_OAUTH_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_OAUTH_SECRET,
     }),
-    GitHubProvider({
-      // Configure GitHub authentication provider with environment variables
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
-    }),
-    // CredentialsProvider({}), // Include a Credentials provider (username/password)
   ],
-};
-
-export const { auth, handlers, signIn, signOut } = NextAuth(authOptions);
+});

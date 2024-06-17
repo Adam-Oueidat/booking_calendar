@@ -108,29 +108,7 @@ const LoginForm = () => {
         onClick={() => signIn("google", { callbackUrl })}
         role="button"
       >
-        <img
-          className="pr-2"
-          src="/images/google.svg"
-          alt=""
-          style={{ height: "2rem" }}
-        />
         Continue with Google
-      </a>
-
-      {/* Sign In with GitHub button */}
-      <a
-        className="px-7 py-2 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full flex justify-center items-center"
-        style={{ backgroundColor: "#000000" }}
-        onClick={() => signIn("github", { callbackUrl })}
-        role="button"
-      >
-        <img
-          className="pr-2"
-          src="/images/github.png"
-          alt=""
-          style={{ height: "2.2rem" }}
-        />
-        Continue with GitHub
       </a>
     </form>
   );

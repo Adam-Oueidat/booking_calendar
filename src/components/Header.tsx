@@ -13,10 +13,9 @@ export default function Header() {
             <Link href="/calendar">Calendar</Link>
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link href="#" className="text-sm font-semibold leading-6">
+            <Link href="/login" className="text-sm font-semibold leading-6">
               Log in <span aria-hidden="true">&rarr;</span>
             </Link>
-            <LoginComponent />
           </div>
         </nav>
       </header>
