@@ -20,7 +20,7 @@ export default function Header() {
               <div className="hidden lg:flex lg:justify-end ">
                 <button
                   className="text-sm font-semibold leading-6"
-                  onClick={() => signOut()}
+                  onClick={() => signOut({ callbackUrl: "/", redirect: true })}
                 >
                   Logout
                 </button>
