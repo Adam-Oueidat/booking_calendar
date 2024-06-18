@@ -58,7 +58,7 @@ export default function Day({
   const notCurrentMonth = prevMonth || nextMonth ? "opacity-70" : "";
 
   const divClassDayResponsive = `w-full min-[320px]:w-14 min-[320px]:h-14 sm:w-16 sm:h-12 md:w-20 md:h-16 lg:w-20 lg:h-16 xl:w-24 xl:h-20 2xl:w-30 2xl:h-26`;
-  const divClassDay = `flex flex-col justify-start items-end p-1 border ${divClassDayResponsive} ${isBooked} ${notCurrentMonth}`;
+  const divClassDay = ` rounded flex flex-col justify-start items-end p-1 border ${divClassDayResponsive} ${isBooked} ${notCurrentMonth}`;
   return (
     <>
       <div
