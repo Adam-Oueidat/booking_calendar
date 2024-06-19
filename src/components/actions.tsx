@@ -17,7 +17,6 @@ export async function addEvent(
   }
   const from = formData.get("event-date-from");
   const to = formData.get("event-date-to");
-  const email = formData.get("email");
   const name = formData.get("name");
 
   const fromDate = new Date(from as string);
@@ -128,4 +127,37 @@ export async function getCardInformation() {
     cardInformationDict[cardInformation.id] = cardInformation;
   });
   return cardInformationDict;
+}
+
+export async function bookTicket(
+  state: boolean,
+  formData: FormData
+): Promise<boolean> {
+  const fromCity = formData.get("city-from");
+
+  const fromCityString = fromCity?.toString();
+  const date = new Date();
+
+  if (fromCity === null || fromCityString === undefined) {
+    return false;
+  }
+  if (fromCityString.toLowerCase() === "stockholm") {
+    redirect(
+      `https://www.sj.se/sok-resa/valj-resa/Stockholm%20Central/K%C3%B6penhamn%20H/` +
+        date.toISOString().split("T")[0]
+    );
+  }
+  if (fromCityString.toLowerCase() === "gothenburg") {
+    redirect(
+      `https://www.sj.se/sok-resa/valj-resa/G%C3%B6teborg%20Central/K%C3%B6penhamn%20H/` +
+        date.toISOString().split("T")[0]
+    );
+  }
+  if (fromCityString.toLowerCase() === "malmo") {
+    redirect(
+      `https://www.sj.se/sok-resa/valj-resa/Malm%C3%B6%20Central/K%C3%B6penhamn%20H/` +
+        date.toISOString().split("T")[0]
+    );
+  }
+  return false;
 }

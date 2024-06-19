@@ -1,3 +1,4 @@
+import BookingTrainForm from "@/src/components/BookingTrainForm";
 import Calendar from "@/src/components/calendar/Calendar";
 import Link from "next/link";
 
@@ -17,13 +18,7 @@ export default function CalendarPage() {
             - Use date from calendar to show this, (The hard part)
 
             */}
-            <label>Från</label>
-            <input />
-            <label>Till</label>
-            <input />
-            <Link href="https://www.sj.se/sok-resa/sok/fran-station/till-station/datum-for-utresa">
-              Boka här
-            </Link>
+            <BookingTrainForm />
           </div>
           <Calendar />
         </div>
