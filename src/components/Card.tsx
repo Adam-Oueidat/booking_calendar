@@ -22,9 +22,15 @@ export default function Card({ cardInfo }: CardProps) {
           </div>
           <div className="flex min-h-full flex-col items-center justify-center absolute inset-0 h-full w-full rounded-xl bg-black/100 px-12 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
             <p className="text-base">{cardInfo[1].shortDescription}</p>
-            <button className="mt-2 rounded-md bg-neutral-800 py-1 px-2 text-sm hover:bg-neutral-900">
-              <Link href={cardInfo[1].imageUrls}>Read more</Link>
-            </button>
+
+            <div className="flex flex-col gap-3">
+              <button className="mt-2 rounded-md bg-neutral-800 py-1 px-2 text-sm hover:bg-neutral-900">
+                <Link href={cardInfo[1].imageUrls}>Läs mer</Link>
+              </button>
+              <button className="mt-2 rounded-md bg-green-800 py-1 px-2 text-sm hover:bg-green-950">
+                <Link href="/calendar">Gå til bokning</Link>
+              </button>
+            </div>
           </div>
         </div>
       </div>
