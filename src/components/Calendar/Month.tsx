@@ -40,6 +40,10 @@ export default function Month({ month, year }: MonthProps) {
     };
 
     fetchCurrentEvents();
+
+    return () => {
+      setIsLoading(true);
+    };
   }, [month, year]);
 
   function getDaysInMonth(year: number, month: number) {

@@ -27,7 +27,7 @@ export default function Card({ cardInfo }: CardProps) {
               <button className="mt-2 rounded-md bg-neutral-800 py-1 px-2 text-sm hover:bg-neutral-900">
                 <Link href={cardInfo[1].imageUrls}>Läs mer</Link>
               </button>
-              <button className="mt-2 rounded-md bg-green-800 py-1 px-2 text-sm hover:bg-green-950">
+              <button className="mt-2 rounded-md bg-gray-600 py-1 px-2 text-sm hover:bg-gray-900">
                 <Link href="/calendar">Gå til bokning</Link>
               </button>
             </div>

@@ -18,6 +18,7 @@ export async function addEvent(
   const from = formData.get("event-date-from");
   const to = formData.get("event-date-to");
   const name = formData.get("name");
+  const description = formData.get("description");
 
   const fromDate = new Date(from as string);
   const toDate = new Date(to as string);
@@ -36,7 +37,8 @@ export async function addEvent(
     fromDate,
     toDate,
     session.user?.email as string,
-    name?.toString() as string
+    name?.toString() as string,
+    description?.toString() as string
   );
 
   revalidatePath("/calendar");
@@ -71,12 +73,13 @@ export default async function createCalendarAppointment(
   fromDate: Date,
   toDate: Date,
   email: string,
-  name: string
+  name: string,
+  description: string
 ) {
   const body = {
     summary: `${name} i Köpenhamn`,
     location: "Copenhagen, Denmark",
-    description: "Tänk vad kul!",
+    description: { description },
     start: {
       date: fromDate.toISOString().split("T")[0],
       timeZone: "Europe/Stockholm",

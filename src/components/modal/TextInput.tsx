@@ -5,6 +5,7 @@ type TextInputProps = {
   defaultValue?: string;
   placeholder?: string;
   requiredValue?: boolean;
+  styling?: string;
 };
 
 export default function TextInput({
@@ -13,9 +14,10 @@ export default function TextInput({
   name,
   placeholder,
   requiredValue,
+  styling,
 }: TextInputProps) {
   return (
-    <div>
+    <div className={styling}>
       <label htmlFor={id}>{label}</label>
       <input
         type="text"

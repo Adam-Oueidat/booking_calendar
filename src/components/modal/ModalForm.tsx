@@ -30,7 +30,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
     if (state) {
       closeModal();
     }
-  }, [state]);
+  }, [state, closeModal]);
 
   return (
     <>
@@ -49,6 +49,13 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
             name="email"
             placeholder="janedoe@example.com"
             requiredValue={true}
+          />
+          <TextInput
+            label="Beskrivning:"
+            id="description"
+            name="description"
+            placeholder="Vad vill vi göra?"
+            styling="col-span-2"
           />
           <DateInput
             label="From:"
