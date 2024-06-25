@@ -1,6 +1,6 @@
-import LoginForm from "../../components/authorization/Login";
+import LoginForm from "@/src/components/authorization/Login";
 
-export default function LoginPage() {
+export default async function LoginPage() {
   return (
     <>
       <section className="bg-ct-blue-600 min-h-screen pt-20">
