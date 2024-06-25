@@ -5,7 +5,7 @@ import { bookTicket } from "@/src/components/actions";
 const initialState = false;
 
 export default function BookingTrainForm() {
-  const [state, formAction] = useActionState(bookTicket, initialState);
+  const [, formAction] = useActionState(bookTicket, initialState);
 
   return (
     <form action={formAction} className="grid gap-5">

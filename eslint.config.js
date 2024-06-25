@@ -51,6 +51,14 @@ module.exports = tsEslint.config(
     },
   },
   {
+    "rules": {
+    "@typescript-eslint/consistent-type-definitions": [
+      "error",
+      "type"
+    ]
+  }
+  },
+  {
     plugins: {
       "@next/next": nextPlugin,
     },

@@ -50,12 +50,12 @@ export default function Day({
 
   const isBooked = currentEvent
     ? "bg-gray-500"
-    : "hover:bg-neutral-800 bg-neutral-600";
+    : "hover:bg-stone-800 bg-stone-600";
 
   const todayClass =
-    "w-7 h-7 bg-center rounded-full flex justify-center items-center";
+    "w-6 h-6 bg-center rounded-full flex justify-center items-center text-sm";
   const isTodayClass = isToday ? `bg-red-500 ${todayClass}` : todayClass;
-  const notCurrentMonth = prevMonth || nextMonth ? "opacity-80" : "";
+  const notCurrentMonth = prevMonth || nextMonth ? "opacity-40" : "";
 
   const divClassDayResponsive = `w-full min-[320px]:w-14 min-[320px]:h-14 sm:w-16 sm:h-12 md:w-20 md:h-16 lg:w-20 lg:h-16 xl:w-20 xl:h-16 2xl:w-30 2xl:h-26`;
   // const divClassDay = `flex flex-col text-sm justify-start items-end text-muted-foreground bg-accent-foreground p-4 rounded ${divClassDayResponsive} ${isBooked} ${notCurrentMonth}`;

@@ -47,7 +47,6 @@ export default function Calendar() {
 
   return (
     <div className="grid">
-      <Month month={month} year={year} />
       <div className=" flex justify-end items-end">
         <NavigateMonthButton onClick={previousMonth}>{"<"}</NavigateMonthButton>
         <NavigateMonthButton
@@ -60,6 +59,7 @@ export default function Calendar() {
         </NavigateMonthButton>
         <NavigateMonthButton onClick={nextMonth}>{">"}</NavigateMonthButton>
       </div>
+      <Month month={month} year={year} />
     </div>
   );
 }

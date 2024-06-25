@@ -3,10 +3,10 @@ import Day from "@/src/components/calendar/Day";
 import { getEventsForMonth } from "@/src/components/actions";
 import { useEffect, useState } from "react";
 
-interface MonthProps {
+type MonthProps = {
   year: number;
   month: number;
-}
+};
 
 export default function Month({ month, year }: MonthProps) {
   function getMonthName(month: number) {
@@ -26,9 +26,9 @@ export default function Month({ month, year }: MonthProps) {
     ];
     return monthNames[month];
   }
-  const [currentEvents, setCurrentEvents] = useState<{
-    [date: number]: boolean;
-  }>({});
+  const [currentEvents, setCurrentEvents] = useState<Record<number, boolean>>(
+    {}
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function Month({ month, year }: MonthProps) {
   return (
     <>
       <div>
-        <h2 className="text-2xl font-bold text-red-800">
+        <h2 className="text-2xl font-bold text-white">
           {getMonthName(month)} {year}
         </h2>
       </div>
