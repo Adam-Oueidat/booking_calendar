@@ -5,11 +5,11 @@ import { signOut, useSession, SessionProvider } from "next-auth/react";
 
 const sharedClasses = {
   navContainer:
-    "mx-auto flex items-left justify-center p-6 lg:px-8 max-w-7xl shadow-lg",
-  linkContainer: "flex lg:flex-1 space-x-4",
+    "mx-auto flex items-left md:justify-center p-6 lg:px-8  shadow-lg",
+  linkContainer: "md:flex lg:flex-1 space-x-4 pr-4",
   button: "text-sm font-semibold leading-6",
-  hiddenLgFlex: "hidden lg:flex lg:justify-end",
-  hiddenLgFlex1: "hidden lg:flex lg:flex-1 lg:justify-end",
+  hiddenLgFlex: "min-[320px]:px-4 sm:px-4 md:flex md:justify-end",
+  hiddenLgFlex1: "min-[320px]:px-4 sm:px-4 md:flex md:flex-1 md:justify-end",
 };
 
 export default function Header() {
