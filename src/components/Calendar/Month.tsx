@@ -89,7 +89,7 @@ export default function Month({ month, year }: MonthProps) {
           {getMonthName(month)} {year}
         </h2>
       </div>
-      <div className="grid grid-cols-7">
+      <div className="grid grid-cols-7 gap-1">
         {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, index) => (
           <div
             key={index}
