@@ -57,7 +57,7 @@ export default function Day({
   const isTodayClass = isToday ? `bg-red-500 ${todayClass}` : todayClass;
   const notCurrentMonth = prevMonth || nextMonth ? "opacity-40" : "";
 
-  const divClassDayResponsive = `w-full min-[320px]:w-14 min-[320px]:h-14 sm:w-16 sm:h-12 md:w-20 md:h-16 lg:w-20 lg:h-16 xl:w-20 xl:h-16 2xl:w-30 2xl:h-26`;
+  const divClassDayResponsive = `w-full min-[320px]:w-12 min-[320px]:h-12 sm:w-16 sm:h-12 md:w-20 md:h-16 lg:w-20 lg:h-16 xl:w-20 xl:h-16 2xl:w-30 2xl:h-26`;
   // const divClassDay = `flex flex-col text-sm justify-start items-end text-muted-foreground bg-accent-foreground p-4 rounded ${divClassDayResponsive} ${isBooked} ${notCurrentMonth}`;
   const divClassDay = `text-muted-foreground bg-accent-foreground rounded flex flex-col justify-start items-end p-1 border ${divClassDayResponsive} ${isBooked} ${notCurrentMonth}`;
   return (
