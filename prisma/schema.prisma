@@ -1,0 +1,24 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Event {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  startDate DateTime
+  endDate   DateTime
+}
+
+model CardInformation {
+  id               String @id @default(auto()) @map("_id") @db.ObjectId
+  title            String
+  shortDescription String
+  longDescription  String
+  imageUrl         String
+  imageUrls        String
+}
