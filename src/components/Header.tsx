@@ -16,12 +16,14 @@ export default function Header() {
   const { status } = useSession();
   return (
     <header className="w-full bg-primary text-primary-foreground shadow-md">
-      <nav className={sharedClasses.navContainer}>
-        <div className={sharedClasses.linkContainer}>
-          <Link href="/">Home</Link>
-          {status === "authenticated" && <Link href="/calendar">Calendar</Link>}
-        </div>
-        <SessionProvider>
+      <SessionProvider>
+        <nav className={sharedClasses.navContainer}>
+          <div className={sharedClasses.linkContainer}>
+            <Link href="/">Home</Link>
+            {status === "authenticated" && (
+              <Link href="/calendar">Calendar</Link>
+            )}
+          </div>
           {status === "authenticated" ? (
             <div className={sharedClasses.hiddenLgFlex}>
               <button
@@ -38,8 +40,8 @@ export default function Header() {
               </Link>
             </div>
           )}
-        </SessionProvider>
-      </nav>
+        </nav>
+      </SessionProvider>
     </header>
   );
 }
