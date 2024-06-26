@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import Image from "next/image";
 
 export default async function Profile() {
   const session = await auth();
@@ -17,9 +18,11 @@ export default async function Profile() {
             ) : (
               <div className="flex items-center gap-8">
                 <div>
-                  <img
+                  <Image
                     src={user.image ? user.image : "/images/default.png"}
                     className="max-h-36"
+                    width={144}
+                    height={144}
                     alt={`profile photo of ${user.name}`}
                   />
                 </div>

@@ -46,7 +46,7 @@ export default function Calendar() {
   }, [month, year]);
 
   return (
-    <div className="grid">
+    <div className="grid py-5 md:py-0">
       <div className=" flex justify-end items-end">
         <NavigateMonthButton onClick={previousMonth}>{"<"}</NavigateMonthButton>
         <NavigateMonthButton
