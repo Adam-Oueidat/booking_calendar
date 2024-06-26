@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react"; // Import the signIn function from Nex
 import { Suspense } from "react";
 
 export default function LoginForm() {
-  const callbackUrl = "/profile";
+  const callbackUrl = "/";
 
   return (
     <>

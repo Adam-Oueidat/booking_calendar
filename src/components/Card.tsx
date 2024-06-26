@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { auth } from "@/auth";
 
 type CardProps = {
   cardInfo?: any;
 };
 
-export default function Card({ cardInfo }: CardProps) {
+export default async function Card({ cardInfo }: CardProps) {
+  const session = await auth();
   return (
     <>
       <div className="flex items-center justify-center group h-80 w-60 [perspective:1000px]">
@@ -27,9 +29,15 @@ export default function Card({ cardInfo }: CardProps) {
               <button className="mt-2 rounded-md bg-neutral-800 py-1 px-2 text-sm hover:bg-neutral-900">
                 <Link href={cardInfo[1].imageUrls}>Läs mer</Link>
               </button>
-              <button className="mt-2 rounded-md bg-gray-600 py-1 px-2 text-sm hover:bg-gray-900">
-                <Link href="/calendar">Gå til bokning</Link>
-              </button>
+              {session ? (
+                <button className="mt-2 rounded-md bg-gray-600 py-1 px-2 text-sm hover:bg-gray-900">
+                  <Link href="/calendar">Gå til bokning</Link>
+                </button>
+              ) : (
+                <button className="mt-2 rounded-md bg-gray-600 py-1 px-2 text-sm hover:bg-gray-900">
+                  <Link href="/login">Logga in för att boka</Link>
+                </button>
+              )}
             </div>
           </div>
         </div>
