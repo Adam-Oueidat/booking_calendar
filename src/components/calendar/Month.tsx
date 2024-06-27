@@ -29,18 +29,27 @@ export default function Month({ month, year }: MonthProps) {
   const [currentEvents, setCurrentEvents] = useState<Record<number, boolean>>(
     {}
   );
+  const [nextMonthEvents, setNextMonthEvents] = useState<
+    Record<number, boolean>
+  >({});
+  const [prevMonthEvents, setPrevMonthEvents] = useState<
+    Record<number, boolean>
+  >({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
     const fetchCurrentEvents = async () => {
       const events = await getEventsForMonth(year, month);
+      const nextEvents = await getEventsForMonth(year, month + 1);
+      const prevEvents = await getEventsForMonth(year, month - 1);
+      setPrevMonthEvents(prevEvents);
+      setNextMonthEvents(nextEvents);
       setCurrentEvents(events);
       setIsLoading(false);
     };
 
     fetchCurrentEvents();
-
     return () => {
       setIsLoading(true);
     };
@@ -107,6 +116,7 @@ export default function Month({ month, year }: MonthProps) {
                 year={month === 0 ? year - 1 : year} // if January, set year to previous year
                 date={startDayOfPreviousMonth + i}
                 prevMonth={true}
+                currentEvent={prevMonthEvents[i]}
               />
             </div>
           ))}
@@ -137,6 +147,7 @@ export default function Month({ month, year }: MonthProps) {
                 year={month === 11 ? year + 1 : year} // if December, set year to next year
                 date={i + 1}
                 nextMonth={true}
+                currentEvent={nextMonthEvents[i + 1]}
               />
             </div>
           ))}
