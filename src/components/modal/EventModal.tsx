@@ -1,12 +1,12 @@
 import React from "react";
 import ModalForm from "./ModalForm";
 
-interface EventModalProps {
+type EventModalProps = {
   closeModal: () => void;
   removeEvent: () => void;
   date: number;
   dateString: string;
-}
+};
 
 export default function EventModal({
   closeModal,
@@ -23,6 +23,7 @@ export default function EventModal({
             X
           </button>
           <h1 className="text-2xl font-bold">Add event</h1>
+          <p>{dateString}</p>
           <ModalForm date={dateString} closeModal={closeModal} />
         </div>
       </div>

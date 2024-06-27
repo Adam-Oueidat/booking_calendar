@@ -6,6 +6,13 @@ import getAccessToken from "@/src/lib/availability/getAccessToken";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 
+type Event = {
+  id: string;
+  name: string;
+  startDate: string;
+  endDate: string;
+};
+
 export async function addEvent(
   state: boolean,
   formData: FormData
@@ -49,10 +56,10 @@ export async function addEvent(
 export async function getEventsForMonth(year: number, month: number) {
   const events = await prisma.event.findMany();
   const jsonArray = JSON.parse(JSON.stringify(events));
+  console.log(jsonArray);
+  const eventsDict: Record<number, boolean> = {};
 
-  const eventsDict: { [date: number]: boolean } = {};
-
-  jsonArray.forEach((event: any) => {
+  jsonArray.forEach((event: Event) => {
     const startDate = new Date(event.startDate.replace("$D", ""));
     const endDate = new Date(event.endDate.replace("$D", ""));
 
