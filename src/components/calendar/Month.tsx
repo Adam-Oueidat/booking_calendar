@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import Day from "@/src/components/calendar/Day";
 import { getEventsForMonth } from "@/src/components/actions";
 import { useEffect, useState } from "react";
@@ -55,6 +55,10 @@ export default function Month({ month, year }: MonthProps) {
     };
   }, [month, year]);
 
+  const computedCurrentEvents = useMemo(() => {
+    return currentEvents;
+  }, [currentEvents]);
+
   function getDaysInMonth(year: number, month: number) {
     month = month + 1;
     if (month === 0) {
@@ -86,13 +90,13 @@ export default function Month({ month, year }: MonthProps) {
 
   if (isLoading) {
     return (
-      <div className="fixed inset-0 flex justify-center items-center font-bold text-center">
-        Loading...
+      <div className="flex items-center justify-center h-[50vh]">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
       </div>
     );
   }
   return (
-    <>
+    <div>
       <div>
         <h2 className="text-2xl font-bold text-white">
           {getMonthName(month)} {year}
@@ -131,27 +135,28 @@ export default function Month({ month, year }: MonthProps) {
                   year={year}
                   date={i}
                   isToday={isToday(i)}
-                  currentEvent={currentEvents[i]}
+                  currentEvent={computedCurrentEvents[i]}
                 />
               </div>
             );
           }
           return days;
         })()}
-        {Array(remainingDays)
-          .fill(null)
-          .map((_, i) => (
-            <div key={`next-${i}`}>
-              <Day
-                month={month === 11 ? 0 : month + 1} // if December, set month to January
-                year={month === 11 ? year + 1 : year} // if December, set year to next year
-                date={i + 1}
-                nextMonth={true}
-                currentEvent={nextMonthEvents[i + 1]}
-              />
-            </div>
-          ))}
+        {currentEvents &&
+          Array(remainingDays)
+            .fill(null)
+            .map((_, i) => (
+              <div key={`next-${i}`}>
+                <Day
+                  month={month === 11 ? 0 : month + 1} // if December, set month to January
+                  year={month === 11 ? year + 1 : year} // if December, set year to next year
+                  date={i + 1}
+                  nextMonth={true}
+                  currentEvent={nextMonthEvents[i + 1]}
+                />
+              </div>
+            ))}
       </div>
-    </>
+    </div>
   );
 }

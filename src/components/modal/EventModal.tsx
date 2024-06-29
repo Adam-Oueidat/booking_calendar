@@ -1,5 +1,6 @@
 import React from "react";
 import ModalForm from "./ModalForm";
+import { useEffect } from "react";
 
 type EventModalProps = {
   closeModal: () => void;
@@ -12,6 +13,21 @@ export default function EventModal({
   closeModal,
   dateString,
 }: EventModalProps) {
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">

@@ -2,7 +2,7 @@
 
 import NavigateMonthButton from "@/src/components/calendar/NavigateMonthButton";
 import Month from "@/src/components/calendar/Month";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 
 export default function Calendar() {
   const date = new Date();
@@ -59,7 +59,9 @@ export default function Calendar() {
         </NavigateMonthButton>
         <NavigateMonthButton onClick={nextMonth}>{">"}</NavigateMonthButton>
       </div>
-      <Month month={month} year={year} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Month month={month} year={year} />
+      </Suspense>
     </div>
   );
 }

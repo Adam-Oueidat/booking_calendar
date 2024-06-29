@@ -21,21 +21,6 @@ export default function Day({
 }: DayProps) {
   const [isModalOpen, setModalOpen] = useState(false);
 
-  useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        closeModal();
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
-
   function removeEvent() {
     setModalOpen(false);
   }
