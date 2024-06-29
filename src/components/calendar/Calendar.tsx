@@ -1,53 +1,43 @@
 "use client";
-
 import NavigateMonthButton from "@/src/components/calendar/NavigateMonthButton";
 import Month from "@/src/components/calendar/Month";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useCallback } from "react";
 
 export default function Calendar() {
   const date = new Date();
-
   const [month, setMonth] = useState(date.getMonth());
   const [year, setYear] = useState(date.getFullYear());
 
-  function nextMonth() {
-    if (month === 11) {
-      setMonth(0);
-      setYear(year + 1);
-    } else {
-      setMonth((month + 1) % 12);
-    }
-  }
+  const nextMonth = useCallback(() => {
+    setMonth((prevMonth) => (prevMonth === 11 ? 0 : prevMonth + 1));
+    setYear((prevYear) => (month === 11 ? prevYear + 1 : prevYear));
+  }, [month]);
 
-  function previousMonth() {
-    if (month === 0) {
-      setMonth(11);
-      setYear(year - 1);
-    } else {
-      setMonth((month - 1) % 12);
-    }
-  }
+  const previousMonth = useCallback(() => {
+    setMonth((prevMonth) => (prevMonth === 0 ? 11 : prevMonth - 1));
+    setYear((prevYear) => (month === 0 ? prevYear - 1 : prevYear));
+  }, [month]);
+
   useEffect(() => {
-    function handleKeyDown(event: KeyboardEvent) {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "ArrowLeft") {
         previousMonth();
       }
       if (event.key === "ArrowRight") {
         nextMonth();
       }
-    }
+    };
 
     window.addEventListener("keydown", handleKeyDown);
 
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [month, year]);
+  }, [previousMonth, nextMonth]);
 
   return (
     <div className="grid py-5 md:py-0">
-      <div className=" flex justify-end items-end">
+      <div className="flex justify-end items-end">
         <NavigateMonthButton onClick={previousMonth}>{"<"}</NavigateMonthButton>
         <NavigateMonthButton
           onClick={() => {
