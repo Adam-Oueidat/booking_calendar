@@ -29,6 +29,7 @@ export default function Month({ month, year }: MonthProps) {
         getEventsForMonth(year, month - 1),
       ]);
       setEvents({ current: current, nextMonth: next, prevMonth: prev });
+      console.log({ current, next, prev });
       setIsLoading(false);
     };
 
@@ -126,7 +127,7 @@ export default function Month({ month, year }: MonthProps) {
                 year={month === 11 ? year + 1 : year} // if December, set year to next year
                 date={i + 1}
                 nextMonth={true}
-                currentEvent={events.prevMonth[i + 1]}
+                currentEvent={events.nextMonth[i + 1]}
               />
             </div>
           ))}
