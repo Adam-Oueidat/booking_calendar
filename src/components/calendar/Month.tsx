@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Day from "@/src/components/calendar/Day";
 import { getEventsForMonth } from "@/src/components/actions";
 
@@ -22,6 +22,7 @@ export default function Month({ month, year }: MonthProps) {
   useEffect(() => {
     const fetchEvents = async () => {
       setIsLoading(true);
+
       const [current, next, prev] = await Promise.all([
         getEventsForMonth(year, month),
         getEventsForMonth(year, month + 1),
@@ -56,13 +57,13 @@ export default function Month({ month, year }: MonthProps) {
   function getFirstDayOfMonth(year: number, month: number) {
     return new Date(year, month, 0).getDay();
   }
-
+  const MAX_TOTAL_DAYS = 42;
   const firstDayOfMonth = getFirstDayOfMonth(year, month);
   const daysInPreviousMonth = getDaysInMonth(year, month - 1);
   const startDayOfPreviousMonth = daysInPreviousMonth - firstDayOfMonth + 1;
 
   const totalDays = firstDayOfMonth + getDaysInMonth(year, month);
-  const remainingDays = 42 - totalDays;
+  const remainingDays = MAX_TOTAL_DAYS - totalDays;
 
   if (isLoading) {
     return (

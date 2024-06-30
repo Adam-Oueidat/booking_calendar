@@ -56,9 +56,7 @@ export async function addEvent(
 export async function getEventsForMonth(year: number, month: number) {
   const events = await prisma.event.findMany();
   const jsonArray = JSON.parse(JSON.stringify(events));
-  console.log(jsonArray);
   const eventsDict: Record<number, boolean> = {};
-
   jsonArray.forEach((event: Event) => {
     const startDate = new Date(event.startDate.replace("$D", ""));
     const endDate = new Date(event.endDate.replace("$D", ""));
@@ -72,7 +70,6 @@ export async function getEventsForMonth(year: number, month: number) {
       }
     }
   });
-
   return eventsDict;
 }
 

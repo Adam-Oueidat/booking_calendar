@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import EventModal from "@/src/components/modal/EventModal";
 
 type DayProps = {
@@ -14,10 +14,10 @@ export default function Day({
   month,
   year,
   date,
-  prevMonth = false,
-  nextMonth = false,
-  currentEvent = false,
-  isToday = false,
+  prevMonth,
+  nextMonth,
+  currentEvent,
+  isToday,
 }: DayProps) {
   const [isModalOpen, setModalOpen] = useState(false);
 
