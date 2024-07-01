@@ -29,6 +29,14 @@ export default async function Profile() {
                 </div>
                 <div>{event.endDate.split("T")[0]}</div>
               </div>
+              <div className="flex justify-end">
+                <button className="bg-red-600 text-white rounded p-2">
+                  Decline
+                </button>
+                <button className="bg-green-800 text-white rounded p-2">
+                  Accept
+                </button>
+              </div>
             </div>
           ))}
         </div>
