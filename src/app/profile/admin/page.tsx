@@ -19,7 +19,7 @@ export default async function Profile() {
   return (
     <section className="bg-ct-blue-600  min-h-screen pt-20 flex items-start justify-center">
       <div>
-        <div className="grid grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 gap-4 p-10 overflow-auto max-h-screen">
           {jsonArray.map((event: Record<string, string>) => (
             <div key={event.id} className="bg-gray-500 rounded p-5 px-10">
               <div className="event-name">{event.name}</div>
