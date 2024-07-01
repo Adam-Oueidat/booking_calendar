@@ -1,0 +1,38 @@
+import { auth } from "@/auth";
+import prisma from "@/src/lib/db";
+
+export default async function Profile() {
+  const events = await prisma.event.findMany();
+  const jsonArray = JSON.parse(JSON.stringify(events));
+  const session = await auth();
+  const user = session?.user;
+  const ADMIN_EMAIL = process.env.AUTH_ADMIN_EMAIL;
+
+  if (user?.email !== ADMIN_EMAIL) {
+    return (
+      <div className="bg-ct-blue-600  min-h-screen pt-20 flex items-start justify-center">
+        <h1>You are not authorized to use this page</h1>
+      </div>
+    );
+  }
+
+  return (
+    <section className="bg-ct-blue-600  min-h-screen pt-20 flex items-start justify-center">
+      <div>
+        <div className="grid grid-cols-1 gap-8">
+          {jsonArray.map((event: Record<string, string>) => (
+            <div key={event.id} className="bg-gray-500 rounded p-5 px-10">
+              <div className="event-name">{event.name}</div>
+              <div className="grid grid-cols-2 gap-5 ">
+                <div className="event-date">
+                  {event.startDate.split("T")[0]}
+                </div>
+                <div>{event.endDate.split("T")[0]}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -73,7 +73,9 @@ export async function getEventsForMonth(year: number, month: number) {
   return eventsDict;
 }
 
-export default async function createCalendarAppointment(
+
+
+export async function createCalendarAppointment(
   fromDate: Date,
   toDate: Date,
   email: string,
