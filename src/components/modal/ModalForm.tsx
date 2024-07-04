@@ -1,8 +1,9 @@
 import { useFormStatus } from "react-dom";
-import { useActionState, useEffect } from "react";
+import { useActionState, useContext, useEffect } from "react";
 import { addEvent } from "@/src/components/actions";
 import DateInput from "@/src/components/modal/DateInput";
 import TextInput from "@/src/components/modal/TextInput";
+import { EventContext } from "@/src/components/calendar/Month";
 
 const initialState = false;
 type ModalFormProps = {
@@ -25,12 +26,14 @@ function SubmitButton() {
 }
 export default function ModalForm({ date, closeModal }: ModalFormProps) {
   const [state, formAction] = useActionState(addEvent, initialState);
+  const { refreshing, setRefreshing } = useContext(EventContext);
 
   useEffect(() => {
     if (state) {
       closeModal();
+      setRefreshing(true);
     }
-  }, [state, closeModal]);
+  }, [state, closeModal, refreshing]);
 
   return (
     <>

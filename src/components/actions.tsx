@@ -73,8 +73,6 @@ export async function getEventsForMonth(year: number, month: number) {
   return eventsDict;
 }
 
-
-
 export async function createCalendarAppointment(
   fromDate: Date,
   toDate: Date,
