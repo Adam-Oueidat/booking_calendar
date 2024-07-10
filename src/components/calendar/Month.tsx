@@ -13,8 +13,7 @@ type RefreshingContextValue = {
 };
 export const EventContext = createContext<RefreshingContextValue>({
   refreshing: false,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setRefreshing: () => {},
+  setRefreshing: () => undefined,
 });
 export default function Month({ month, year }: MonthProps) {
   const [refreshing, setRefreshing] = useState(false);
