@@ -27,19 +27,20 @@ export async function requestEvent(
   const name = formData.get("name");
   const description = formData.get("description");
 
+  if (!from || !to || !name || !description) {
+    throw new Error("Missing form data");
+  }
+
   const fromDate = new Date(from as string);
   const toDate = new Date(to as string);
-
   await prisma.requestedEvent.create({
     data: {
       id: new ObjectId().toString(),
-      name: "Event Name", // Add the name property here
+      name: name as string, // Add the name property here
       startDate: fromDate,
       endDate: toDate,
     },
   });
-
-  toDate.setDate(toDate.getDate() + 1);
 
   revalidatePath("/calendar");
 
@@ -56,6 +57,7 @@ export async function addEvent() {
     },
   });
 
+  toDate.setDate(toDate.getDate() + 1);
   createCalendarAppointment(
     fromDate,
     toDate,
