@@ -22,3 +22,10 @@ model CardInformation {
   imageUrl         String
   imageUrls        String
 }
+
+model RequestedEvent {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  startDate DateTime
+  endDate   DateTime
+}

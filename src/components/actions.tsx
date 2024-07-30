@@ -13,7 +13,7 @@ type Event = {
   endDate: string;
 };
 
-export async function addEvent(
+export async function requestEvent(
   state: boolean,
   formData: FormData
 ): Promise<boolean> {
@@ -30,7 +30,7 @@ export async function addEvent(
   const fromDate = new Date(from as string);
   const toDate = new Date(to as string);
 
-  await prisma.event.create({
+  await prisma.requestedEvent.create({
     data: {
       id: new ObjectId().toString(),
       name: "Event Name", // Add the name property here
@@ -40,6 +40,22 @@ export async function addEvent(
   });
 
   toDate.setDate(toDate.getDate() + 1);
+
+  revalidatePath("/calendar");
+
+  return !state;
+}
+
+export async function addEvent() {
+  await prisma.requestedEvent.create({
+    data: {
+      id: new ObjectId().toString(),
+      name: "Event Name", // Add the name property here
+      startDate: fromDate,
+      endDate: toDate,
+    },
+  });
+
   createCalendarAppointment(
     fromDate,
     toDate,
@@ -47,10 +63,6 @@ export async function addEvent(
     name?.toString() as string,
     description?.toString() as string
   );
-
-  revalidatePath("/calendar");
-
-  return !state;
 }
 
 export async function getEventsForMonth(year: number, month: number) {
