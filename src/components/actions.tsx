@@ -9,6 +9,8 @@ import { redirect } from "next/navigation";
 type Event = {
   id: string;
   name: string;
+  description: string;
+  email: string;
   startDate: string;
   endDate: string;
 };
@@ -37,6 +39,8 @@ export async function requestEvent(
     data: {
       id: new ObjectId().toString(),
       name: name as string, // Add the name property here
+      description: description as string,
+      email: session.user?.email as string,
       startDate: fromDate,
       endDate: toDate,
     },
@@ -47,24 +51,41 @@ export async function requestEvent(
   return !state;
 }
 
-export async function addEvent() {
-  await prisma.requestedEvent.create({
+export async function addEvent(event: Event) {
+  const id = event.id;
+  const fromDate = event.startDate;
+  const toDate = event.endDate;
+  const name = event.name;
+  const description = event.description;
+
+  await prisma.event.create({
     data: {
-      id: new ObjectId().toString(),
-      name: "Event Name", // Add the name property here
+      id: id,
+      name: name, // Add the name property here
       startDate: fromDate,
       endDate: toDate,
     },
   });
 
-  toDate.setDate(toDate.getDate() + 1);
+  const convertToDate = new Date(toDate);
+  const convertFromDate = new Date(fromDate);
+  convertToDate.setDate(convertToDate.getDate() + 1);
   createCalendarAppointment(
-    fromDate,
-    toDate,
-    session.user?.email as string,
-    name?.toString() as string,
-    description?.toString() as string
+    convertFromDate,
+    convertToDate,
+    event.email,
+    name,
+    description
   );
+}
+
+export async function deleteRequestedEvent(event: Event) {
+  await prisma.requestedEvent.delete({
+    where: {
+      id: event.id,
+    },
+  });
+  revalidatePath("/profile/admin");
 }
 
 export async function getEventsForMonth(year: number, month: number) {

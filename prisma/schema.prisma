@@ -24,8 +24,10 @@ model CardInformation {
 }
 
 model RequestedEvent {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  startDate DateTime
-  endDate   DateTime
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  email       String
+  startDate   DateTime
+  endDate     DateTime
 }
