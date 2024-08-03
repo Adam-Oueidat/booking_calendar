@@ -58,6 +58,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
           name="description"
           placeholder="Vad vill vi göra?"
           styling="col-span-2"
+          requiredValue={true}
         />
         <DateInput
           label="From:"
