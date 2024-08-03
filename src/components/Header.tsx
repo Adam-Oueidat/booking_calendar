@@ -20,6 +20,7 @@ export default function Header() {
         <nav className={sharedClasses.navContainer}>
           <div className={sharedClasses.linkContainer}>
             <Link href="/">Home</Link>
+            <Link href="/profile">Profil</Link>
             {status === "authenticated" && (
               <Link href="/calendar">Calendar</Link>
             )}

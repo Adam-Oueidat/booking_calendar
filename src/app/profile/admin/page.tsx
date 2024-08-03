@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import RequestEventForm from "@/src/components/RequestEventForm";
 import prisma from "@/src/lib/db";
 
-export default async function Profile() {
+export default async function AdminProfile() {
   const events = await prisma.requestedEvent.findMany();
   const jsonArray = JSON.parse(JSON.stringify(events));
   const session = await auth();
