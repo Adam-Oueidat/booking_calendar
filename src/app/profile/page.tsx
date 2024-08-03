@@ -17,8 +17,8 @@ export default async function Profile() {
               <p>Loading...</p>
             ) : (
               <>
-                <div className="flex items-center gap-24">
-                  <div>
+                <div className="flex gap-24">
+                  <div className="">
                     <Image
                       src={user.image ? user.image : "/images/default.png"}
                       className="max-h-36"

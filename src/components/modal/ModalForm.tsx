@@ -36,47 +36,45 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   }, [state, closeModal, refreshing]);
 
   return (
-    <>
-      <form action={formAction}>
-        <div className="grid gap-2 mb-6 lg:grid-cols-2 w-full">
-          <TextInput
-            label="Name:"
-            id="name"
-            name="name"
-            placeholder="Skriv ditt namn"
-            requiredValue={true}
-          />
-          <TextInput
-            label="Email:"
-            id="email"
-            name="email"
-            placeholder="janedoe@example.com"
-            requiredValue={true}
-          />
-          <TextInput
-            label="Beskrivning:"
-            id="description"
-            name="description"
-            placeholder="Vad vill vi göra?"
-            styling="col-span-2"
-          />
-          <DateInput
-            label="From:"
-            id="event-date-from"
-            name="event-date-from"
-            defaultValue={date}
-          />
-          <DateInput
-            label="To:"
-            id="event-date-to"
-            name="event-date-to"
-            defaultValue={date}
-          />
-        </div>
-        <div className="relative bottom-0 right-0">
-          <SubmitButton />
-        </div>
-      </form>
-    </>
+    <form action={formAction}>
+      <div className="grid gap-2 mb-6 lg:grid-cols-2 w-full">
+        <TextInput
+          label="Name:"
+          id="name"
+          name="name"
+          placeholder="Skriv ditt namn"
+          requiredValue={true}
+        />
+        <TextInput
+          label="Email:"
+          id="email"
+          name="email"
+          placeholder="janedoe@example.com"
+          requiredValue={true}
+        />
+        <TextInput
+          label="Beskrivning:"
+          id="description"
+          name="description"
+          placeholder="Vad vill vi göra?"
+          styling="col-span-2"
+        />
+        <DateInput
+          label="From:"
+          id="event-date-from"
+          name="event-date-from"
+          defaultValue={date}
+        />
+        <DateInput
+          label="To:"
+          id="event-date-to"
+          name="event-date-to"
+          defaultValue={date}
+        />
+      </div>
+      <div className="relative bottom-0 right-0">
+        <SubmitButton />
+      </div>
+    </form>
   );
 }
