@@ -1,8 +1,9 @@
 "use client";
 import { addEvent, deleteRequestedEvent } from "@/src/components/actions";
 
-type TRequestEventForm = {
+type RequestEventFormProps = {
   event: Record<string, string>;
+  isAdmin?: boolean;
 };
 
 type Event = {
@@ -38,7 +39,10 @@ const handleDeleteEvent = async (event: Record<string, string>) => {
   };
   await deleteRequestedEvent(newEvent);
 };
-export default function RequestEventForm({ event }: TRequestEventForm) {
+export default function RequestEventForm({
+  event,
+  isAdmin,
+}: RequestEventFormProps) {
   return (
     <div key={event.id} className="bg-gray-500 rounded p-5 px-10">
       <div className="event-name">{event.name}</div>
@@ -47,18 +51,22 @@ export default function RequestEventForm({ event }: TRequestEventForm) {
         <div>{event.endDate.split("T")[0]}</div>
       </div>
       <div className="flex justify-end">
-        <button
-          onClick={() => handleDeleteEvent(event)}
-          className="bg-red-600 text-white rounded p-2"
-        >
-          Decline
-        </button>
-        <button
-          onClick={() => handleAddEvent(event)}
-          className="bg-green-800 text-white rounded p-2"
-        >
-          Accept
-        </button>
+        {isAdmin && (
+          <>
+            <button
+              onClick={() => handleDeleteEvent(event)}
+              className="bg-red-600 text-white rounded p-2"
+            >
+              Decline
+            </button>
+            <button
+              onClick={() => handleAddEvent(event)}
+              className="bg-green-800 text-white rounded p-2"
+            >
+              Accept
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
