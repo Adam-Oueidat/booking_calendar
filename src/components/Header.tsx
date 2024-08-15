@@ -7,7 +7,7 @@ const sharedClasses = {
   navContainer:
     "mx-auto flex items-left md:justify-center p-6 lg:px-8  shadow-lg",
   linkContainer: "md:flex lg:flex-1 space-x-4 pr-4",
-  button: "text-sm font-semibold leading-6",
+  button: "text-sm font-semibold leading-6 text-white",
   hiddenLgFlex: "min-[320px]:px-4 sm:px-4 md:flex md:justify-end",
   hiddenLgFlex1: "min-[320px]:px-4 sm:px-4 md:flex md:flex-1 md:justify-end",
 };
@@ -19,10 +19,16 @@ export default function Header() {
       <SessionProvider>
         <nav className={sharedClasses.navContainer}>
           <div className={sharedClasses.linkContainer}>
-            <Link href="/">Home</Link>
-            <Link href="/profile">Profil</Link>
+            <Link className="text-white" href="/">
+              Home
+            </Link>
+            <Link className="text-white" href="/profile">
+              Profil
+            </Link>
             {status === "authenticated" && (
-              <Link href="/calendar">Calendar</Link>
+              <Link className="text-white" href="/calendar">
+                Calendar
+              </Link>
             )}
           </div>
           {status === "authenticated" ? (

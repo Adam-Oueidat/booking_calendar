@@ -38,7 +38,7 @@ export default function Day({
     : "hover:bg-stone-800 bg-stone-600";
 
   const todayClass =
-    "w-6 h-6 bg-center rounded-full flex justify-center items-center text-sm";
+    "text-white w-6 h-6 bg-center rounded-full flex justify-center items-center text-sm";
   const isTodayClass = isToday ? `bg-red-500 ${todayClass}` : todayClass;
   const notCurrentMonth = prevMonth || nextMonth ? "opacity-40" : "";
 
