@@ -26,17 +26,23 @@ export default async function Card({ cardInfo }: CardProps) {
             <p className="text-base">{cardInfo[1].shortDescription}</p>
 
             <div className="flex flex-col gap-3">
-              <button className="mt-2 rounded-md bg-neutral-800 py-1 px-2 text-sm hover:bg-neutral-900">
-                <Link href={cardInfo[1].imageUrls}>Läs mer</Link>
-              </button>
+              <Link href={cardInfo[1].imageUrls} passHref>
+                <button className="mt-2 rounded-md bg-neutral-800 py-1 px-7 text-sm hover:bg-neutral-900">
+                  Läs mer
+                </button>
+              </Link>
               {session ? (
-                <button className="mt-2 rounded-md bg-gray-600 py-1 px-2 text-sm hover:bg-gray-900">
-                  <Link href="/calendar">Gå til bokning</Link>
-                </button>
+                <Link href="/calendar" passHref>
+                  <button className="mt-2 rounded-md bg-gray-600 py-1 px-2 text-sm hover:bg-gray-900">
+                    Gå till bokning
+                  </button>
+                </Link>
               ) : (
-                <button className="mt-2 rounded-md bg-gray-600 py-1 px-2 text-sm hover:bg-gray-900">
-                  <Link href="/login">Logga in för att boka</Link>
-                </button>
+                <Link href="/login" passHref>
+                  <button className="mt-2 rounded-md bg-gray-600 py-1 px-2 text-sm hover:bg-gray-900">
+                    Logga in för att boka
+                  </button>
+                </Link>
               )}
             </div>
           </div>
