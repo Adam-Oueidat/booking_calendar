@@ -5,7 +5,6 @@ import DateInput from "@/src/components/modal/DateInput";
 import TextInput from "@/src/components/modal/TextInput";
 import { EventContext } from "@/src/components/calendar/Month";
 import { useSession } from "next-auth/react";
-import { ADMIN_EMAIL } from "@/src/lib/util/utils";
 
 const initialState = false;
 type ModalFormProps = {
