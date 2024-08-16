@@ -31,6 +31,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   const { refreshing, setRefreshing } = useContext(EventContext);
   const { data: session, status } = useSession();
   const isAdmin = session?.user?.email === "ooueidat@gmail.com";
+  console.log(session?.user?.email);
 
   useEffect(() => {
     if (state) {
@@ -53,7 +54,12 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
           label="Email:"
           id="email"
           name="email"
-          placeholder="janedoe@example.com"
+          defaultValue={
+            session?.user?.email ? session.user.email : "janedoe@example.com"
+          }
+          placeholder={
+            session?.user?.email ? session.user.email : "janedoe@example.com"
+          }
           requiredValue={true}
         />
         <TextInput
