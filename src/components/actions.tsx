@@ -51,6 +51,30 @@ export async function requestEvent(
   return !state;
 }
 
+export async function blockEvent(state: boolean, formData: FormData) {
+  const from = formData.get("event-date-from");
+  const to = formData.get("event-date-to");
+
+  if (!from || !to) {
+    throw new Error("Missing form data");
+  }
+
+  const fromDate = new Date(from as string);
+  const toDate = new Date(to as string);
+  await prisma.event.create({
+    data: {
+      id: new ObjectId().toString(),
+      name: "Blocked Event", // Add the name property here
+      startDate: fromDate,
+      endDate: toDate,
+    },
+  });
+
+  revalidatePath("/calendar");
+
+  return !state;
+}
+
 export async function addEvent(event: Event) {
   const id = event.id;
   const fromDate = event.startDate;

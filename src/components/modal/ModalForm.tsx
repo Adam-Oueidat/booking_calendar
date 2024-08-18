@@ -1,6 +1,6 @@
 import { useFormStatus } from "react-dom";
 import { useActionState, useContext, useEffect } from "react";
-import { requestEvent } from "@/src/components/actions";
+import { requestEvent, blockEvent } from "@/src/components/actions";
 import DateInput from "@/src/components/modal/DateInput";
 import TextInput from "@/src/components/modal/TextInput";
 import { EventContext } from "@/src/components/calendar/Month";
@@ -27,13 +27,13 @@ function SubmitButton() {
 }
 export default function ModalForm({ date, closeModal }: ModalFormProps) {
   const [state, formAction] = useActionState(requestEvent, initialState);
+  const [state2, formAction2] = useActionState(blockEvent, initialState);
   const { refreshing, setRefreshing } = useContext(EventContext);
   const { data: session, status } = useSession();
   const isAdmin = session?.user?.email === "ooueidat@gmail.com";
-  console.log(session?.user?.email);
 
   useEffect(() => {
-    if (state) {
+    if (state || state2) {
       closeModal();
       setRefreshing(true);
     }
@@ -88,7 +88,8 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
           <button
             type="submit"
             value="submit"
-            className="bg-red-600 float-end hover:bg-green-800 text-white font-bold py-2 px-4 mr-2 rounded"
+            formAction={formAction2}
+            className="bg-red-600 float-end hover:bg-red-800 text-white font-bold py-2 px-4 mr-2 rounded"
           >
             Block event
           </button>
