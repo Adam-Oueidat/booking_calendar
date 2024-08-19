@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
-import Image from "next/image";
 import RequestedEventList from "@/src/components/profile/RequestedEventList";
+
 export default async function Profile() {
   const session = await auth();
   const user = session?.user;
