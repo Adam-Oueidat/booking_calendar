@@ -115,7 +115,7 @@ export default function Month({ month, year }: MonthProps) {
                   year={month === 0 ? year - 1 : year} // if January, set year to previous year
                   date={startDayOfPreviousMonth + i}
                   prevMonth={true}
-                  currentEvent={events.prevMonth[i]}
+                  currentEvent={events.prevMonth[startDayOfPreviousMonth + i]}
                 />
               </div>
             ))}
