@@ -30,7 +30,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   const [state2, formAction2] = useActionState(blockEvent, initialState);
   const { refreshing, setRefreshing } = useContext(EventContext);
   const { data: session, status } = useSession();
-  const isAdmin = session?.user?.email === "ooueidat@gmail.com";
+  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL;
 
   useEffect(() => {
     if (state || state2) {
