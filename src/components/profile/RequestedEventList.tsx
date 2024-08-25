@@ -10,7 +10,7 @@ export default async function RequestedEventList({
 }: RequestedEventListProps) {
   const ADMIN_EMAIL = process.env.AUTH_ADMIN_EMAIL;
   let events = [];
-  if (userEmail !== ADMIN_EMAIL) {
+  if (userEmail === ADMIN_EMAIL) {
     events = await prisma.requestedEvent.findMany();
   } else {
     events = await prisma.requestedEvent.findMany({
