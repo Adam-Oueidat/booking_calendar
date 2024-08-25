@@ -21,7 +21,7 @@ function SubmitButton() {
       className="bg-green-600 float-end hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
       disabled={pending}
     >
-      Add Event
+      Request Dates
     </button>
   );
 }
