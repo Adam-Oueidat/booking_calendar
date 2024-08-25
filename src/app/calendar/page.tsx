@@ -9,7 +9,13 @@ export default async function CalendarPage() {
           <h1 className="text-white text-4xl font-semibold text-center">
             Tågbiljetter
           </h1>
+          <p></p>
           <BookingTrainForm />
+          <div className="w-60">
+            Använd kalendern för att boka in dagar du vill besöka, ansökan
+            kommer skickas till oss sen kan vi acceptera om det funkar eller
+            inte.
+          </div>
         </div>
         <Calendar />
       </div>
