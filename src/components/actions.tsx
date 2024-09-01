@@ -36,7 +36,7 @@ export async function requestEvent(
   const fromDate = new Date(from as string);
   const toDate = new Date(to as string);
 
-  if (fromDate < currentDate) {
+  if (fromDate <= currentDate) {
     revalidatePath("/calendar");
     return [!state[0], "From date cannot be in the past"];
   }
