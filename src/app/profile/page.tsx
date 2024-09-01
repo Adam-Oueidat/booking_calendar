@@ -16,7 +16,7 @@ export default async function Profile() {
             <p>Loading...</p>
           ) : (
             <>
-              <div className="flex">
+              <div className="flex flex-col md:flex-row">
                 <div className="">
                   <div className="mt-8">
                     <p className="mb-3">Name: {user.name}</p>
