@@ -16,9 +16,9 @@ type Event = {
 };
 
 export async function requestEvent(
-  state: boolean,
+  state: [boolean, string],
   formData: FormData
-): Promise<boolean> {
+): Promise<[boolean, string]> {
   // Check for session, if not logged in redirect to login page
   const session = await auth();
   if (!session) {
@@ -32,9 +32,18 @@ export async function requestEvent(
   if (!from || !to || !name || !description) {
     throw new Error("Missing form data");
   }
-
+  const currentDate = new Date();
   const fromDate = new Date(from as string);
   const toDate = new Date(to as string);
+
+  if (fromDate < currentDate) {
+    revalidatePath("/calendar");
+    return [!state[0], "From date cannot be in the past"];
+  }
+  if (toDate < fromDate) {
+    revalidatePath("/calendar");
+    return [!state[0], "To date cannot be before from date"];
+  }
   await prisma.requestedEvent.create({
     data: {
       id: new ObjectId().toString(),
@@ -48,7 +57,7 @@ export async function requestEvent(
 
   revalidatePath("/calendar");
 
-  return !state;
+  return [!state[0], "Success"];
 }
 
 export async function blockEvent(state: boolean, formData: FormData) {
