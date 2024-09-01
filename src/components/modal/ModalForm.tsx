@@ -6,7 +6,11 @@ import TextInput from "@/src/components/modal/TextInput";
 import { EventContext } from "@/src/components/calendar/Month";
 import { useSession } from "next-auth/react";
 
-const initialState = [false, ""];
+const initialState = {
+  closeModal: false,
+  message: "",
+  error: "",
+};
 const initialState2 = false;
 type ModalFormProps = {
   date: string;
@@ -34,15 +38,15 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL;
 
   useEffect(() => {
-    if (state[0] || state2) {
+    if (state.closeModal || state2) {
       closeModal();
       setRefreshing(true);
     }
-  }, [state[0], closeModal, refreshing]);
+  }, [state.closeModal, closeModal, refreshing]);
 
   return (
     <form action={formAction}>
-      <h1 className="text-red-600">{state[1]}</h1>
+      <h1 className="text-red-600">{state.error}</h1>
       <div className="grid gap-2 mb-6 lg:grid-cols-2 w-full">
         <TextInput
           label="Name:"
