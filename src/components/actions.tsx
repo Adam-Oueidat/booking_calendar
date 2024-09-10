@@ -21,9 +21,11 @@ export async function requestEvent(
 ): Promise<Record<string, string | boolean>> {
   // Check for session, if not logged in redirect to login page
   const session = await auth();
+
   if (!session) {
     redirect("/login");
   }
+
   const from = formData.get("event-date-from");
   const to = formData.get("event-date-to");
   const name = formData.get("name");
@@ -52,6 +54,47 @@ export async function requestEvent(
       error: "To date cannot be before from date",
     };
   }
+
+  const existingEvent = await prisma.requestedEvent.findFirst({
+    where: {
+      OR: [
+        {
+          startDate: {
+            lte: fromDate,
+          },
+          endDate: {
+            gte: fromDate,
+          },
+        },
+        {
+          startDate: {
+            lte: toDate,
+          },
+          endDate: {
+            gte: toDate,
+          },
+        },
+        {
+          startDate: {
+            gte: fromDate,
+          },
+          endDate: {
+            lte: toDate,
+          },
+        },
+      ],
+    },
+  });
+
+  console.log(existingEvent);
+  if (existingEvent) {
+    return {
+      closeModal: false,
+      message: "",
+      error: "Selected dates are already booked",
+    };
+  }
+
   await prisma.requestedEvent.create({
     data: {
       id: new ObjectId().toString(),
