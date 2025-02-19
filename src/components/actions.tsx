@@ -86,7 +86,6 @@ export async function requestEvent(
     },
   });
 
-  console.log(existingEvent);
   if (existingEvent) {
     return {
       closeModal: false,
