@@ -89,7 +89,6 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
         />
       </div>
       <div className="relative bottom-0 right-0">
-        <SubmitButton />
         {status === "authenticated" && isAdmin ? (
           <button
             type="submit"
@@ -99,7 +98,9 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
           >
             Block event
           </button>
-        ) : null}
+        ) : (
+          <SubmitButton />
+        )}
       </div>
     </form>
   );
