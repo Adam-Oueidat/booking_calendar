@@ -248,13 +248,25 @@ export async function createCalendarAppointment(
   return response;
 }
 
-export async function getCardInformation() {
+type Card = {
+  id: string;
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+  imageUrl: string;
+  imageUrls: string;
+};
+
+type Cards = Record<string, Card>;
+
+export async function getCardInformation(): Promise<Cards> {
   const cardInformation = await prisma.cardInformation.findMany();
   const jsonArray = JSON.parse(JSON.stringify(cardInformation));
-  const cardInformationDict: { [date: number]: {} } = {};
-  jsonArray.forEach((cardInformation: any) => {
+  const cardInformationDict: Cards = {};
+  jsonArray.forEach((cardInformation: Card) => {
     cardInformationDict[cardInformation.id] = cardInformation;
   });
+  console.log(cardInformationDict);
   return cardInformationDict;
 }
 
