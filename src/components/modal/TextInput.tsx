@@ -15,7 +15,8 @@ export default function TextInput({
   placeholder,
   requiredValue,
   styling,
-}: TextInputProps) {
+  ...props
+}: TextInputProps & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className={styling}>
       <label htmlFor={id}>{label}</label>
@@ -27,6 +28,7 @@ export default function TextInput({
         className="bg-blue-200 rounded border text-gray-900 p-2.5 w-full text-sm"
         required={requiredValue}
         data-lpignore="true"
+        {...props}
       />
     </div>
   );

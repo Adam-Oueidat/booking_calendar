@@ -52,6 +52,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
           label="Name:"
           id="name"
           name="name"
+          defaultValue={session?.user?.name ? session.user.name : "Namn"}
           placeholder="Skriv ditt namn"
           requiredValue={true}
         />
@@ -62,9 +63,9 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
           defaultValue={
             session?.user?.email ? session.user.email : "janedoe@example.com"
           }
-          placeholder={
-            session?.user?.email ? session.user.email : "janedoe@example.com"
-          }
+          // placeholder={
+          //   session?.user?.email ? session.user.email : "janedoe@example.com"
+          // }
           requiredValue={true}
         />
         <TextInput
