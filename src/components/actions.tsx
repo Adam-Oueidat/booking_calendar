@@ -248,7 +248,7 @@ export async function createCalendarAppointment(
   return response;
 }
 
-type Card = {
+export type Card = {
   id: string;
   title: string;
   shortDescription: string;
@@ -266,7 +266,6 @@ export async function getCardInformation(): Promise<Cards> {
   jsonArray.forEach((cardInformation: Card) => {
     cardInformationDict[cardInformation.id] = cardInformation;
   });
-  console.log(cardInformationDict);
   return cardInformationDict;
 }
 

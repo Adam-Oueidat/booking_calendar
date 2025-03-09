@@ -26,7 +26,7 @@ export default function EventModal({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [closeModal]);
 
   return (
     <>

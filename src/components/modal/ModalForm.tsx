@@ -44,7 +44,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
       closeModal();
       setRefreshing(true);
     }
-  }, [state.closeModal, closeModal, refreshing]);
+  }, [state.closeModal, closeModal, refreshing, setRefreshing, state2]);
 
   return (
     <form action={formAction}>
