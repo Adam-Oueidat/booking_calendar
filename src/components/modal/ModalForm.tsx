@@ -11,7 +11,9 @@ const initialState = {
   message: "",
   error: "",
 };
+
 const initialState2 = false;
+
 type ModalFormProps = {
   date: string;
   closeModal: () => void;
