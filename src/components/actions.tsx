@@ -127,7 +127,8 @@ export async function blockEvent(state: boolean, formData: FormData) {
   await prisma.event.create({
     data: {
       id: new ObjectId().toString(),
-      name: "Blocked Event", // Add the name property here
+      name: "Blocked Event",
+      description: 'Blocked event by Admin' as string, // Add the name property here
       startDate: fromDate,
       endDate: toDate,
     },
@@ -149,6 +150,7 @@ export async function addEvent(event: Event) {
     data: {
       id: id,
       name: name, // Add the name property here
+      description: description,
       startDate: fromDate,
       endDate: toDate,
     },

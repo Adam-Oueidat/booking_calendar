@@ -26,12 +26,12 @@ export default async function RequestedEventList({
       <div>
         <div className="grid grid-cols-1 gap-4 p-10 overflow-auto max-h-screen">
           {jsonArray.map((event: Record<string, string>) => (
-            <>
+            <div key={event.id}>
               <RequestEventForm
                 event={event}
                 isAdmin={userEmail == ADMIN_EMAIL}
               />
-            </>
+            </div>
           ))}
         </div>
       </div>

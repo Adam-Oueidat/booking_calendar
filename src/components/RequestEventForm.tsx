@@ -46,6 +46,7 @@ export default function RequestEventForm({
   return (
     <div key={event.id} className="bg-gray-500 rounded p-5 px-10 flex flex-col">
       <div className="event-name">{event.name}</div>
+      <div className="event-description">{event.description}</div>
       <div className="grid grid-cols-2 gap-5 ">
         <div className="event-date">{event.startDate.split("T")[0]}</div>
         <div>{event.endDate.split("T")[0]}</div>

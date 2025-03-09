@@ -3,8 +3,10 @@ import RequestEventForm from "@/src/components/RequestEventForm";
 import prisma from "@/src/lib/db";
 
 export default async function AdminProfile() {
-  const events = await prisma.requestedEvent.findMany();
-  const jsonArray = JSON.parse(JSON.stringify(events));
+  const requestedEvents = await prisma.requestedEvent.findMany();
+  const requestedEventsArray = JSON.parse(JSON.stringify(requestedEvents));
+  const events = await prisma.event.findMany();
+  const eventsArray = JSON.parse(JSON.stringify(events));
   const session = await auth();
   const user = session?.user;
   const ADMIN_EMAIL = process.env.AUTH_ADMIN_EMAIL;
@@ -20,11 +22,17 @@ export default async function AdminProfile() {
     <section className="bg-ct-blue-600  min-h-screen pt-20 flex items-start justify-center">
       <div>
         <div className="grid grid-cols-1 gap-4 p-10 overflow-auto max-h-screen">
-          {jsonArray.map((event: Record<string, string>) => (
+          {requestedEventsArray.map((event: Record<string, string>) => (
             <>
               <RequestEventForm event={event} />
             </>
           ))}
+          <div className="grid grid-cols-3 gap-5">
+
+          {eventsArray.map((event: Record<string, string>) => (
+            <RequestEventForm key={event.id} event={event} isAdmin/>
+          ))}
+          </div>
         </div>
       </div>
     </section>

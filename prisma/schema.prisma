@@ -8,10 +8,11 @@ generator client {
 }
 
 model Event {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  startDate DateTime
-  endDate   DateTime
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  startDate   DateTime
+  endDate     DateTime
 }
 
 model CardInformation {
