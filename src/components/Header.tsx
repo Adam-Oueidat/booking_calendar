@@ -13,7 +13,10 @@ const sharedClasses = {
 };
 
 export default function Header() {
-  const { status } = useSession();
+  const { status, data: session } = useSession();
+  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL;
+  console.log(isAdmin);
+
   return (
     <header className="w-full bg-primary text-primary-foreground shadow-md">
       <SessionProvider>
@@ -30,7 +33,13 @@ export default function Header() {
                 Calendar
               </Link>
             )}
+            {isAdmin && (
+            <Link className="text-white" href="/profile/admin">
+              Admin Page
+            </Link>)
+              }
           </div>
+
           {status === "authenticated" ? (
             <div className={sharedClasses.hiddenLgFlex}>
               <button
