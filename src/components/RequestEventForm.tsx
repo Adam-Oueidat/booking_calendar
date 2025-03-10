@@ -44,7 +44,7 @@ export default function RequestEventForm({
   isAdmin,
 }: RequestEventFormProps) {
   return (
-    <div key={event.id} className="bg-gray-500 rounded p-5 px-10 flex flex-col">
+    <div key={event.id} className="bg-slate-400 rounded p-5 px-10 flex flex-col gap-2">
       <div className="event-name">{event.name}</div>
       <div className="event-description">{event.description}</div>
       <div className="grid grid-cols-2 gap-5 ">
@@ -52,12 +52,12 @@ export default function RequestEventForm({
         <div>{event.endDate.split("T")[0]}</div>
       </div>
       {isAdmin && (
-        <div className="flex justify-end">
+        <div className="flex justify-end gap-2">
           <button
             onClick={() => handleDeleteEvent(event)}
             className="bg-red-600 text-white rounded p-2"
           >
-            Decline
+            Remove
           </button>
           <button
             onClick={() => handleAddEvent(event)}
