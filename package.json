@@ -39,7 +39,7 @@
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-compiler": "0.0.0-experimental-7670337-20240918",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "globals": "^15.15.0",
+    "globals": "^16.0.0",
     "postcss": "^8.5.3",
     "prettier": "3.3.1",
     "prettier-plugin-tailwindcss": "0.6.2",
