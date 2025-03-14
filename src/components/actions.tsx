@@ -128,7 +128,7 @@ export async function blockEvent(state: boolean, formData: FormData) {
     data: {
       id: new ObjectId().toString(),
       name: "Blocked Event",
-      description: 'Blocked event by Admin' as string, // Add the name property here
+      description: "Blocked event by Admin" as string, // Add the name property here
       startDate: fromDate,
       endDate: toDate,
     },
@@ -170,6 +170,15 @@ export async function addEvent(event: Event) {
 
 export async function deleteRequestedEvent(event: Event) {
   await prisma.requestedEvent.delete({
+    where: {
+      id: event.id,
+    },
+  });
+  revalidatePath("/profile/admin");
+}
+
+export async function deleteConfirmedEvent(event: Event) {
+  await prisma.event.delete({
     where: {
       id: event.id,
     },

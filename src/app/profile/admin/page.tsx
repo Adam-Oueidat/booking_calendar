@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import ConfirmedEventForm from "@/src/components/ConfirmedEventForm";
 import RequestEventForm from "@/src/components/RequestEventForm";
 import prisma from "@/src/lib/db";
 
@@ -23,15 +24,17 @@ export default async function AdminProfile() {
       <div>
         <div className="grid grid-cols-1 gap-4 p-10 overflow-auto max-h-screen">
           {requestedEventsArray.map((event: Record<string, string>) => (
-            <>
+            <div
+              key={event.id}
+              className="bg-slate-400 rounded p-5 px-10 flex flex-col gap-2"
+            >
               <RequestEventForm event={event} />
-            </>
+            </div>
           ))}
           <div className="grid grid-cols-3 gap-5">
-
-          {eventsArray.map((event: Record<string, string>) => (
-            <RequestEventForm key={event.id} event={event} isAdmin/>
-          ))}
+            {eventsArray.map((event: Record<string, string>) => (
+              <ConfirmedEventForm key={event.id} event={event} isAdmin />
+            ))}
           </div>
         </div>
       </div>
