@@ -28,7 +28,7 @@ export default async function AdminProfile() {
               key={event.id}
               className="bg-slate-400 rounded p-5 px-10 flex flex-col gap-2"
             >
-              <RequestEventForm event={event} />
+              <RequestEventForm event={event} isAdmin />
             </div>
           ))}
           <div className="grid grid-cols-3 gap-5">
