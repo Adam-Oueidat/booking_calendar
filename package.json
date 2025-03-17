@@ -14,7 +14,7 @@
     "typecheck": "tsc --pretty --noEmit && echo '✅ Typechecking passed!'"
   },
   "dependencies": {
-    "@prisma/client": "^6.4.1",
+    "@prisma/client": "^6.5.0",
     "bson": "^6.10.3",
     "next": "15.2.1",
     "next-auth": "5.0.0-beta.25",
