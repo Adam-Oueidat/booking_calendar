@@ -38,7 +38,7 @@ export default function Day({
     prevMonth || nextMonth
       ? "bg-gray-700/40 text-gray-300 border-gray-600/50"
       : currentEvent
-        ? "bg-blue-600/40 hover:bg-blue-600/50 border-blue-500/60"
+        ? "bg-blue-600/40 border-blue-500/60"
         : "hover:bg-white/20 border-white/20"
   } ${isToday ? "bg-red-500/30 border-red-500/60" : ""}`;
 

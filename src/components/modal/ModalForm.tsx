@@ -47,7 +47,7 @@ function SubmitButton() {
               clipRule="evenodd"
             />
           </svg>
-          <span>Request Dates</span>
+          <span>Boka</span>
         </>
       )}
     </button>
