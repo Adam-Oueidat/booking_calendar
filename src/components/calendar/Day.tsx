@@ -10,6 +10,7 @@ type DayProps = {
   currentEvent?: boolean;
   isToday?: boolean;
 };
+
 export default function Day({
   month,
   year,
@@ -34,27 +35,35 @@ export default function Day({
   }
 
   const isBooked = currentEvent
-    ? "bg-gray-500"
-    : "hover:bg-stone-800 bg-stone-600";
+    ? "bg-white/20 hover:bg-white/30"
+    : "hover:bg-white/10";
 
-  const todayClass =
-    "text-white w-6 h-6 bg-center rounded-full flex justify-center items-center text-sm";
-  const isTodayClass = isToday ? `bg-red-500 ${todayClass}` : todayClass;
-  const notCurrentMonth = prevMonth || nextMonth ? "opacity-40" : "";
+  const todayClass = isToday
+    ? "bg-red-500 text-white"
+    : prevMonth || nextMonth
+      ? "text-white/40"
+      : "text-white";
 
-  const divClassDayResponsive = `w-full min-[320px]:w-12 min-[320px]:h-12 sm:w-16 sm:h-12 md:w-18 md:h-14 lg:w-20 lg:h-16 xl:w-20 xl:h-16 2xl:w-30 2xl:h-26`;
-  // const divClassDay = `flex flex-col text-sm justify-start items-end text-muted-foreground bg-accent-foreground p-4 rounded ${divClassDayResponsive} ${isBooked} ${notCurrentMonth}`;
-  const divClassDay = `text-muted-foreground bg-accent-foreground rounded flex flex-col justify-start items-end p-1 border ${divClassDayResponsive} ${isBooked} ${notCurrentMonth}`;
   return (
     <>
       <div
-        className={divClassDay}
+        className={`h-12 rounded-lg p-1.5 flex flex-col items-end transition-colors duration-200 cursor-pointer ${isBooked}`}
         onClick={currentEvent ? undefined : clickHandler}
       >
-        <p className={isTodayClass}>{date}</p>
+        <span className={`text-xs font-medium ${todayClass}`}>{date}</span>
+        {currentEvent && (
+          <div className="mt-auto w-full">
+            <div className="h-0.5 bg-white/40 rounded-full"></div>
+          </div>
+        )}
       </div>
-      <div className="flex justify-center items-center">
-        {isModalOpen && (
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={closeModal}
+          ></div>
           <EventModal
             date={date}
             closeModal={closeModal}
@@ -63,8 +72,8 @@ export default function Day({
               new Date(year, month, date + 1).toISOString().split("T")[0]
             }
           />
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 }

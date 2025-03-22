@@ -11,10 +11,12 @@ type RefreshingContextValue = {
   refreshing: boolean;
   setRefreshing: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
 export const EventContext = createContext<RefreshingContextValue>({
   refreshing: false,
   setRefreshing: () => undefined,
 });
+
 export default function Month({ month, year }: MonthProps) {
   const [refreshing, setRefreshing] = useState(false);
   const [events, setEvents] = useState<{
@@ -48,10 +50,9 @@ export default function Month({ month, year }: MonthProps) {
   function getDaysInMonth(year: number, month: number) {
     month = month + 1;
     if (month === 0) {
-      // if January
-      return new Date(year - 1, 12, 0).getDate(); // get days of December of previous year
+      return new Date(year - 1, 12, 0).getDate();
     } else {
-      return new Date(year, month, 0).getDate(); // get days of previous month
+      return new Date(year, month, 0).getDate();
     }
   }
 
@@ -67,6 +68,7 @@ export default function Month({ month, year }: MonthProps) {
   function getFirstDayOfMonth(year: number, month: number) {
     return new Date(year, month, 0).getDay();
   }
+
   const MAX_TOTAL_DAYS = 42;
   const firstDayOfMonth = getFirstDayOfMonth(year, month);
   const daysInPreviousMonth = getDaysInMonth(year, month - 1);
@@ -88,37 +90,40 @@ export default function Month({ month, year }: MonthProps) {
   });
 
   return (
-    <div>
-      <div>
-        <h2 className="text-2xl font-bold text-white">
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-bold text-white">
           {monthName} {year}
         </h2>
       </div>
+
       <EventContext.Provider value={{ refreshing, setRefreshing }}>
         <div className="grid grid-cols-7 gap-1">
           {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
             (day, index) => (
               <div
                 key={index}
-                className="text-center flex flex-end justify-end items-end font-bold text-white"
+                className="text-center py-1 text-xs font-medium text-white/60"
               >
                 {day}
               </div>
             )
           )}
+
           {Array(firstDayOfMonth)
             .fill(null)
             .map((_, i) => (
               <div key={`prev-${i}`}>
                 <Day
-                  month={month === 0 ? 11 : month - 1} // if January, set month to December
-                  year={month === 0 ? year - 1 : year} // if January, set year to previous year
+                  month={month === 0 ? 11 : month - 1}
+                  year={month === 0 ? year - 1 : year}
                   date={startDayOfPreviousMonth + i}
                   prevMonth={true}
                   currentEvent={events.prevMonth[startDayOfPreviousMonth + i]}
                 />
               </div>
             ))}
+
           {Array.from({ length: getDaysInMonth(year, month) }, (_, i) => (
             <div key={i}>
               <Day
@@ -130,13 +135,14 @@ export default function Month({ month, year }: MonthProps) {
               />
             </div>
           ))}
+
           {Array(remainingDays)
             .fill(null)
             .map((_, i) => (
               <div key={`next-${i}`}>
                 <Day
-                  month={month === 11 ? 0 : month + 1} // if December, set month to January
-                  year={month === 11 ? year + 1 : year} // if December, set year to next year
+                  month={month === 11 ? 0 : month + 1}
+                  year={month === 11 ? year + 1 : year}
                   date={i + 1}
                   nextMonth={true}
                   currentEvent={events.nextMonth[i + 1]}
