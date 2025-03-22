@@ -25,13 +25,35 @@ function SubmitButton() {
     <button
       type="submit"
       value="submit"
-      className="bg-green-600 float-end hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
+      className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
       disabled={pending}
     >
-      Request Dates
+      {pending ? (
+        <>
+          <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+          <span>Processing...</span>
+        </>
+      ) : (
+        <>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+              clipRule="evenodd"
+            />
+          </svg>
+          <span>Request Dates</span>
+        </>
+      )}
     </button>
   );
 }
+
 export default function ModalForm({ date, closeModal }: ModalFormProps) {
   const [state, formAction] = useActionState(requestEvent, initialState);
   const [state2, formAction2] = useActionState(blockEvent, initialState2);
@@ -47,66 +69,82 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   }, [state.closeModal, closeModal, refreshing, setRefreshing, state2]);
 
   return (
-    <form action={formAction}>
-      <h1 className="text-red-600">{state.error}</h1>
-      <div className="grid gap-2 mb-6 lg:grid-cols-2 w-full">
+    <form action={formAction} className="space-y-6">
+      {state.error && (
+        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
+          {state.error}
+        </div>
+      )}
+
+      <div className="grid gap-4">
+        <div className="grid gap-2 lg:grid-cols-2">
+          <TextInput
+            label="Name"
+            id="name"
+            name="name"
+            defaultValue={session?.user?.name ? session.user.name : "Namn"}
+            placeholder="Enter your name"
+            requiredValue={true}
+          />
+          <TextInput
+            label="Email"
+            id="email"
+            name="email"
+            defaultValue={
+              session?.user?.email ? session.user.email : "janedoe@example.com"
+            }
+            requiredValue={true}
+          />
+        </div>
+
         <TextInput
-          label="Name:"
-          id="name"
-          name="name"
-          defaultValue={session?.user?.name ? session.user.name : "Namn"}
-          placeholder="Skriv ditt namn"
-          requiredValue={true}
-        />
-        <TextInput
-          label="Email:"
-          id="email"
-          name="email"
-          defaultValue={
-            session?.user?.email ? session.user.email : "janedoe@example.com"
-          }
-          // placeholder={
-          //   session?.user?.email ? session.user.email : "janedoe@example.com"
-          // }
-          requiredValue={true}
-        />
-        <TextInput
-          label="Beskrivning:"
+          label="Description"
           id="description"
           name="description"
-          placeholder="Vad vill vi göra?"
-          styling="col-span-2"
+          placeholder="What would you like to do?"
           requiredValue={true}
         />
-        <DateInput
-          label="From:"
-          id="event-date-from"
-          name="event-date-from"
-          defaultValue={date}
-        />
-        <DateInput
-          label="To:"
-          id="event-date-to"
-          name="event-date-to"
-          defaultValue={date}
-        />
+
+        <div className="grid gap-2 lg:grid-cols-2">
+          <DateInput
+            label="From"
+            id="event-date-from"
+            name="event-date-from"
+            defaultValue={date}
+          />
+          <DateInput
+            label="To"
+            id="event-date-to"
+            name="event-date-to"
+            defaultValue={date}
+          />
+        </div>
       </div>
-      <div className="relative bottom-0 right-0">
-        {status === "authenticated" && isAdmin ? (
-          <>
-            <button
-              type="submit"
-              value="submit"
-              formAction={formAction2}
-              className="bg-red-600 float-end hover:bg-red-800 text-white font-bold py-2 px-4 mr-2 rounded"
+
+      <div className="flex justify-end gap-3 pt-4">
+        {status === "authenticated" && isAdmin && (
+          <button
+            type="submit"
+            value="submit"
+            formAction={formAction2}
+            className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
             >
-              Block event
-            </button>
-            <SubmitButton />
-          </>
-        ) : (
-          <SubmitButton />
+              <path
+                fillRule="evenodd"
+                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span>Block Event</span>
+          </button>
         )}
+        <SubmitButton />
       </div>
     </form>
   );
