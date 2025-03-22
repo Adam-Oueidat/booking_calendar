@@ -15,7 +15,7 @@ export default function DateInput({
     <div>
       <label
         htmlFor={id}
-        className="block text-sm font-medium text-gray-300 mb-1"
+        className="block text-sm font-medium text-slate-200 mb-1"
       >
         {label}
       </label>
@@ -23,7 +23,7 @@ export default function DateInput({
         type="date"
         id={id}
         name={name}
-        className="bg-gray-700 border border-gray-600 rounded-lg text-gray-100 p-2.5 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        className="bg-slate-800 border border-slate-700 rounded-lg text-slate-100 p-2.5 w-full text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
         defaultValue={defaultValue}
       />
     </div>

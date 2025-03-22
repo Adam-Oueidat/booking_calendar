@@ -9,7 +9,7 @@ export default async function HomePage() {
   const session = await auth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
       {/* Hero Section */}
       <div className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -23,28 +23,28 @@ export default async function HomePage() {
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
         <div className="relative z-10 text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold text-slate-100 mb-6">
             Boka din tid
           </h1>
-          <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-200 mb-8 max-w-2xl mx-auto">
             Enkelt och smidigt sätt att boka tid för ett besök!
           </p>
           <div className="flex gap-4 justify-center">
             {session ? (
               <Link href="/calendar">
-                <button className="bg-blue-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-400 transition-colors">
+                <button className="bg-indigo-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-indigo-400 transition-colors">
                   Gå till bokning
                 </button>
               </Link>
             ) : (
               <Link href="/login">
-                <button className="bg-blue-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-400 transition-colors">
+                <button className="bg-indigo-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-indigo-400 transition-colors">
                   Logga in
                 </button>
               </Link>
             )}
             <Link href="#features">
-              <button className="bg-white/10 text-white px-8 py-3 rounded-lg font-medium hover:bg-white/20 transition-colors backdrop-blur-sm">
+              <button className="bg-slate-800/50 text-slate-100 px-8 py-3 rounded-lg font-medium hover:bg-slate-700/50 transition-colors backdrop-blur-sm border border-slate-700/50">
                 Läs mer
               </button>
             </Link>
@@ -55,7 +55,7 @@ export default async function HomePage() {
       {/* Features Section */}
       <section id="features" className="py-20 px-4">
         <div className="flex flex-col items-center justify-center">
-          <h2 className="text-3xl font-bold text-white mb-12 text-center">
+          <h2 className="text-3xl font-bold text-slate-100 mb-12 text-center">
             Våra tjänster
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -67,20 +67,20 @@ export default async function HomePage() {
       </section>
 
       {/* Developer Footer */}
-      <footer className="bg-gray-900 border-t border-gray-800">
+      <footer className="bg-slate-900 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold text-blue-400 mb-2">
+              <h3 className="text-xl font-bold text-indigo-400 mb-2">
                 Adam Oueidat
               </h3>
-              <p className="text-gray-400">Software Engineer</p>
+              <p className="text-slate-400">Software Engineer</p>
               <div className="flex gap-4 mt-4">
                 <a
                   href="https://github.com/Adam-Oueidat"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-slate-400 hover:text-indigo-400 transition-colors"
                 >
                   <svg
                     className="w-6 h-6"
@@ -99,7 +99,7 @@ export default async function HomePage() {
                   href="https://www.linkedin.com/in/adam-oueidat-29555215b/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
+                  className="text-slate-400 hover:text-indigo-400 transition-colors"
                 >
                   <svg
                     className="w-6 h-6"
@@ -117,10 +117,10 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-gray-400 mb-2">
+              <p className="text-slate-400 mb-2">
                 Built with Next.js & TypeScript
               </p>
-              <p className="text-gray-400">
+              <p className="text-slate-400">
                 © {new Date().getFullYear()} All rights reserved
               </p>
             </div>

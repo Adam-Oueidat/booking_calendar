@@ -19,13 +19,18 @@ export default function TextInput({
 }: TextInputProps & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className={styling}>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-300 mb-1">{label}</label>
+      <label
+        htmlFor={id}
+        className="block text-sm font-medium text-slate-200 mb-1"
+      >
+        {label}
+      </label>
       <input
         type="text"
         id={id}
         name={name}
         placeholder={placeholder}
-        className="bg-gray-700 border border-gray-600 rounded-lg text-gray-100 p-2.5 w-full text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
+        className="bg-slate-800 border border-slate-700 rounded-lg text-slate-100 p-2.5 w-full text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-slate-400"
         required={requiredValue}
         data-lpignore="true"
         {...props}

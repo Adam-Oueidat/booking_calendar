@@ -24,29 +24,29 @@ export default async function Card({ cardInfo }: CardProps) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h3 className="text-xl font-bold text-blue-100 mb-2">
+              <h3 className="text-xl font-bold text-slate-100 mb-2">
                 {cardInfo?.title}
               </h3>
-              <div className="h-1 w-12 bg-blue-400 rounded-full"></div>
+              <div className="h-1 w-12 bg-indigo-400 rounded-full"></div>
             </div>
           </div>
         </div>
 
         {/* Back of card */}
-        <div className="absolute inset-0 h-full w-full rounded-xl bg-gradient-to-br from-gray-900 to-gray-800 p-6 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+        <div className="absolute inset-0 h-full w-full rounded-xl bg-gradient-to-br from-slate-900 to-slate-800 p-6 [transform:rotateY(180deg)] [backface-visibility:hidden]">
           <div className="flex flex-col h-full">
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-blue-100 mb-4">
+              <h3 className="text-xl font-bold text-slate-100 mb-4">
                 {cardInfo?.title}
               </h3>
-              <p className="text-blue-50 text-sm leading-relaxed">
+              <p className="text-slate-200 text-sm leading-relaxed">
                 {cardInfo?.shortDescription}
               </p>
             </div>
 
             <div className="flex flex-col gap-3 mt-6">
               <Link href={cardInfo?.imageUrls} passHref>
-                <button className="w-full rounded-lg bg-blue-500 py-2 px-4 text-sm font-medium text-white hover:bg-blue-400 transition-colors duration-200 flex items-center justify-center gap-2">
+                <button className="w-full rounded-lg bg-indigo-500 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-400 transition-colors duration-200 flex items-center justify-center gap-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
@@ -66,7 +66,7 @@ export default async function Card({ cardInfo }: CardProps) {
               </Link>
               {session ? (
                 <Link href="/calendar" passHref>
-                  <button className="w-full rounded-lg bg-blue-600/30 py-2 px-4 text-sm font-medium text-blue-100 hover:bg-blue-600/40 transition-colors duration-200 flex items-center justify-center gap-2">
+                  <button className="w-full rounded-lg bg-slate-800/50 py-2 px-4 text-sm font-medium text-slate-100 hover:bg-slate-700/50 transition-colors duration-200 flex items-center justify-center gap-2 border border-slate-700/50">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-4 w-4"
@@ -86,7 +86,7 @@ export default async function Card({ cardInfo }: CardProps) {
                 </Link>
               ) : (
                 <Link href="/login" passHref>
-                  <button className="w-full rounded-lg bg-blue-600/30 py-2 px-4 text-sm font-medium text-blue-100 hover:bg-blue-600/40 transition-colors duration-200 flex items-center justify-center gap-2">
+                  <button className="w-full rounded-lg bg-slate-800/50 py-2 px-4 text-sm font-medium text-slate-100 hover:bg-slate-700/50 transition-colors duration-200 flex items-center justify-center gap-2 border border-slate-700/50">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-4 w-4"

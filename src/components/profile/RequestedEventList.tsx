@@ -26,14 +26,14 @@ export default async function RequestedEventList({
       {jsonArray.map((event: Record<string, string>) => (
         <div
           key={event.id}
-          className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:border-white/20 transition-all duration-300"
+          className="bg-slate-800/30 backdrop-blur-sm rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300"
         >
           <RequestEventForm event={event} isAdmin={userEmail == ADMIN_EMAIL} />
         </div>
       ))}
       {jsonArray.length === 0 && (
         <div className="text-center py-8">
-          <p className="text-white/60">No events found</p>
+          <p className="text-slate-400">No events found</p>
         </div>
       )}
     </div>

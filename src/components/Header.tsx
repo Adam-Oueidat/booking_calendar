@@ -7,8 +7,8 @@ const sharedClasses = {
   navContainer: "mx-auto flex items-center justify-between p-4 lg:px-8",
   linkContainer: "flex items-center space-x-6",
   button:
-    "text-sm font-medium text-white/80 hover:text-white transition-colors duration-200",
-  activeLink: "text-white font-semibold",
+    "text-sm font-medium text-slate-300 hover:text-slate-100 transition-colors duration-200",
+  activeLink: "text-slate-100 font-semibold",
   hiddenLgFlex: "flex items-center",
   hiddenLgFlex1: "flex items-center",
 };
@@ -18,7 +18,7 @@ export default function Header() {
   const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-ct-blue-600/80 backdrop-blur-md border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800/50">
       <SessionProvider>
         <nav className={sharedClasses.navContainer}>
           <div className={sharedClasses.linkContainer}>

@@ -29,7 +29,7 @@ function SubmitButton() {
     <button
       type="submit"
       value="submit"
-      className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
+      className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
       disabled={pending}
     >
       {pending ? (
@@ -69,7 +69,8 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   );
   const { refreshing, setRefreshing } = useContext(EventContext);
   const { data: session, status } = useSession();
-  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL;
+  const isAdmin =
+    session?.user?.email === process.env.NEXT_PUBLIC_AUTH_ADMIN_EMAIL;
 
   useEffect(() => {
     if (state.closeModal || state2) {
@@ -81,7 +82,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   return (
     <form action={formAction} className="space-y-6">
       {state.error && (
-        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
+        <div className="bg-rose-50 border border-rose-200 text-rose-600 px-4 py-3 rounded-lg">
           {state.error}
         </div>
       )}
@@ -137,7 +138,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
             type="submit"
             value="submit"
             formAction={formAction2}
-            className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
+            className="bg-rose-600 hover:bg-rose-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
