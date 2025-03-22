@@ -1,3 +1,5 @@
+"use client";
+
 import { useFormStatus } from "react-dom";
 import { useActionState, useContext, useEffect } from "react";
 import { requestEvent, blockEvent } from "@/src/app/api/server_actions/actions";
@@ -6,7 +8,9 @@ import TextInput from "@/src/components/modal/TextInput";
 import { EventContext } from "@/src/components/calendar/Month";
 import { useSession } from "next-auth/react";
 
-const initialState = {
+type RequestEventState = Record<string, string | boolean>;
+
+const initialState: RequestEventState = {
   closeModal: false,
   message: "",
   error: "",
@@ -55,8 +59,14 @@ function SubmitButton() {
 }
 
 export default function ModalForm({ date, closeModal }: ModalFormProps) {
-  const [state, formAction] = useActionState(requestEvent, initialState);
-  const [state2, formAction2] = useActionState(blockEvent, initialState2);
+  const [state, formAction] = useActionState<RequestEventState, FormData>(
+    requestEvent,
+    initialState
+  );
+  const [state2, formAction2] = useActionState<boolean, FormData>(
+    blockEvent,
+    initialState2
+  );
   const { refreshing, setRefreshing } = useContext(EventContext);
   const { data: session, status } = useSession();
   const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL;
