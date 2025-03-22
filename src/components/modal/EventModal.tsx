@@ -31,15 +31,20 @@ export default function EventModal({
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10">
-        <div className="bg-slate-400 lg:w-1/3 p-5 rounded-lg">
-          <button
-            className="bg-red-500 hover:bg-red-700 text-white float-end font-bold py-2 px-4 rounded"
-            onClick={closeModal}
-          >
-            X
-          </button>
-          <h1 className="text-2xl font-bold">Add event</h1>
-          <p>{dateString}</p>
+        <div className="bg-slate-400 w-[90%] max-w-2xl p-8 rounded-lg shadow-xl">
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h1 className="text-3xl font-bold mb-2">Add event</h1>
+              <p className="text-lg text-gray-700">{dateString}</p>
+            </div>
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200"
+              onClick={closeModal}
+              aria-label="Close modal"
+            >
+              X
+            </button>
+          </div>
           <ModalForm date={dateString} closeModal={closeModal} />
         </div>
       </div>
