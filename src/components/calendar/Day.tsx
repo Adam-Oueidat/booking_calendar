@@ -39,7 +39,7 @@ export default function Day({
     : "hover:bg-white/10";
 
   const todayClass = isToday
-    ? "bg-red-500 text-white"
+    ? "bg-red-500/20 border-red-500/50"
     : prevMonth || nextMonth
       ? "text-white/40"
       : "text-white";
@@ -47,10 +47,14 @@ export default function Day({
   return (
     <>
       <div
-        className={`h-12 rounded-lg p-1.5 flex flex-col items-end transition-colors duration-200 cursor-pointer ${isBooked}`}
+        className={`h-12 rounded-lg p-1.5 flex flex-col items-end transition-colors duration-200 cursor-pointer border ${todayClass} ${isBooked}`}
         onClick={currentEvent ? undefined : clickHandler}
       >
-        <span className={`text-xs font-medium ${todayClass}`}>{date}</span>
+        <span
+          className={`text-xs font-medium ${prevMonth || nextMonth ? "text-white/40" : "text-white"}`}
+        >
+          {date}
+        </span>
         {currentEvent && (
           <div className="mt-auto w-full">
             <div className="h-0.5 bg-white/40 rounded-full"></div>
