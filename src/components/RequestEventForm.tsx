@@ -1,5 +1,8 @@
 "use client";
-import { addEvent, deleteRequestedEvent } from "@/src/components/actions";
+import {
+  addEvent,
+  deleteRequestedEvent,
+} from "@/src/app/api/server_actions/actions";
 
 type RequestEventFormProps = {
   event: Record<string, string>;

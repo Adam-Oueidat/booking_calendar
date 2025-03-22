@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import Day from "@/src/components/calendar/Day";
-import { getEventsForMonth } from "@/src/components/actions";
+import { getEventsForMonth } from "@/src/app/api/server_actions/actions";
 
 type MonthProps = {
   year: number;

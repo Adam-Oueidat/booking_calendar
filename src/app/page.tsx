@@ -1,5 +1,5 @@
 import Card from "@/src/components/Card";
-import { getCardInformation } from "../components/actions";
+import { getCardInformation } from "@/src/app/api/server_actions/actions";
 
 export default async function HomePage() {
   const cardInformation = await getCardInformation();

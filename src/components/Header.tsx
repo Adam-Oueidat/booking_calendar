@@ -34,10 +34,10 @@ export default function Header() {
               </Link>
             )}
             {isAdmin && (
-            <Link className="text-white" href="/profile/admin">
-              Admin Page
-            </Link>)
-              }
+              <Link className="text-white" href="/profile/admin">
+                Admin Page
+              </Link>
+            )}
           </div>
 
           {status === "authenticated" ? (

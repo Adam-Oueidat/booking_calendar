@@ -1,6 +1,6 @@
 import { useFormStatus } from "react-dom";
 import { useActionState, useContext, useEffect } from "react";
-import { requestEvent, blockEvent } from "@/src/components/actions";
+import { requestEvent, blockEvent } from "@/src/app/api/server_actions/actions";
 import DateInput from "@/src/components/modal/DateInput";
 import TextInput from "@/src/components/modal/TextInput";
 import { EventContext } from "@/src/components/calendar/Month";
@@ -93,15 +93,16 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
       </div>
       <div className="relative bottom-0 right-0">
         {status === "authenticated" && isAdmin ? (
-          <><button
-            type="submit"
-            value="submit"
-            formAction={formAction2}
-            className="bg-red-600 float-end hover:bg-red-800 text-white font-bold py-2 px-4 mr-2 rounded"
-          >
-            Block event
-          </button>
-          <SubmitButton />
+          <>
+            <button
+              type="submit"
+              value="submit"
+              formAction={formAction2}
+              className="bg-red-600 float-end hover:bg-red-800 text-white font-bold py-2 px-4 mr-2 rounded"
+            >
+              Block event
+            </button>
+            <SubmitButton />
           </>
         ) : (
           <SubmitButton />

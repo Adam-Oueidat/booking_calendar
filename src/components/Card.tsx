@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/auth";
-import type { Card } from "./actions";
+import type { Card } from "@/src/app/api/server_actions/actions";
 
 type CardProps = {
   cardInfo: Card;

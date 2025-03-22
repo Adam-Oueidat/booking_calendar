@@ -1,5 +1,5 @@
 "use client";
-import { deleteConfirmedEvent } from "@/src/components/actions";
+import { deleteConfirmedEvent } from "@/src/app/api/server_actions/actions";
 
 type ConfirmedEventFormProps = {
   event: Record<string, string>;

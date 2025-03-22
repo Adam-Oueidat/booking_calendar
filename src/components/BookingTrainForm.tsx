@@ -1,6 +1,6 @@
 "use client";
 import { useActionState } from "react";
-import { bookTicket } from "@/src/components/actions";
+import { bookTicket } from "@/src/app/api/server_actions/actions";
 
 const initialState = false;
 
