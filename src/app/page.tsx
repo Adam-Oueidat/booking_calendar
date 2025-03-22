@@ -25,7 +25,7 @@ export default async function HomePage() {
               Boka din tid
             </h1>
             <p className="text-xl text-gray-300 mb-8">
-              Enkelt och smidigt sätt att boka tid för dina aktiviteter
+              Enkelt och smidigt sätt att boka tid för ett besök!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
