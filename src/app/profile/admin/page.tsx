@@ -14,30 +14,65 @@ export default async function AdminProfile() {
 
   if (user?.email !== ADMIN_EMAIL) {
     return (
-      <div className="bg-ct-blue-600  min-h-screen pt-20 flex items-start justify-center">
-        <h1>You are not authorized to use this page</h1>
+      <div className="bg-ct-blue-600 min-h-screen pt-20 flex items-center justify-center">
+        <div className="bg-white/10 backdrop-blur-lg rounded-lg p-8 shadow-xl">
+          <h1 className="text-2xl font-bold text-white">Access Denied</h1>
+          <p className="text-white/80 mt-2">
+            You are not authorized to use this page
+          </p>
+        </div>
       </div>
     );
   }
+
   return (
-    <section className="bg-ct-blue-600  min-h-screen pt-20 flex items-start justify-center">
-      <div>
-        <div className="grid grid-cols-1 gap-4 p-10 overflow-auto max-h-screen">
-          {requestedEventsArray.map((event: Record<string, string>) => (
-            <div
-              key={event.id}
-              className="bg-slate-400 rounded p-5 px-10 flex flex-col gap-2"
-            >
-              <RequestEventForm event={event} isAdmin />
+    <div className="bg-ct-blue-600 min-h-screen pt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white/10 backdrop-blur-lg rounded-lg shadow-xl p-6 mb-8">
+          <h1 className="text-3xl font-bold text-white mb-2">
+            Admin Dashboard
+          </h1>
+          <p className="text-white/80">Manage your events and bookings</p>
+        </div>
+
+        {/* Pending Requests Section */}
+        <div className="mb-12">
+          <div className="bg-white/10 backdrop-blur-lg rounded-lg shadow-xl p-6 mb-6">
+            <h2 className="text-2xl font-semibold text-white mb-4">
+              Pending Requests
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {requestedEventsArray.map((event: Record<string, string>) => (
+                <div
+                  key={event.id}
+                  className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:border-white/20 transition-all duration-300"
+                >
+                  <RequestEventForm event={event} isAdmin />
+                </div>
+              ))}
             </div>
-          ))}
-          <div className="grid grid-cols-3 gap-5">
-            {eventsArray.map((event: Record<string, string>) => (
-              <ConfirmedEventForm key={event.id} event={event} isAdmin />
-            ))}
+          </div>
+        </div>
+
+        {/* Confirmed Events Section */}
+        <div>
+          <div className="bg-white/10 backdrop-blur-lg rounded-lg shadow-xl p-6">
+            <h2 className="text-2xl font-semibold text-white mb-4">
+              Confirmed Events
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {eventsArray.map((event: Record<string, string>) => (
+                <div
+                  key={event.id}
+                  className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:border-white/20 transition-all duration-300"
+                >
+                  <ConfirmedEventForm event={event} isAdmin />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
