@@ -42,7 +42,7 @@ export default function LoginForm() {
               />
             </svg>
           )}
-          <span>Continue with Google</span>
+          <span>Logga in med Google</span>
         </button>
       </Suspense>
     </>
