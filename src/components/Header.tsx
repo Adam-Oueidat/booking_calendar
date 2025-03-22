@@ -4,38 +4,41 @@ import Link from "next/link";
 import { signOut, useSession, SessionProvider } from "next-auth/react";
 
 const sharedClasses = {
-  navContainer:
-    "mx-auto flex items-left md:justify-center p-6 lg:px-8  shadow-lg",
-  linkContainer: "md:flex lg:flex-1 space-x-4 pr-4",
-  button: "text-sm font-semibold leading-6 text-white",
-  hiddenLgFlex: "min-[320px]:px-4 sm:px-4 md:flex md:justify-end",
-  hiddenLgFlex1: "min-[320px]:px-4 sm:px-4 md:flex md:flex-1 md:justify-end",
+  navContainer: "mx-auto flex items-center justify-between p-4 lg:px-8",
+  linkContainer: "flex items-center space-x-6",
+  button:
+    "text-sm font-medium text-white/80 hover:text-white transition-colors duration-200",
+  activeLink: "text-white font-semibold",
+  hiddenLgFlex: "flex items-center",
+  hiddenLgFlex1: "flex items-center",
 };
 
 export default function Header() {
   const { status, data: session } = useSession();
   const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL;
-  console.log(isAdmin);
 
   return (
-    <header className="w-full bg-primary text-primary-foreground shadow-md">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-ct-blue-600/80 backdrop-blur-md border-b border-white/10">
       <SessionProvider>
         <nav className={sharedClasses.navContainer}>
           <div className={sharedClasses.linkContainer}>
-            <Link className="text-white" href="/">
+            <Link
+              className={`${sharedClasses.button} ${sharedClasses.activeLink}`}
+              href="/"
+            >
               Home
             </Link>
-            <Link className="text-white" href="/profile">
-              Profil
+            <Link className={sharedClasses.button} href="/profile">
+              Profile
             </Link>
             {status === "authenticated" && (
-              <Link className="text-white" href="/calendar">
+              <Link className={sharedClasses.button} href="/calendar">
                 Calendar
               </Link>
             )}
             {isAdmin && (
-              <Link className="text-white" href="/profile/admin">
-                Admin Page
+              <Link className={sharedClasses.button} href="/profile/admin">
+                Admin
               </Link>
             )}
           </div>
@@ -43,16 +46,47 @@ export default function Header() {
           {status === "authenticated" ? (
             <div className={sharedClasses.hiddenLgFlex}>
               <button
-                className={sharedClasses.button}
+                className={`${sharedClasses.button} flex items-center gap-2`}
                 onClick={() => signOut({ callbackUrl: "/", redirect: true })}
               >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                  />
+                </svg>
                 Logout
               </button>
             </div>
           ) : (
             <div className={sharedClasses.hiddenLgFlex1}>
-              <Link href="/login" className={sharedClasses.button}>
-                Log in <span aria-hidden="true">&rarr;</span>
+              <Link
+                href="/login"
+                className={`${sharedClasses.button} flex items-center gap-2`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                  />
+                </svg>
+                Login
               </Link>
             </div>
           )}

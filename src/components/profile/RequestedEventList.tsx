@@ -22,19 +22,20 @@ export default async function RequestedEventList({
 
   const jsonArray = JSON.parse(JSON.stringify(events));
   return (
-    <section className="bg-ct-blue-600  min-h-screen pt-20 flex items-start justify-center">
-      <div>
-        <div className="grid grid-cols-1 gap-4 p-10 overflow-auto max-h-screen">
-          {jsonArray.map((event: Record<string, string>) => (
-            <div key={event.id}>
-              <RequestEventForm
-                event={event}
-                isAdmin={userEmail == ADMIN_EMAIL}
-              />
-            </div>
-          ))}
+    <div className="grid grid-cols-1 gap-6">
+      {jsonArray.map((event: Record<string, string>) => (
+        <div
+          key={event.id}
+          className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:border-white/20 transition-all duration-300"
+        >
+          <RequestEventForm event={event} isAdmin={userEmail == ADMIN_EMAIL} />
         </div>
-      </div>
-    </section>
+      ))}
+      {jsonArray.length === 0 && (
+        <div className="text-center py-8">
+          <p className="text-white/60">No events found</p>
+        </div>
+      )}
+    </div>
   );
 }
