@@ -47,7 +47,7 @@ export default function Day({
   return (
     <>
       <div
-        className={`h-12 rounded-lg p-1.5 flex flex-col items-end transition-colors duration-200 cursor-pointer border ${todayClass} ${isBooked}`}
+        className={`h-20 rounded-lg p-1.5 flex flex-col items-end transition-colors duration-200 cursor-pointer border ${todayClass} ${isBooked}`}
         onClick={currentEvent ? undefined : clickHandler}
       >
         <span
