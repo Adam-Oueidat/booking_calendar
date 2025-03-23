@@ -212,6 +212,26 @@ export async function getEventsForMonth(year: number, month: number) {
   return eventsDict;
 }
 
+export async function getRequestedEventsForMonth(year: number, month: number) {
+  const requestedEvents = await prisma.requestedEvent.findMany();
+  const jsonArray = JSON.parse(JSON.stringify(requestedEvents));
+  const requestedEventsDict: Record<number, boolean> = {};
+  jsonArray.forEach((event: Event) => {
+    const startDate = new Date(event.startDate.replace("$D", ""));
+    const endDate = new Date(event.endDate.replace("$D", ""));
+
+    if (startDate.getFullYear() === year && startDate.getMonth() === month) {
+      for (let date = startDate.getDate(); date <= endDate.getDate(); date++) {
+        if (!requestedEventsDict[date]) {
+          requestedEventsDict[date] = false;
+        }
+        requestedEventsDict[date] = true;
+      }
+    }
+  });
+  return requestedEventsDict;
+}
+
 export async function createCalendarAppointment(
   fromDate: Date,
   toDate: Date,

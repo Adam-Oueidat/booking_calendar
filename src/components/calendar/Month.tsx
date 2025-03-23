@@ -1,6 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 import Day from "@/src/components/calendar/Day";
-import { getEventsForMonth } from "@/src/app/api/server_actions/actions";
+import {
+  getEventsForMonth,
+  getRequestedEventsForMonth,
+} from "@/src/app/api/server_actions/actions";
 
 type MonthProps = {
   year: number;
@@ -28,6 +31,15 @@ export default function Month({ month, year }: MonthProps) {
     nextMonth: {},
     prevMonth: {},
   });
+  const [requestedEvents, setRequestedEvents] = useState<{
+    current: Record<number, boolean>;
+    nextMonth: Record<number, boolean>;
+    prevMonth: Record<number, boolean>;
+  }>({
+    current: {},
+    nextMonth: {},
+    prevMonth: {},
+  });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -39,7 +51,18 @@ export default function Month({ month, year }: MonthProps) {
         getEventsForMonth(year, month + 1),
         getEventsForMonth(year, month - 1),
       ]);
+      const [currentRequested, nextRequested, prevRequested] =
+        await Promise.all([
+          getRequestedEventsForMonth(year, month),
+          getRequestedEventsForMonth(year, month + 1),
+          getRequestedEventsForMonth(year, month - 1),
+        ]);
       setEvents({ current: current, nextMonth: next, prevMonth: prev });
+      setRequestedEvents({
+        current: currentRequested,
+        nextMonth: nextRequested,
+        prevMonth: prevRequested,
+      });
       setIsLoading(false);
       setRefreshing(false);
     };
@@ -120,6 +143,9 @@ export default function Month({ month, year }: MonthProps) {
                   date={startDayOfPreviousMonth + i}
                   prevMonth={true}
                   currentEvent={events.prevMonth[startDayOfPreviousMonth + i]}
+                  requestedEvent={
+                    requestedEvents.prevMonth[startDayOfPreviousMonth + i]
+                  }
                 />
               </div>
             ))}
@@ -132,6 +158,7 @@ export default function Month({ month, year }: MonthProps) {
                 date={i + 1}
                 isToday={isToday(i + 1)}
                 currentEvent={events.current[i + 1]}
+                requestedEvent={requestedEvents.current[i + 1]}
               />
             </div>
           ))}
@@ -146,6 +173,7 @@ export default function Month({ month, year }: MonthProps) {
                   date={i + 1}
                   nextMonth={true}
                   currentEvent={events.nextMonth[i + 1]}
+                  requestedEvent={requestedEvents.nextMonth[i + 1]}
                 />
               </div>
             ))}

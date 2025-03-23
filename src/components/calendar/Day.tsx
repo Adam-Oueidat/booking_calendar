@@ -8,6 +8,7 @@ type DayProps = {
   prevMonth?: boolean;
   nextMonth?: boolean;
   currentEvent?: boolean;
+  requestedEvent?: boolean;
   isToday?: boolean;
 };
 
@@ -18,10 +19,10 @@ export default function Day({
   prevMonth,
   nextMonth,
   currentEvent,
+  requestedEvent,
   isToday,
 }: DayProps) {
   const [isModalOpen, setModalOpen] = useState(false);
-
   function removeEvent() {
     setModalOpen(false);
   }
@@ -38,8 +39,10 @@ export default function Day({
     prevMonth || nextMonth
       ? "bg-gray-700/40 text-gray-300 border-gray-600/50"
       : currentEvent
-        ? "bg-blue-600/40 border-blue-500/60"
-        : "hover:bg-white/20 border-white/20"
+        ? "bg-indigo-600/40 border-indigo-500/60"
+        : requestedEvent
+          ? "bg-blue-600/40 border-blue-500/60"
+          : "hover:bg-white/20 border-white/20"
   } ${isToday ? "bg-red-500/30 border-red-500/60" : ""}`;
 
   return (
@@ -64,8 +67,14 @@ export default function Day({
         </span>
         {currentEvent && (
           <div className="mt-auto w-full flex flex-col gap-1">
+            <div className="h-1.5 bg-indigo-400 rounded-full"></div>
+            <div className="text-xs text-indigo-100 font-medium">Bokad</div>
+          </div>
+        )}
+        {requestedEvent && (
+          <div className="mt-auto w-full flex flex-col gap-1">
             <div className="h-1.5 bg-blue-400 rounded-full"></div>
-            <div className="text-xs text-blue-100 font-medium">Bokad</div>
+            <div className="text-xs text-blue-100 font-medium">Förfrågan</div>
           </div>
         )}
       </div>
