@@ -30,10 +30,16 @@ export async function requestEvent(
   const to = formData.get("event-date-to");
   const name = formData.get("name");
   const description = formData.get("description");
+  const isBlockEvent = formData.get("isBlockEvent") === "true";
 
-  if (!from || !to || !name || !description) {
+  if (!from || !to) {
     throw new Error("Missing form data");
   }
+
+  if (!isBlockEvent && (!name || !description)) {
+    throw new Error("Missing required fields for booking");
+  }
+
   const currentDate = new Date();
   const fromDate = new Date(from as string);
   const toDate = new Date(to as string);

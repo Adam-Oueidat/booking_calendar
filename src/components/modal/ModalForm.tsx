@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
-import { useActionState, useContext, useEffect } from "react";
+import { useActionState, useContext, useEffect, useState } from "react";
 import { requestEvent, blockEvent } from "@/src/app/api/server_actions/actions";
 import DateInput from "@/src/components/modal/DateInput";
 import TextInput from "@/src/components/modal/TextInput";
@@ -70,6 +70,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   const { refreshing, setRefreshing } = useContext(EventContext);
   const { data: session, status } = useSession();
   const isAdmin = session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+  const [isBlockEvent, setIsBlockEvent] = useState(false);
 
   useEffect(() => {
     if (state.closeModal || state2) {
@@ -77,6 +78,10 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
       setRefreshing(true);
     }
   }, [state.closeModal, closeModal, refreshing, setRefreshing, state2]);
+
+  const handleBlockEventClick = () => {
+    setIsBlockEvent(true);
+  };
 
   return (
     <form action={formAction} className="space-y-6">
@@ -94,7 +99,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
             name="name"
             defaultValue={session?.user?.name ? session.user.name : "Namn"}
             placeholder="Enter your name"
-            requiredValue={true}
+            requiredValue={!isBlockEvent}
           />
           <TextInput
             label="Email"
@@ -103,7 +108,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
             defaultValue={
               session?.user?.email ? session.user.email : "janedoe@example.com"
             }
-            requiredValue={true}
+            requiredValue={!isBlockEvent}
           />
         </div>
 
@@ -112,7 +117,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
           id="description"
           name="description"
           placeholder="What would you like to do?"
-          requiredValue={true}
+          requiredValue={!isBlockEvent}
         />
 
         <div className="grid gap-2 lg:grid-cols-2">
@@ -137,6 +142,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
             type="submit"
             value="submit"
             formAction={formAction2}
+            onClick={handleBlockEventClick}
             className="bg-rose-600 hover:bg-rose-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
           >
             <svg
