@@ -1,17 +1,27 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { auth } from "@/auth";
 import type { Card } from "@/src/app/api/server_actions/actions";
+import { useState } from "react";
 
 type CardProps = {
   cardInfo: Card;
 };
 
-export default async function Card({ cardInfo }: CardProps) {
-  const session = await auth();
+export default function Card({ cardInfo }: CardProps) {
+  const [isFlipped, setIsFlipped] = useState(false);
+
   return (
-    <div className="flex items-center justify-center group h-80 w-60 [perspective:1000px]">
-      <div className="relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+    <div
+      className="flex items-center justify-center group h-80 w-60 [perspective:1000px]"
+      onClick={() => setIsFlipped(!isFlipped)}
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
+    >
+      <div
+        className={`relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] ${isFlipped ? "[transform:rotateY(180deg)]" : ""}`}
+      >
         {/* Front of card */}
         <div className="absolute inset-0 rounded-xl overflow-hidden">
           <div className="relative h-full">
@@ -64,47 +74,25 @@ export default async function Card({ cardInfo }: CardProps) {
                   Läs mer
                 </button>
               </Link>
-              {session ? (
-                <Link href="/calendar" passHref>
-                  <button className="w-full rounded-lg bg-slate-800/50 py-2 px-4 text-sm font-medium text-slate-100 hover:bg-slate-700/50 transition-colors duration-200 flex items-center justify-center gap-2 border border-slate-700/50">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                    </svg>
-                    Gå till bokning
-                  </button>
-                </Link>
-              ) : (
-                <Link href="/login" passHref>
-                  <button className="w-full rounded-lg bg-slate-800/50 py-2 px-4 text-sm font-medium text-slate-100 hover:bg-slate-700/50 transition-colors duration-200 flex items-center justify-center gap-2 border border-slate-700/50">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                      />
-                    </svg>
-                    Logga in för att boka
-                  </button>
-                </Link>
-              )}
+              <Link href="/calendar" passHref>
+                <button className="w-full rounded-lg bg-slate-800/50 py-2 px-4 text-sm font-medium text-slate-100 hover:bg-slate-700/50 transition-colors duration-200 flex items-center justify-center gap-2 border border-slate-700/50">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  Gå till bokning
+                </button>
+              </Link>
             </div>
           </div>
         </div>
