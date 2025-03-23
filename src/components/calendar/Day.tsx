@@ -49,7 +49,7 @@ export default function Day({
     <>
       <div
         className={dayClass}
-        onClick={currentEvent ? undefined : clickHandler}
+        onClick={currentEvent || requestedEvent ? undefined : clickHandler}
         role="button"
         aria-label={`${date} ${new Date(year, month).toLocaleString("default", { month: "long" })} ${isToday ? "(Today)" : ""}`}
         tabIndex={currentEvent ? -1 : 0}
