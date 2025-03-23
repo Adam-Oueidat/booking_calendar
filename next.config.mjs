@@ -1,4 +1,3 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = { 
     images: {
@@ -30,7 +29,7 @@ const nextConfig = {
     ],
   },
 env:{
-  ADMIN_EMAIL: 'ooueidat@gmail.com'
+  NEXT_PUBLIC_ADMIN_EMAIL: 'ooueidat@gmail.com'
 }};
 
 export default nextConfig;

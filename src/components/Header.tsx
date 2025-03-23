@@ -15,7 +15,7 @@ const sharedClasses = {
 
 export default function Header() {
   const { status, data: session } = useSession();
-  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL;
+  const isAdmin = session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800/50">

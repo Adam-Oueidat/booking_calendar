@@ -69,8 +69,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   );
   const { refreshing, setRefreshing } = useContext(EventContext);
   const { data: session, status } = useSession();
-  const isAdmin =
-    session?.user?.email === process.env.NEXT_PUBLIC_AUTH_ADMIN_EMAIL;
+  const isAdmin = session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
 
   useEffect(() => {
     if (state.closeModal || state2) {

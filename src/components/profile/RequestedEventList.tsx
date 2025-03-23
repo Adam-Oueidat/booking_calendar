@@ -8,7 +8,7 @@ type RequestedEventListProps = {
 export default async function RequestedEventList({
   userEmail,
 }: RequestedEventListProps) {
-  const ADMIN_EMAIL = process.env.AUTH_ADMIN_EMAIL;
+  const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
   let events = [];
   if (userEmail === ADMIN_EMAIL) {
     events = await prisma.requestedEvent.findMany();
