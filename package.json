@@ -31,7 +31,7 @@
     "@next/eslint-plugin-next": "15.2.3",
     "@stylistic/eslint-plugin": "2.1.0",
     "@types/eslint__js": "8.42.3",
-    "@types/node": "^20.17.25",
+    "@types/node": "^22.13.13",
     "@types/react": "19.0.12",
     "@types/react-dom": "19.0.4",
     "babel-plugin-react-compiler": "0.0.0-experimental-7449567-20240905",
