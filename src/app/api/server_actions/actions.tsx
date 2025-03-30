@@ -137,6 +137,7 @@ export async function blockEvent(state: boolean, formData: FormData) {
       description: "Blocked event by Admin" as string, // Add the name property here
       startDate: fromDate,
       endDate: toDate,
+      email: "admin@admin.com",
     },
   });
 
