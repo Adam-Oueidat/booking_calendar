@@ -10,6 +10,7 @@ generator client {
 model Event {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String
+  email       String
   description String
   startDate   DateTime
   endDate     DateTime

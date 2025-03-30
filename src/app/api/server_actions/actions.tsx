@@ -150,6 +150,7 @@ export async function addEvent(event: Event) {
   const fromDate = event.startDate;
   const toDate = event.endDate;
   const name = event.name;
+  const email = event.email;
   const description = event.description;
 
   await prisma.event.create({
@@ -159,6 +160,7 @@ export async function addEvent(event: Event) {
       description: description,
       startDate: fromDate,
       endDate: toDate,
+      email: email,
     },
   });
 

@@ -47,7 +47,7 @@ const handleDeleteEvent = async (event: Record<string, string>) => {
 
 export default function RequestEventForm({
   event,
-  isAdmin,
+  isAdmin = false,
 }: RequestEventFormProps) {
   const startDate = new Date(event.startDate);
   const endDate = new Date(event.endDate);
