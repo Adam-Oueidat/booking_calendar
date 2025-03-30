@@ -1,4 +1,3 @@
-import { isUserAdmin } from "@/src/app/api/admin/admin_actions";
 import RequestEventForm from "@/src/components/RequestEventForm";
 import prisma from "@/src/lib/db";
 
