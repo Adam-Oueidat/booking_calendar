@@ -1,5 +1,7 @@
 import { auth } from "@/auth";
 import ConfirmedEventForm from "@/src/components/ConfirmedEventForm";
+import AddAdminForm from "@/src/components/profile/admin/AddAdminForm";
+import AdminList from "@/src/components/profile/admin/AdminList";
 import RequestEventForm from "@/src/components/RequestEventForm";
 import prisma from "@/src/lib/db";
 
@@ -26,7 +28,7 @@ export default async function AdminProfile() {
   }
 
   return (
-    <div className="bg-slate-900 min-h-screen pt-20">
+    <div className="bg-slate-900 min-h-screen pt-20 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-slate-800/50 backdrop-blur-lg rounded-lg shadow-xl p-6 mb-8 border border-slate-700/50">
           <h1 className="text-3xl font-bold text-indigo-400 mb-2">
@@ -55,7 +57,7 @@ export default async function AdminProfile() {
         </div>
 
         {/* Confirmed Events Section */}
-        <div>
+        <div className="mb-12">
           <div className="bg-slate-800/50 backdrop-blur-lg rounded-lg shadow-xl p-6 border border-slate-700/50">
             <h2 className="text-2xl font-semibold text-slate-200 mb-4">
               Confirmed Events
@@ -69,6 +71,21 @@ export default async function AdminProfile() {
                   <ConfirmedEventForm event={event} isAdmin />
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Manage Admins section */}
+        <div>
+          <div className="bg-slate-800/50 backdrop-blur-lg rounded-lg shadow-xl p-6 border border-slate-700/50">
+            <h2 className="text-2xl font-semibold text-slate-200 mb-4">
+              Manage Admins
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <AdminList />
+              <div className="bg-slate-800/30 backdrop-blur-sm rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300">
+                <AddAdminForm />
+              </div>
             </div>
           </div>
         </div>

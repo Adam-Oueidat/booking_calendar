@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { signOut, useSession, SessionProvider } from "next-auth/react";
+import { isUserAdmin } from "@/src/app/api/admin/admin_actions";
+import { useEffect, useState } from "react";
 
 const sharedClasses = {
   navContainer: "mx-auto flex items-center justify-between p-4 lg:px-8",
@@ -15,7 +17,18 @@ const sharedClasses = {
 
 export default function Header() {
   const { status, data: session } = useSession();
-  const isAdmin = session?.user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      if (session?.user?.email) {
+        const adminStatus = await isUserAdmin(session.user.email);
+        setIsAdmin(adminStatus);
+      }
+    };
+
+    checkAdminStatus();
+  }, [session?.user?.email]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800/50">

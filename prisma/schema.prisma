@@ -32,3 +32,8 @@ model RequestedEvent {
   startDate   DateTime
   endDate     DateTime
 }
+
+model Admin {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
+}
