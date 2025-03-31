@@ -4,6 +4,7 @@ import AddAdminForm from "@/src/components/profile/admin/AddAdminForm";
 import AdminList from "@/src/components/profile/admin/AdminList";
 import RequestEventForm from "@/src/components/RequestEventForm";
 import prisma from "@/src/lib/db";
+import { isUserAdmin } from "../../api/admin/admin_actions";
 
 export default async function AdminProfile() {
   const requestedEvents = await prisma.requestedEvent.findMany();
@@ -12,9 +13,9 @@ export default async function AdminProfile() {
   const eventsArray = JSON.parse(JSON.stringify(events));
   const session = await auth();
   const user = session?.user;
-  const ADMIN_EMAIL = process.env.AUTH_ADMIN_EMAIL;
+  const isAdmin = await isUserAdmin(user?.email ?? "");
 
-  if (user?.email !== ADMIN_EMAIL) {
+  if (!isAdmin) {
     return (
       <div className="bg-slate-900 min-h-screen pt-20 flex items-center justify-center">
         <div className="bg-slate-800/50 backdrop-blur-lg rounded-lg p-8 shadow-xl border border-slate-700/50">
