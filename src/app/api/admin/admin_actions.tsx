@@ -50,3 +50,31 @@ export async function isUserAdmin(email: string) {
 
   return admin ? true : false;
 }
+
+export async function getCalendarLink() {
+  const session = await auth();
+  if (!session) {
+    redirect("/login");
+  }
+
+  const calendarLink = await prisma.calendarLink.findUnique({
+    where: { id: "calendar_link" },
+  });
+
+  return calendarLink;
+}
+
+export async function setCalendarLink(link: string) {
+  const session = await auth();
+  if (!session) {
+    redirect("/login");
+  }
+
+  await prisma.calendarLink.upsert({
+    where: { id: "calendar_link" },
+    update: { link },
+    create: { link },
+  });
+
+  revalidatePath("/");
+}

@@ -38,3 +38,8 @@ model Admin {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   email String @unique
 }
+
+model CalendarLink {
+  id   String @id @default("calendar_link") @map("_id")
+  link String
+}

@@ -4,7 +4,7 @@ import AddAdminForm from "@/src/components/profile/admin/AddAdminForm";
 import AdminList from "@/src/components/profile/admin/AdminList";
 import RequestEventForm from "@/src/components/RequestEventForm";
 import prisma from "@/src/lib/db";
-import { isUserAdmin } from "../../api/admin/admin_actions";
+import { getCalendarLink, isUserAdmin } from "../../api/admin/admin_actions";
 
 export default async function AdminProfile() {
   const requestedEvents = await prisma.requestedEvent.findMany();
@@ -14,6 +14,7 @@ export default async function AdminProfile() {
   const session = await auth();
   const user = session?.user;
   const isAdmin = await isUserAdmin(user?.email ?? "");
+  const calendarLink = await getCalendarLink();
 
   if (!isAdmin) {
     return (
@@ -87,6 +88,17 @@ export default async function AdminProfile() {
               <div className="bg-slate-800/30 backdrop-blur-sm rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300">
                 <AddAdminForm />
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="mt-12">
+          <div className="bg-slate-800/50 backdrop-blur-lg rounded-lg shadow-xl p-6 border border-slate-700/50">
+            <h2 className="text-2xl font-semibold text-slate-200 mb-4">
+              Manage Google Calendar
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <p>My current calendar</p>
+              <p>{calendarLink?.link}</p>
             </div>
           </div>
         </div>
