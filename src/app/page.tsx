@@ -17,7 +17,7 @@ export default async function HomePage() {
             src="/hero-bg.jpg"
             alt="Hero background"
             fill
-            className="object-cover"
+            className="object-cover blur-sm"
             priority
           />
           <div className="absolute inset-0 bg-black/50"></div>
