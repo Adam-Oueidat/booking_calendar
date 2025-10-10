@@ -26,17 +26,17 @@
   "devDependencies": {
     "@eslint/compat": "1.2.7",
     "@eslint/eslintrc": "3.3.1",
-    "@eslint/js": "^9.23.0",
+    "@eslint/js": "^9.36.0",
     "@ianvs/prettier-plugin-sort-imports": "4.4.1",
-    "@next/eslint-plugin-next": "15.2.3",
+    "@next/eslint-plugin-next": "15.5.4",
     "@stylistic/eslint-plugin": "4.2.0",
-    "@types/eslint__js": "8.42.3",
+
     "@types/node": "^22.13.13",
     "@types/react": "19.0.12",
     "@types/react-dom": "19.0.4",
     "babel-plugin-react-compiler": "0.0.0-experimental-7449567-20240905",
     "eslint": "^9.23.0",
-    "eslint-config-next": "15.2.3",
+    "eslint-config-next": "15.5.4",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-compiler": "0.0.0-experimental-7670337-20240918",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -47,7 +47,7 @@
     "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.27.0"
+    "typescript-eslint": "^8.46.0"
   },
   "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).",
   "main": "index.js",
