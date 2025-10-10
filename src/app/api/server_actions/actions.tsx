@@ -300,13 +300,19 @@ export type Card = {
 type Cards = Record<string, Card>;
 
 export async function getCardInformation(): Promise<Cards> {
-  const cardInformation = await prisma.cardInformation.findMany();
-  const jsonArray = JSON.parse(JSON.stringify(cardInformation));
-  const cardInformationDict: Cards = {};
-  jsonArray.forEach((cardInformation: Card) => {
-    cardInformationDict[cardInformation.id] = cardInformation;
-  });
-  return cardInformationDict;
+  try {
+    const cardInformation = await prisma.cardInformation.findMany();
+    const jsonArray = JSON.parse(JSON.stringify(cardInformation));
+    const cardInformationDict: Cards = {};
+    jsonArray.forEach((cardInformation: Card) => {
+      cardInformationDict[cardInformation.id] = cardInformation;
+    });
+    return cardInformationDict;
+  } catch (error) {
+    // Return empty object if database is not available (development mode)
+    console.warn("Database not available, returning empty card information:", error);
+    return {};
+  }
 }
 
 export async function bookTicket(

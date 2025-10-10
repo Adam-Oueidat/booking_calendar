@@ -6,6 +6,9 @@ import RequestEventForm from "@/src/components/RequestEventForm";
 import prisma from "@/src/lib/db";
 import { getCalendarLink, isUserAdmin } from "../../api/admin/admin_actions";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 export default async function AdminProfile() {
   const requestedEvents = await prisma.requestedEvent.findMany();
   const requestedEventsArray = JSON.parse(JSON.stringify(requestedEvents));

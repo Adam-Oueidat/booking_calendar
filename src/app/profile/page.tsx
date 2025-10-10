@@ -1,6 +1,9 @@
 import { auth } from "@/auth";
 import RequestedEventList from "@/src/components/profile/RequestedEventList";
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 export default async function Profile() {
   const session = await auth();
   const user = session?.user;
