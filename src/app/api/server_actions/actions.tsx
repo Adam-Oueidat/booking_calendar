@@ -310,7 +310,7 @@ export async function getCardInformation(): Promise<Cards> {
     return cardInformationDict;
   } catch (error) {
     // Return empty object if database is not available (development mode)
-    console.warn("Database not available, returning empty card information:", error);
+    console.warn("Database connection failed (likely in development mode), returning empty card information:", error);
     return {};
   }
 }

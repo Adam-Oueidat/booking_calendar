@@ -14,7 +14,7 @@ This is a Next.js booking calendar application with Google authentication, admin
 
 ## Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - pnpm (recommended) or npm
 - MongoDB database (local or cloud)
 - Google OAuth credentials
@@ -92,7 +92,8 @@ To set up Google OAuth:
 2. Create a new project or select existing
 3. Enable Google+ API
 4. Create OAuth 2.0 credentials
-5. Add authorized redirect URI: `http://localhost:3000/api/auth/callback/google`
+5. Add authorized redirect URI: `http://localhost:3000/api/auth/callback/google` (for development)
+   - For production, use your actual domain with HTTPS: `https://yourdomain.com/api/auth/callback/google`
 6. Copy Client ID and Secret to your `.env.local`
 
 ## Database Schema
