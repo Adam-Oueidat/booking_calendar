@@ -21,7 +21,7 @@ const compat = new FlatCompat({
 
 module.exports = tsEslint.config(
   {
-    ignores: [".next/*"],
+    ignores: [".next/*", "next-env.d.ts"],
   },
   eslint.configs.recommended,
   ...tsEslint.configs.strict,
@@ -82,7 +82,7 @@ module.exports = tsEslint.config(
     },
   },
   {
-    // Teat some some config files with forced .js extension as common-js
+    // Treat config files with forced .js extension as common-js
     files: ["next.config.js", "eslint.config.js", "prettier.config.js"],
     languageOptions: {
       globals: {
@@ -91,6 +91,7 @@ module.exports = tsEslint.config(
     },
     rules: {
       "@typescript-eslint/no-var-requires": "off",
+      "@typescript-eslint/no-require-imports": "off",
     },
   },
 );

@@ -4,6 +4,10 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import Image from "next/image";
 
+// Renders live card data from the database and reads the auth session, so it
+// must not be statically prerendered at build time.
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const cardInfo = await getCardInformation();
   const session = await auth();
