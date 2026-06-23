@@ -53,7 +53,7 @@ export default async function AdminProfile() {
               {requestedEventsArray.map((event: Record<string, string>) => (
                 <div
                   key={event.id}
-                  className="bg-slate-800/30 backdrop-blur-sm rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300"
+                  className="bg-slate-800/30 backdrop-blur-xs rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300"
                 >
                   <RequestEventForm event={event} isAdmin />
                 </div>
@@ -72,7 +72,7 @@ export default async function AdminProfile() {
               {eventsArray.map((event: Record<string, string>) => (
                 <div
                   key={event.id}
-                  className="bg-slate-800/30 backdrop-blur-sm rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300"
+                  className="bg-slate-800/30 backdrop-blur-xs rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300"
                 >
                   <ConfirmedEventForm event={event} isAdmin />
                 </div>
@@ -89,7 +89,7 @@ export default async function AdminProfile() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <AdminList />
-              <div className="bg-slate-800/30 backdrop-blur-sm rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300">
+              <div className="bg-slate-800/30 backdrop-blur-xs rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300">
                 <AddAdminForm />
               </div>
             </div>

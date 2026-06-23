@@ -17,7 +17,7 @@ export default function LoginForm() {
       <button
         onClick={handleSignIn}
         disabled={isLoading}
-        className="w-full flex items-center justify-center gap-3 px-7 py-3 text-slate-100 font-medium text-sm rounded-lg shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-center gap-3 px-7 py-3 text-slate-100 font-medium text-sm rounded-lg shadow-md hover:shadow-lg focus:shadow-lg focus:outline-hidden focus:ring-0 active:shadow-lg transition duration-150 ease-in-out bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? (
           <div className="w-5 h-5 border-2 border-slate-400/20 border-t-slate-400 rounded-full animate-spin" />

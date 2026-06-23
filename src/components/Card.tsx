@@ -14,13 +14,13 @@ export default function Card({ cardInfo }: CardProps) {
 
   return (
     <div
-      className="flex items-center justify-center group h-80 w-60 [perspective:1000px]"
+      className="flex items-center justify-center group h-80 w-60 perspective-[1000px]"
       onClick={() => setIsFlipped(!isFlipped)}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >
       <div
-        className={`relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] ${isFlipped ? "[transform:rotateY(180deg)]" : ""}`}
+        className={`relative h-full w-full rounded-xl shadow-xl transition-all duration-500 transform-3d ${isFlipped ? "transform-[rotateY(180deg)]" : ""}`}
       >
         {/* Front of card */}
         <div className="absolute inset-0 rounded-xl overflow-hidden">
@@ -32,7 +32,7 @@ export default function Card({ cardInfo }: CardProps) {
               className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
               alt={cardInfo?.title}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 p-4">
               <h3 className="text-xl font-bold text-slate-100 mb-2">
                 {cardInfo?.title}
@@ -43,7 +43,7 @@ export default function Card({ cardInfo }: CardProps) {
         </div>
 
         {/* Back of card */}
-        <div className="absolute inset-0 h-full w-full rounded-xl bg-gradient-to-br from-slate-900 to-slate-800 p-6 [transform:rotateY(180deg)] [backface-visibility:hidden]">
+        <div className="absolute inset-0 h-full w-full rounded-xl bg-linear-to-br from-slate-900 to-slate-800 p-6 transform-[rotateY(180deg)] backface-hidden">
           <div className="flex flex-col h-full">
             <div className="flex-1">
               <h3 className="text-xl font-bold text-slate-100 mb-4">
