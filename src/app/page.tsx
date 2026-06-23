@@ -13,7 +13,7 @@ export default async function HomePage() {
   const session = await auth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
+    <div className="min-h-screen bg-linear-to-b from-slate-900 to-slate-800">
       {/* Hero Section */}
       <div className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
@@ -21,7 +21,7 @@ export default async function HomePage() {
             src="/hero-bg.jpg"
             alt="Hero background"
             fill
-            className="object-cover blur-sm"
+            className="object-cover blur-xs"
             priority
           />
           <div className="absolute inset-0 bg-black/50"></div>
@@ -48,7 +48,7 @@ export default async function HomePage() {
               </Link>
             )}
             <Link href="#features">
-              <button className="bg-slate-800/50 text-slate-100 px-8 py-3 rounded-lg font-medium hover:bg-slate-700/50 transition-colors backdrop-blur-sm border border-slate-700/50">
+              <button className="bg-slate-800/50 text-slate-100 px-8 py-3 rounded-lg font-medium hover:bg-slate-700/50 transition-colors backdrop-blur-xs border border-slate-700/50">
                 Läs mer
               </button>
             </Link>

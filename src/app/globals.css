@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@config "../../tailwind.config.ts";
 
 :root {
   --background: #ffffff;
@@ -17,23 +17,5 @@
 body {
   color: var(--foreground);
   font-synthesis: none;
-  background-image: linear-gradient( black, gray);
+  background-image: linear-gradient(black, gray);
 }
-
-.my-rotate-y-180 {
-  transform: "rotateY(180deg)",
-}
-
-
-.preserve-3d {
-  transformStyle: "preserve-3d",
-}
-
-
-.perspective {
-  perspective: "1000px",
-}
-
-
-.backface-hidden {
-  backfaceVisibility: "hidden"}

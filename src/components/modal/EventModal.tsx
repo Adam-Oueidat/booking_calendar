@@ -30,7 +30,7 @@ export default function EventModal({
 
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm z-10 animate-fadeIn">
+      <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-xs z-10 animate-fadeIn">
         <div className="bg-gray-800 w-[90%] max-w-2xl rounded-xl shadow-xl transform transition-all duration-300 ease-out animate-slideUp">
           <div className="p-8">
             <div className="flex justify-between items-start mb-8">
