@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "@/src/components/Header";
 import { NextAuthProvider } from "@/src/lib/provider/NextAuthProvider";
@@ -11,6 +12,14 @@ const geistSans = localFont({
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
+});
+
+// Nordic display face — Schibsted Grotesk is a Scandinavian newspaper typeface,
+// grounding the headlines in Copenhagen rather than a generic serif.
+const schibsted = Schibsted_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "700", "800"],
+  variable: "--font-schibsted",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +40,9 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${schibsted.variable}`}
+      >
         <NextAuthProvider>
           <Header />
           {children}

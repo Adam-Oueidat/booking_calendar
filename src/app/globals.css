@@ -3,19 +3,48 @@
 @config "../../tailwind.config.ts";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #efeae0; /* warm limestone */
+  --foreground: #1a1714; /* ink */
 }
 
 body {
   color: var(--foreground);
+  background-color: var(--background);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-synthesis: none;
-  background-image: linear-gradient(black, gray);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Quality floor: a visible, on-brand keyboard focus ring everywhere. */
+:focus-visible {
+  outline: 2px solid #e6a23c;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* The canal reflection shimmers gently under the houses. */
+@keyframes canal-shimmer {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.32;
+    transform: translateY(2px);
+  }
+}
+
+.canal-reflection {
+  animation: canal-shimmer 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

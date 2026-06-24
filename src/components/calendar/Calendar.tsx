@@ -45,7 +45,7 @@ export default function Calendar() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-white"
+              className="h-5 w-5 text-cph-paper"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -63,7 +63,7 @@ export default function Calendar() {
               setMonth(date.getMonth());
               setYear(date.getFullYear());
             }}
-            className="px-4 py-2 text-sm font-medium text-white bg-white/10 hover:bg-white/20 rounded-lg transition-colors duration-200"
+            className="px-4 py-2 text-sm font-medium text-cph-paper border border-cph-sky/30 hover:bg-white/5 rounded-lg transition-colors duration-200"
           >
             Today
           </button>
@@ -74,7 +74,7 @@ export default function Calendar() {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-white"
+              className="h-5 w-5 text-cph-paper"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -93,7 +93,7 @@ export default function Calendar() {
       <Suspense
         fallback={
           <div className="flex items-center justify-center h-[50vh]">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cph-ochre"></div>
           </div>
         }
       >

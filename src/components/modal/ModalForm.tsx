@@ -30,12 +30,12 @@ function SubmitButton() {
     <button
       type="submit"
       value="submit"
-      className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs hover:shadow-md"
+      className="bg-cph-ochre text-cph-navy hover:bg-amber-300 font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs hover:shadow-md"
       disabled={pending}
     >
       {pending ? (
         <>
-          <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+          <div className="w-4 h-4 border-2 border-cph-navy/30 border-t-cph-navy rounded-full animate-spin"></div>
           <span>Processing...</span>
         </>
       ) : (
@@ -98,7 +98,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   return (
     <form action={formAction} className="space-y-6">
       {state.error && (
-        <div className="bg-rose-50 border border-rose-200 text-rose-600 px-4 py-3 rounded-lg">
+        <div className="bg-cph-rust/15 border border-cph-rust/40 text-cph-rust px-4 py-3 rounded-lg">
           {state.error}
         </div>
       )}
@@ -155,7 +155,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
             value="submit"
             formAction={formAction2}
             onClick={handleBlockEventClick}
-            className="bg-rose-600 hover:bg-rose-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
+            className="bg-cph-rust hover:bg-cph-rust/80 text-cph-paper font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

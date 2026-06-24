@@ -2,67 +2,261 @@ import Card from "@/src/components/Card";
 import { getCardInformation } from "@/src/app/api/server_actions/actions";
 import Link from "next/link";
 import { auth } from "@/auth";
-import Image from "next/image";
 
 // Renders live card data from the database and reads the auth session, so it
 // must not be statically prerendered at build time.
 export const dynamic = "force-dynamic";
+
+// The painted facades of Nyhavn, abstracted into a canal row. Order and color
+// aren't decoration — they're the brand's whole palette in one glance.
+const facadeColors = [
+  "#E6A23C",
+  "#C25342",
+  "#2F6E69",
+  "#4A6FA5",
+  "#E8C766",
+  "#B94B3C",
+];
+
+// One ribbon of facade color, reused as the page's structural divider.
+function FacadeStripe({ className = "" }: { className?: string }) {
+  return (
+    <div className={`flex h-1.5 w-full ${className}`} aria-hidden="true">
+      {facadeColors.map((c) => (
+        <span key={c} className="flex-1" style={{ backgroundColor: c }} />
+      ))}
+    </div>
+  );
+}
+
+// The canal houses. Heights and colors vary like the real row; a few wear the
+// stepped Danish gable (trappegavl).
+type House = {
+  x: number;
+  w: number;
+  h: number;
+  color: string;
+  roof: "gable" | "flat" | "step";
+};
+
+const houses: House[] = [
+  { x: 32, w: 92, h: 150, color: "#E6A23C", roof: "gable" },
+  { x: 132, w: 78, h: 182, color: "#C25342", roof: "gable" },
+  { x: 218, w: 104, h: 132, color: "#2F6E69", roof: "flat" },
+  { x: 330, w: 70, h: 166, color: "#4A6FA5", roof: "gable" },
+  { x: 408, w: 96, h: 204, color: "#D98C2B", roof: "step" },
+  { x: 512, w: 72, h: 140, color: "#B94B3C", roof: "gable" },
+  { x: 592, w: 110, h: 176, color: "#E8C766", roof: "gable" },
+  { x: 710, w: 80, h: 122, color: "#2F6E69", roof: "flat" },
+  { x: 798, w: 92, h: 192, color: "#E6A23C", roof: "gable" },
+  { x: 898, w: 74, h: 150, color: "#4A6FA5", roof: "gable" },
+  { x: 980, w: 100, h: 212, color: "#C25342", roof: "step" },
+  { x: 1088, w: 72, h: 140, color: "#2F6E69", roof: "gable" },
+];
+
+const QUAY = 244; // baseline where the houses meet the quay
+
+function stepGable(x: number, top: number, w: number) {
+  const p = [
+    [x, top],
+    [x, top - 8],
+    [x + 0.16 * w, top - 8],
+    [x + 0.16 * w, top - 18],
+    [x + 0.32 * w, top - 18],
+    [x + 0.32 * w, top - 28],
+    [x + 0.42 * w, top - 28],
+    [x + 0.42 * w, top - 38],
+    [x + 0.58 * w, top - 38],
+    [x + 0.58 * w, top - 28],
+    [x + 0.68 * w, top - 28],
+    [x + 0.68 * w, top - 18],
+    [x + 0.84 * w, top - 18],
+    [x + 0.84 * w, top - 8],
+    [x + w, top - 8],
+    [x + w, top],
+  ];
+  return p.map((pt) => pt.join(",")).join(" ");
+}
+
+function House({ house }: { house: House }) {
+  const { x, w, h, color, roof } = house;
+  const top = QUAY - h;
+  return (
+    <g>
+      <rect x={x} y={top} width={w} height={h} fill={color} />
+      {roof === "gable" && (
+        <polygon
+          points={`${x - 3},${top} ${x + w / 2},${top - 30} ${x + w + 3},${top}`}
+          fill={color}
+        />
+      )}
+      {roof === "flat" && (
+        <rect x={x - 3} y={top - 9} width={w + 6} height={9} fill={color} />
+      )}
+      {roof === "step" && <polygon points={stepGable(x, top, w)} fill={color} />}
+      {/* Lit windows at golden hour */}
+      <rect
+        x={x + w * 0.24}
+        y={top + 24}
+        width={11}
+        height={15}
+        fill="#F6E4A8"
+        opacity={0.9}
+      />
+      <rect
+        x={x + w * 0.6}
+        y={top + 24}
+        width={11}
+        height={15}
+        fill="#F6E4A8"
+        opacity={0.9}
+      />
+      {h > 150 && (
+        <>
+          <rect
+            x={x + w * 0.24}
+            y={top + 58}
+            width={11}
+            height={15}
+            fill="#F6E4A8"
+            opacity={0.55}
+          />
+          <rect
+            x={x + w * 0.6}
+            y={top + 58}
+            width={11}
+            height={15}
+            fill="#F6E4A8"
+            opacity={0.55}
+          />
+        </>
+      )}
+    </g>
+  );
+}
+
+function NyhavnSkyline() {
+  return (
+    <svg
+      viewBox="0 0 1200 380"
+      preserveAspectRatio="xMidYMax meet"
+      className="h-full w-full"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#16263B" stopOpacity="0" />
+          <stop offset="85%" stopColor="#16263B" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#16263B" stopOpacity="1" />
+        </linearGradient>
+      </defs>
+
+      {/* Reflection in the canal — mirrored about the quay line and shimmering */}
+      <g
+        className="canal-reflection"
+        transform={`translate(0, ${QUAY * 2}) scale(1, -1)`}
+        opacity={0.45}
+      >
+        {houses.map((h) => (
+          <House key={`r-${h.x}`} house={h} />
+        ))}
+      </g>
+      <rect
+        x="0"
+        y={QUAY}
+        width="1200"
+        height={380 - QUAY}
+        fill="url(#fade)"
+      />
+
+      {/* The quay edge */}
+      <rect x="0" y={QUAY - 2} width="1200" height="3" fill="#0E1C2E" />
+
+      {/* The houses */}
+      {houses.map((h) => (
+        <House key={h.x} house={h} />
+      ))}
+    </svg>
+  );
+}
 
 export default async function HomePage() {
   const cardInfo = await getCardInformation();
   const session = await auth();
 
   return (
-    <div className="min-h-screen bg-linear-to-b from-slate-900 to-slate-800">
-      {/* Hero Section */}
-      <div className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/hero-bg.jpg"
-            alt="Hero background"
-            fill
-            className="object-cover blur-xs"
-            priority
-          />
-          <div className="absolute inset-0 bg-black/50"></div>
-        </div>
-        <div className="relative z-10 text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-bold text-slate-100 mb-6">
-            Boka din tid
-          </h1>
-          <p className="text-xl text-slate-200 mb-8 max-w-2xl mx-auto">
-            Enkelt och smidigt sätt att boka tid för ett besök!
+    <div className="min-h-screen bg-cph-paper">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-cph-navy">
+        <FacadeStripe />
+
+        {/* Golden-hour glow over the canal */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(120% 80% at 75% 8%, rgba(230,162,60,0.28), rgba(217,140,43,0.08) 38%, transparent 62%)",
+          }}
+        />
+
+        <div className="relative z-10 mx-auto flex min-h-[78vh] max-w-5xl flex-col items-start justify-center px-6 pt-28 pb-56 sm:pb-64 lg:px-8">
+          <p className="font-mono text-xs tracking-[0.3em] text-cph-ochre uppercase">
+            Besökskalender · Köpenhamn
           </p>
-          <div className="flex gap-4 justify-center">
+          <h1 className="mt-6 font-display text-5xl leading-[0.95] font-extrabold tracking-tight text-cph-paper sm:text-6xl md:text-7xl">
+            Boka din tid
+            <br />
+            <span className="text-cph-ochre">vid kanalen</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-cph-sky">
+            Välj en ledig dag, boka tåget över Öresund och kom och hälsa på.
+            Enkelt och smidigt — ända fram till Nyhavn.
+          </p>
+
+          <div className="mt-9 flex flex-wrap items-center gap-4">
             {session ? (
-              <Link href="/calendar">
-                <button className="bg-indigo-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-indigo-400 transition-colors">
-                  Gå till bokning
-                </button>
+              <Link
+                href="/calendar"
+                className="rounded-md bg-cph-ochre px-7 py-3 font-medium text-cph-navy transition-colors hover:bg-amber-300"
+              >
+                Gå till bokning
               </Link>
             ) : (
-              <Link href="/login">
-                <button className="bg-indigo-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-indigo-400 transition-colors">
-                  Logga in
-                </button>
+              <Link
+                href="/login"
+                className="rounded-md bg-cph-ochre px-7 py-3 font-medium text-cph-navy transition-colors hover:bg-amber-300"
+              >
+                Logga in
               </Link>
             )}
-            <Link href="#features">
-              <button className="bg-slate-800/50 text-slate-100 px-8 py-3 rounded-lg font-medium hover:bg-slate-700/50 transition-colors backdrop-blur-xs border border-slate-700/50">
-                Läs mer
-              </button>
+            <Link
+              href="#features"
+              className="rounded-md border border-cph-sky/30 px-7 py-3 font-medium text-cph-paper transition-colors hover:border-cph-sky/60 hover:bg-white/5"
+            >
+              Utforska staden
             </Link>
           </div>
         </div>
-      </div>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 px-4">
-        <div className="flex flex-col items-center justify-center">
-          <h2 className="text-3xl font-bold text-slate-100 mb-12 text-center">
-            Våra tjänster
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        {/* Signature: the Nyhavn skyline rising from the canal */}
+        <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-56 sm:h-64">
+          <NyhavnSkyline />
+        </div>
+      </section>
+
+      {/* Things to do */}
+      <section id="features" className="px-6 py-20 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 text-center">
+            <p className="font-mono text-xs tracking-[0.3em] text-cph-rust uppercase">
+              Upplevelser
+            </p>
+            <h2 className="mt-3 font-display text-3xl font-bold text-cph-navy sm:text-4xl">
+              Att göra i Köpenhamn
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 justify-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
             {Object.entries(cardInfo).map(([id, card]) => (
               <Card key={id} cardInfo={card} />
             ))}
@@ -70,24 +264,26 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Developer Footer */}
-      <footer className="bg-slate-900 border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+      {/* Footer */}
+      <footer className="bg-cph-navy">
+        <FacadeStripe />
+        <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+          <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold text-indigo-400 mb-2">
+              <h3 className="font-display text-xl font-bold text-cph-ochre">
                 Adam Oueidat
               </h3>
-              <p className="text-slate-400">Software Engineer</p>
-              <div className="flex gap-4 mt-4">
+              <p className="mt-1 text-cph-sky">Software Engineer</p>
+              <div className="mt-4 flex justify-center gap-4 md:justify-start">
                 <a
                   href="https://github.com/Adam-Oueidat"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-indigo-400 transition-colors"
+                  aria-label="GitHub"
+                  className="text-cph-sky transition-colors hover:text-cph-ochre"
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="h-6 w-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -103,10 +299,11 @@ export default async function HomePage() {
                   href="https://www.linkedin.com/in/adam-oueidat-29555215b/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-slate-400 hover:text-indigo-400 transition-colors"
+                  aria-label="LinkedIn"
+                  className="text-cph-sky transition-colors hover:text-cph-ochre"
                 >
                   <svg
-                    className="w-6 h-6"
+                    className="h-6 w-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -121,10 +318,8 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-slate-400 mb-2">
-                Built with Next.js & TypeScript
-              </p>
-              <p className="text-slate-400">
+              <p className="text-cph-sky/80">Built with Next.js &amp; TypeScript</p>
+              <p className="mt-2 text-cph-sky/80">
                 © {new Date().getFullYear()} All rights reserved
               </p>
             </div>

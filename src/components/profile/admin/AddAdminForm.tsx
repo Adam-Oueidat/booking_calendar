@@ -27,7 +27,7 @@ export default function AddAdminForm() {
   );
   return (
     <div>
-      <h2 className="text-2xl font-semibold text-slate-200 mb-4">
+      <h2 className="font-display text-2xl font-semibold text-cph-paper mb-4">
         Add new admin
       </h2>
       <form action={addAdminAction} className="space-y-6">
@@ -35,7 +35,7 @@ export default function AddAdminForm() {
           <TextInput id="email" name="email" placeholder="Email" type="email" />
         </div>
         {state.error && (
-          <div className="bg-rose-50 border border-rose-200 text-rose-600 px-4 py-3 rounded-lg">
+          <div className="bg-cph-rust/15 border border-cph-rust/30 text-cph-rust px-4 py-3 rounded-lg">
             {state.error}
           </div>
         )}

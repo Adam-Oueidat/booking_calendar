@@ -31,17 +31,17 @@ export default function EventModal({
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-xs z-10 animate-fadeIn">
-        <div className="bg-gray-800 w-[90%] max-w-2xl rounded-xl shadow-xl transform transition-all duration-300 ease-out animate-slideUp">
+        <div className="bg-cph-navy2 border border-cph-sky/15 w-[90%] max-w-2xl rounded-xl shadow-xl transform transition-all duration-300 ease-out animate-slideUp">
           <div className="p-8">
             <div className="flex justify-between items-start mb-8">
               <div>
-                <h1 className="text-3xl font-bold mb-2 text-blue-400">
+                <h1 className="font-display text-3xl font-bold mb-2 text-cph-ochre">
                   Add event
                 </h1>
-                <p className="text-lg text-gray-300">{dateString}</p>
+                <p className="text-lg text-cph-sky">{dateString}</p>
               </div>
               <button
-                className="text-gray-400 hover:text-gray-200 transition-colors duration-200 p-2 rounded-full hover:bg-gray-700"
+                className="text-cph-sky/70 hover:text-cph-paper transition-colors duration-200 p-2 rounded-full hover:bg-white/5"
                 onClick={closeModal}
                 aria-label="Close modal"
               >
