@@ -32,7 +32,6 @@ export default async function RequestedEventList({
 
   const requestedEventsArray = JSON.parse(JSON.stringify(requestedEvents));
   const eventsArray = JSON.parse(JSON.stringify(events));
-  console.log(eventsArray);
   return (
     <div className="grid grid-cols-1 gap-6">
       {requestedEventsArray.map((event: Record<string, string>) => (
