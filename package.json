@@ -11,7 +11,9 @@
     "lint": "eslint . && echo '✅ Linting passed!'",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
-    "typecheck": "tsc --pretty --noEmit && echo '✅ Typechecking passed!'"
+    "typecheck": "tsc --pretty --noEmit && echo '✅ Typechecking passed!'",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
@@ -37,6 +39,7 @@
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "babel-plugin-react-compiler": "0.0.0-experimental-7449567-20240905",
+    "dotenv": "^17.4.2",
     "eslint": "^9.39.4",
     "eslint-config-next": "16.2.9",
     "eslint-plugin-react": "^7.37.5",
@@ -49,7 +52,9 @@
     "tailwindcss": "^4.3.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.62.0"
+    "typescript-eslint": "^8.62.0",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.9"
   },
   "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/create-next-app).",
   "main": "index.js",
