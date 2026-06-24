@@ -3,9 +3,13 @@ import { revalidatePath } from "next/cache";
 import prisma from "@/src/lib/db";
 import { auth } from "@/auth";
 import { requireAdmin, isAdmin } from "@/src/lib/auth/requireAdmin";
+import { addAdminLimiter, isRateLimited } from "@/src/lib/rateLimit";
 
 export async function addAdmin(email: string) {
-  await requireAdmin();
+  const session = await requireAdmin();
+  if (await isRateLimited(addAdminLimiter, session?.user?.email ?? "anonymous")) {
+    return { error: "Too many requests. Please try again later." };
+  }
 
   const admin = await prisma.admin.findUnique({
     where: { email },
