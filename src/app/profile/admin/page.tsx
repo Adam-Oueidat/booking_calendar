@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import ConfirmedEventForm from "@/src/components/ConfirmedEventForm";
 import AddAdminForm from "@/src/components/profile/admin/AddAdminForm";
 import AdminList from "@/src/components/profile/admin/AdminList";
@@ -15,9 +14,7 @@ export default async function AdminProfile() {
   const requestedEventsArray = JSON.parse(JSON.stringify(requestedEvents));
   const events = await prisma.event.findMany();
   const eventsArray = JSON.parse(JSON.stringify(events));
-  const session = await auth();
-  const user = session?.user;
-  const isAdmin = await isUserAdmin(user?.email ?? "");
+  const isAdmin = await isUserAdmin();
   const calendarLink = await getCalendarLink();
 
   if (!isAdmin) {

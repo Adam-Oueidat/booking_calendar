@@ -22,7 +22,7 @@ export default function Header() {
   useEffect(() => {
     const checkAdminStatus = async () => {
       if (session?.user?.email) {
-        const adminStatus = await isUserAdmin(session.user.email);
+        const adminStatus = await isUserAdmin();
         setIsAdmin(adminStatus);
       }
     };

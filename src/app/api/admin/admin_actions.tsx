@@ -2,8 +2,7 @@
 import { revalidatePath } from "next/cache";
 import prisma from "@/src/lib/db";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
-import { requireAdmin } from "@/src/lib/auth/requireAdmin";
+import { requireAdmin, isAdmin } from "@/src/lib/auth/requireAdmin";
 
 export async function addAdmin(email: string) {
   await requireAdmin();
@@ -24,36 +23,23 @@ export async function addAdmin(email: string) {
 }
 
 export async function getAdmins() {
-  const session = await auth();
-  if (!session) {
-    redirect("/login");
-  }
+  await requireAdmin();
 
   const admins = await prisma.admin.findMany();
   return admins;
 }
 
-export async function isUserAdmin(email: string) {
+export async function isUserAdmin() {
   const session = await auth();
-  if (!session) {
-    redirect("/login");
-  }
+  const email = session?.user?.email;
   if (!email) {
     return false;
   }
-
-  const admin = await prisma.admin.findUnique({
-    where: { email },
-  });
-
-  return admin ? true : false;
+  return isAdmin(email);
 }
 
 export async function getCalendarLink() {
-  const session = await auth();
-  if (!session) {
-    redirect("/login");
-  }
+  await requireAdmin();
 
   const calendarLink = await prisma.calendarLink.findUnique({
     where: { id: "calendar_link" },
@@ -63,10 +49,7 @@ export async function getCalendarLink() {
 }
 
 export async function setCalendarLink(link: string) {
-  const session = await auth();
-  if (!session) {
-    redirect("/login");
-  }
+  await requireAdmin();
 
   await prisma.calendarLink.upsert({
     where: { id: "calendar_link" },

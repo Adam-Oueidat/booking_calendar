@@ -76,7 +76,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   useEffect(() => {
     const checkAdminStatus = async () => {
       if (session?.user?.email) {
-        const adminStatus = await isUserAdmin(session.user.email);
+        const adminStatus = await isUserAdmin();
         setIsAdmin(adminStatus);
       }
     };
