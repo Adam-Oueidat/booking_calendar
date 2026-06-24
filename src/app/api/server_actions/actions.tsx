@@ -5,6 +5,11 @@ import prisma from "@/src/lib/db";
 import getAccessToken from "@/src/lib/availability/getAccessToken";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import {
+  requireAdmin,
+  requireSession,
+  isAdmin,
+} from "@/src/lib/auth/requireAdmin";
 
 type Event = {
   id: string;
@@ -121,6 +126,8 @@ export async function requestEvent(
 }
 
 export async function blockEvent(state: boolean, formData: FormData) {
+  await requireAdmin();
+
   const from = formData.get("event-date-from");
   const to = formData.get("event-date-to");
 
@@ -147,6 +154,8 @@ export async function blockEvent(state: boolean, formData: FormData) {
 }
 
 export async function addEvent(event: Event) {
+  await requireAdmin();
+
   const id = event.id;
   const fromDate = event.startDate;
   const toDate = event.endDate;
@@ -178,6 +187,12 @@ export async function addEvent(event: Event) {
 }
 
 export async function deleteRequestedEvent(event: Event) {
+  // Admin-or-owner: admins can delete any request; a user may delete their own.
+  const { email } = await requireSession();
+  if (!(await isAdmin(email)) && email !== event.email) {
+    throw new Error("Forbidden");
+  }
+
   await prisma.requestedEvent.delete({
     where: {
       id: event.id,
@@ -187,6 +202,8 @@ export async function deleteRequestedEvent(event: Event) {
 }
 
 export async function deleteConfirmedEvent(event: Event) {
+  await requireAdmin();
+
   await prisma.event.delete({
     where: {
       id: event.id,
