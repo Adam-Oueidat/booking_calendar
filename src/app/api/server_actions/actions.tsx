@@ -33,16 +33,32 @@ export async function requestEvent(
 
   const from = formData.get("event-date-from");
   const to = formData.get("event-date-to");
-  const name = formData.get("name");
-  const description = formData.get("description");
+  const name = String(formData.get("name") ?? "").trim();
+  const description = String(formData.get("description") ?? "").trim();
   const isBlockEvent = formData.get("isBlockEvent") === "true";
 
   if (!from || !to) {
     throw new Error("Missing form data");
   }
 
-  if (!isBlockEvent && (!name || !description)) {
-    throw new Error("Missing required fields for booking");
+  if (!isBlockEvent) {
+    if (!name || !description) {
+      throw new Error("Missing required fields for booking");
+    }
+    if (name.length > 100) {
+      return {
+        closeModal: false,
+        message: "",
+        error: "Name cannot be longer than 100 characters",
+      };
+    }
+    if (description.length > 1000) {
+      return {
+        closeModal: false,
+        message: "",
+        error: "Description cannot be longer than 1000 characters",
+      };
+    }
   }
 
   const currentDate = new Date();
@@ -108,8 +124,8 @@ export async function requestEvent(
   await prisma.requestedEvent.create({
     data: {
       id: new ObjectId().toString(),
-      name: name as string, // Add the name property here
-      description: description as string,
+      name: name, // Add the name property here
+      description: description,
       email: session.user?.email as string,
       startDate: fromDate,
       endDate: toDate,
@@ -275,7 +291,10 @@ export async function createCalendarAppointment(
       date: toDate.toISOString().split("T")[0],
       timeZone: "Europe/Stockholm",
     },
-    attendees: [{ email: "ooueidat@gmail.com" }, { email: email }],
+    attendees: [
+      { email: process.env.OWNER_EMAIL ?? "ooueidat@gmail.com" },
+      { email: email },
+    ],
     reminders: {
       useDefault: false,
       overrides: [
