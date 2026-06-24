@@ -32,8 +32,8 @@ export async function requestEvent(
     redirect("/login");
   }
 
-  const rlId = session.user?.email ?? "anonymous";
-  if (await isRateLimited(requestEventLimiter, rlId)) {
+  const rateLimitId = session.user?.email ?? "anonymous";
+  if (await isRateLimited(requestEventLimiter, rateLimitId)) {
     return {
       closeModal: false,
       message: "",
