@@ -3,12 +3,10 @@ import { revalidatePath } from "next/cache";
 import prisma from "@/src/lib/db";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { requireAdmin } from "@/src/lib/auth/requireAdmin";
 
 export async function addAdmin(email: string) {
-  const session = await auth();
-  if (!session) {
-    redirect("/login");
-  }
+  await requireAdmin();
 
   const admin = await prisma.admin.findUnique({
     where: { email },
