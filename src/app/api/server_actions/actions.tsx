@@ -10,6 +10,7 @@ import {
   requireSession,
   isAdmin,
 } from "@/src/lib/auth/requireAdmin";
+import { isRateLimited, requestEventLimiter } from "@/src/lib/rateLimit";
 
 type Event = {
   id: string;
@@ -29,6 +30,15 @@ export async function requestEvent(
 
   if (!session) {
     redirect("/login");
+  }
+
+  const rlId = session.user?.email ?? "anonymous";
+  if (await isRateLimited(requestEventLimiter, rlId)) {
+    return {
+      closeModal: false,
+      message: "",
+      error: "Too many requests. Please try again later.",
+    };
   }
 
   const from = formData.get("event-date-from");
