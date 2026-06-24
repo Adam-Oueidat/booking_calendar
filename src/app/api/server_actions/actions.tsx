@@ -156,33 +156,37 @@ export async function blockEvent(state: boolean, formData: FormData) {
 export async function addEvent(event: Event) {
   await requireAdmin();
 
-  const id = event.id;
-  const fromDate = event.startDate;
-  const toDate = event.endDate;
-  const name = event.name;
-  const email = event.email;
-  const description = event.description;
+  // Do not trust client-supplied fields. Re-fetch the authoritative
+  // RequestedEvent from the DB and use its stored values to prevent
+  // calendar-invite abuse and arbitrary record injection.
+  const requested = await prisma.requestedEvent.findUnique({
+    where: { id: event.id },
+  });
+
+  if (!requested) {
+    throw new Error("Requested event not found");
+  }
 
   await prisma.event.create({
     data: {
-      id: id,
-      name: name, // Add the name property here
-      description: description,
-      startDate: fromDate,
-      endDate: toDate,
-      email: email,
+      id: requested.id,
+      name: requested.name, // Add the name property here
+      description: requested.description,
+      startDate: requested.startDate,
+      endDate: requested.endDate,
+      email: requested.email,
     },
   });
 
-  const convertToDate = new Date(toDate);
-  const convertFromDate = new Date(fromDate);
+  const convertToDate = new Date(requested.endDate);
+  const convertFromDate = new Date(requested.startDate);
   convertToDate.setDate(convertToDate.getDate() + 1);
-  createCalendarAppointment(
+  await createCalendarAppointment(
     convertFromDate,
     convertToDate,
-    event.email,
-    name,
-    description
+    requested.email,
+    requested.name,
+    requested.description
   );
 }
 
