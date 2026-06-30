@@ -210,8 +210,7 @@ export default async function HomePage() {
             <span className="text-cph-ochre">vid kanalen</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-cph-sky">
-            Välj en ledig dag, boka tåget över Öresund och kom och hälsa på.
-            Enkelt och smidigt — ända fram till Nyhavn.
+            Hitta en ledig dag och boka ett besök!
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
