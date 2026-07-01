@@ -12,14 +12,12 @@ export default function BookingTrainForm() {
       <select
         name="city-from"
         id="city-from"
-        className="bg-gray-50 border border-gray-300 
-        text-gray-900 text-sm 
-        rounded-lg focus:ring-blue-500 
-        focus:border-blue-500 block 
-        w-full p-2.5 
-        dark:bg-gray-700 dark:border-gray-600 
-        dark:placeholder-gray-400 dark:text-white
-        dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="bg-cph-navy border border-cph-sky/15
+        text-cph-paper text-sm
+        rounded-lg focus:ring-cph-ochre
+        focus:border-transparent block
+        w-full p-2.5
+        placeholder-cph-sky/70"
         defaultValue="default"
       >
         <option disabled value="default" className="display:none">
@@ -32,7 +30,7 @@ export default function BookingTrainForm() {
       <button
         type="submit"
         value="submit"
-        className="justify-self-end bg-gray-600 rounded-lg text-sm w-auto inline-block p-1.5"
+        className="justify-self-end bg-cph-ochre text-cph-navy hover:bg-amber-300 transition-colors rounded-lg text-sm w-auto inline-block p-1.5"
       >
         Boka tågbiljett
       </button>

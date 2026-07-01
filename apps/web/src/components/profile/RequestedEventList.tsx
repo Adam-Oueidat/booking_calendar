@@ -37,7 +37,7 @@ export default async function RequestedEventList({
       {requestedEventsArray.map((event: Record<string, string>) => (
         <div
           key={event.id}
-          className="bg-slate-800/30 backdrop-blur-xs rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300"
+          className="bg-white/[0.03] backdrop-blur-xs rounded-lg p-6 border border-cph-sky/15 hover:border-cph-sky/30 transition-all duration-300"
         >
           <RequestEventForm event={event} />
         </div>
@@ -45,14 +45,14 @@ export default async function RequestedEventList({
       {eventsArray.map((event: Record<string, string>) => (
         <div
           key={event.id}
-          className="bg-slate-800/30 backdrop-blur-xs rounded-lg p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300"
+          className="bg-white/[0.03] backdrop-blur-xs rounded-lg p-6 border border-cph-sky/15 hover:border-cph-sky/30 transition-all duration-300"
         >
           <RequestEventForm event={event} />
         </div>
       ))}
       {requestedEventsArray.length === 0 && eventsArray.length === 0 && (
         <div className="text-center py-8">
-          <p className="text-slate-400">No events found</p>
+          <p className="text-cph-sky/70">No events found</p>
         </div>
       )}
     </div>

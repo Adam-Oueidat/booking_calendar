@@ -37,13 +37,13 @@ export default function Day({
 
   const dayClass = `h-20 rounded-lg p-1.5 flex flex-col items-end transition-colors duration-200 cursor-pointer border ${
     prevMonth || nextMonth
-      ? "bg-gray-700/40 text-gray-300 border-gray-600/50"
+      ? "bg-white/[0.03] text-cph-sky/70 border-cph-sky/15 hover:bg-white/[0.08] hover:border-cph-sky/30 hover:text-cph-sky"
       : currentEvent
-        ? "bg-indigo-600/40 border-indigo-500/60"
+        ? "bg-cph-ochre/15 border-cph-ochre/60"
         : requestedEvent
-          ? "bg-blue-600/40 border-blue-500/60"
-          : "hover:bg-white/20 border-white/20"
-  } ${isToday ? "bg-red-500/30 border-red-500/60" : ""}`;
+          ? "bg-cph-teal/20 border-cph-teal/60"
+          : "hover:bg-white/5 border-cph-sky/30"
+  } ${isToday ? "bg-cph-rust/20 border-cph-rust/60" : ""}`;
 
   return (
     <>
@@ -55,26 +55,26 @@ export default function Day({
         tabIndex={currentEvent ? -1 : 0}
       >
         <span
-          className={`text-sm font-medium ${
+          className={`font-mono text-sm font-medium ${
             prevMonth || nextMonth
-              ? "text-gray-300"
+              ? "text-cph-sky/70"
               : isToday
-                ? "text-white font-bold"
-                : "text-white"
+                ? "text-cph-paper font-bold"
+                : "text-cph-paper"
           }`}
         >
           {date}
         </span>
         {currentEvent && (
           <div className="mt-auto w-full flex flex-col gap-1">
-            <div className="h-1.5 bg-indigo-400 rounded-full"></div>
-            <div className="text-xs text-indigo-100 font-medium">Bokad</div>
+            <div className="h-1.5 bg-cph-ochre rounded-full"></div>
+            <div className="text-xs text-cph-ochre font-medium">Bokad</div>
           </div>
         )}
         {requestedEvent && (
           <div className="mt-auto w-full flex flex-col gap-1">
-            <div className="h-1.5 bg-blue-400 rounded-full"></div>
-            <div className="text-xs text-blue-100 font-medium">Förfrågan</div>
+            <div className="h-1.5 bg-cph-teal rounded-full"></div>
+            <div className="text-xs text-cph-teal font-medium">Förfrågan</div>
           </div>
         )}
       </div>

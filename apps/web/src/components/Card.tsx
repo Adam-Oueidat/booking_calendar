@@ -9,8 +9,43 @@ type CardProps = {
   cardInfo: Card;
 };
 
+// The facade palette, reused so a broken image still reads as a Nyhavn house.
+const facadeColors = ["#E6A23C", "#C25342", "#2F6E69", "#4A6FA5", "#E8C766"];
+
+function accentFor(seed: string) {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) | 0;
+  return facadeColors[Math.abs(hash) % facadeColors.length];
+}
+
+// On-brand stand-in when a card's image is missing or fails to load: a single
+// gabled canal house with lit windows, echoing the hero skyline.
+function FallbackArt({ seed }: { seed: string }) {
+  const color = accentFor(seed);
+  return (
+    <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-cph-navy to-cph-navy2 transition-transform duration-500 group-hover:scale-110">
+      <svg
+        width="96"
+        height="120"
+        viewBox="0 0 96 120"
+        fill="none"
+        aria-hidden="true"
+      >
+        <polygon points="6,46 48,12 90,46" fill={color} />
+        <rect x="14" y="46" width="68" height="62" fill={color} />
+        <rect x="26" y="60" width="14" height="18" fill="#F6E4A8" opacity="0.9" />
+        <rect x="56" y="60" width="14" height="18" fill="#F6E4A8" opacity="0.9" />
+        <rect x="26" y="86" width="14" height="18" fill="#F6E4A8" opacity="0.55" />
+        <rect x="56" y="86" width="14" height="18" fill="#F6E4A8" opacity="0.55" />
+      </svg>
+    </div>
+  );
+}
+
 export default function Card({ cardInfo }: CardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [imgError, setImgError] = useState(false);
+  const showFallback = imgError || !cardInfo?.imageUrl;
 
   return (
     <div
@@ -25,38 +60,43 @@ export default function Card({ cardInfo }: CardProps) {
         {/* Front of card */}
         <div className="absolute inset-0 rounded-xl overflow-hidden">
           <div className="relative h-full">
-            <Image
-              src={cardInfo?.imageUrl}
-              width={400}
-              height={600}
-              className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
-              alt={cardInfo?.title}
-            />
+            {showFallback ? (
+              <FallbackArt seed={cardInfo?.title ?? cardInfo?.id ?? ""} />
+            ) : (
+              <Image
+                src={cardInfo?.imageUrl}
+                width={400}
+                height={600}
+                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                alt={cardInfo?.title}
+                onError={() => setImgError(true)}
+              />
+            )}
             <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 p-4">
-              <h3 className="text-xl font-bold text-slate-100 mb-2">
+              <h3 className="font-display text-xl font-bold text-cph-paper mb-2">
                 {cardInfo?.title}
               </h3>
-              <div className="h-1 w-12 bg-indigo-400 rounded-full"></div>
+              <div className="h-1 w-12 bg-cph-ochre rounded-full"></div>
             </div>
           </div>
         </div>
 
         {/* Back of card */}
-        <div className="absolute inset-0 h-full w-full rounded-xl bg-linear-to-br from-slate-900 to-slate-800 p-6 transform-[rotateY(180deg)] backface-hidden">
+        <div className="absolute inset-0 h-full w-full rounded-xl bg-linear-to-br from-cph-navy to-cph-navy2 p-6 transform-[rotateY(180deg)] backface-hidden">
           <div className="flex flex-col h-full">
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-slate-100 mb-4">
+              <h3 className="font-display text-xl font-bold text-cph-paper mb-4">
                 {cardInfo?.title}
               </h3>
-              <p className="text-slate-200 text-sm leading-relaxed">
+              <p className="text-cph-sky text-sm leading-relaxed">
                 {cardInfo?.shortDescription}
               </p>
             </div>
 
             <div className="flex flex-col gap-3 mt-6">
               <Link href={cardInfo?.imageUrls} passHref>
-                <button className="w-full rounded-lg bg-indigo-500 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-400 transition-colors duration-200 flex items-center justify-center gap-2">
+                <button className="w-full rounded-lg bg-cph-ochre py-2 px-4 text-sm font-medium text-cph-navy hover:bg-amber-300 transition-colors duration-200 flex items-center justify-center gap-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
@@ -75,7 +115,7 @@ export default function Card({ cardInfo }: CardProps) {
                 </button>
               </Link>
               <Link href="/calendar" passHref>
-                <button className="w-full rounded-lg bg-slate-800/50 py-2 px-4 text-sm font-medium text-slate-100 hover:bg-slate-700/50 transition-colors duration-200 flex items-center justify-center gap-2 border border-slate-700/50">
+                <button className="w-full rounded-lg bg-white/5 py-2 px-4 text-sm font-medium text-cph-paper hover:bg-white/10 transition-colors duration-200 flex items-center justify-center gap-2 border border-cph-sky/25">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"

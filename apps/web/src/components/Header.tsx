@@ -9,8 +9,8 @@ const sharedClasses = {
   navContainer: "mx-auto flex items-center justify-between p-4 lg:px-8",
   linkContainer: "flex items-center space-x-6",
   button:
-    "text-sm font-medium text-slate-300 hover:text-slate-100 transition-colors duration-200",
-  activeLink: "text-slate-100 font-semibold",
+    "text-sm font-medium text-cph-sky hover:text-cph-paper transition-colors duration-200",
+  activeLink: "text-cph-ochre font-semibold",
   hiddenLgFlex: "flex items-center",
   hiddenLgFlex1: "flex items-center",
 };
@@ -31,7 +31,7 @@ export default function Header() {
   }, [session?.user?.email]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800/50">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-cph-navy/85 backdrop-blur-md border-b border-white/10">
       <SessionProvider>
         <nav className={sharedClasses.navContainer}>
           <div className={sharedClasses.linkContainer}>
@@ -59,10 +59,10 @@ export default function Header() {
           {status === "authenticated" ? (
             <div className={sharedClasses.hiddenLgFlex}>
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded-lg border border-slate-700/50">
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-lg border border-cph-sky/20">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 text-indigo-400"
+                    className="h-4 w-4 text-cph-ochre"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -74,7 +74,7 @@ export default function Header() {
                       d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                     />
                   </svg>
-                  <span className="text-sm font-medium text-slate-200">
+                  <span className="text-sm font-medium text-cph-paper">
                     {session?.user?.name}
                   </span>
                 </div>

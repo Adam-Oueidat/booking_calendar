@@ -42,12 +42,12 @@ export default function ConfirmedEventForm({
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1">
-        <h3 className="text-xl font-semibold text-white mb-2">{event.name}</h3>
-        <p className="text-white/80 text-sm mb-4 line-clamp-2">
+        <h3 className="font-display text-xl font-semibold text-cph-paper mb-2">{event.name}</h3>
+        <p className="text-cph-paper/80 text-sm mb-4 line-clamp-2">
           {event.description}
         </p>
 
-        <div className="flex items-center gap-2 text-sm text-white/60 mb-4">
+        <div className="flex items-center gap-2 text-sm text-cph-sky mb-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
@@ -70,11 +70,11 @@ export default function ConfirmedEventForm({
       </div>
 
       {isAdmin && (
-        <div className="mt-auto pt-4 border-t border-white/10">
+        <div className="mt-auto pt-4 border-t border-cph-sky/15">
           {!confirmDelete ? (
             <button
               onClick={() => setConfirmDelete(true)}
-              className="w-full bg-red-500/20 hover:bg-red-500/30 text-red-400 hover:text-red-300 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
+              className="w-full bg-cph-rust text-cph-paper hover:bg-cph-rust/85 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,13 +97,13 @@ export default function ConfirmedEventForm({
               <div className="flex gap-3">
                 <button
                   onClick={() => setConfirmDelete(false)}
-                  className="flex-1 bg-slate-700/50 hover:bg-slate-700/70 text-slate-300 hover:text-slate-100 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
+                  className="flex-1 border border-cph-sky/30 text-cph-paper hover:bg-white/5 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => handleDeleteEvent(event)}
-                  className="flex-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 hover:text-red-300 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
+                  className="flex-1 bg-cph-rust text-cph-paper hover:bg-cph-rust/85 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

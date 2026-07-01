@@ -21,7 +21,7 @@ export default function TextInput({
     <div className={styling}>
       <label
         htmlFor={id}
-        className="block text-sm font-medium text-slate-200 mb-1"
+        className="block text-sm font-medium text-cph-paper mb-1"
       >
         {label}
       </label>
@@ -30,7 +30,7 @@ export default function TextInput({
         id={id}
         name={name}
         placeholder={placeholder}
-        className="bg-slate-800 border border-slate-700 rounded-lg text-slate-100 p-2.5 w-full text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-slate-400"
+        className="bg-cph-navy border border-cph-sky/15 rounded-lg text-cph-paper p-2.5 w-full text-sm focus:ring-2 focus:ring-cph-ochre focus:border-transparent placeholder-cph-sky/70"
         required={requiredValue}
         data-lpignore="true"
         {...props}

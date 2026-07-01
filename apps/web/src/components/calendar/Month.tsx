@@ -103,7 +103,7 @@ export default function Month({ month, year }: MonthProps) {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-[50vh]">
-        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-white"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cph-ochre"></div>
       </div>
     );
   }
@@ -115,7 +115,7 @@ export default function Month({ month, year }: MonthProps) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-white">
+        <h2 className="font-display text-xl font-bold text-cph-paper">
           {monthName} {year}
         </h2>
       </div>
@@ -126,7 +126,7 @@ export default function Month({ month, year }: MonthProps) {
             (day, index) => (
               <div
                 key={index}
-                className="text-center py-1 text-xs font-medium text-white/60"
+                className="text-center py-1 font-mono uppercase tracking-wider text-xs font-medium text-cph-sky/70"
               >
                 {day}
               </div>
