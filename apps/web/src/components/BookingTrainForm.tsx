@@ -1,6 +1,7 @@
 "use client";
 import { useActionState } from "react";
 import { bookTicket } from "@/src/app/api/server_actions/actions";
+import { Button } from "@repo/ui";
 
 const initialState = false;
 
@@ -27,13 +28,14 @@ export default function BookingTrainForm() {
         <option value="stockholm">Stockholm</option>
         <option value="malmo">Malmö</option>
       </select>
-      <button
+      <Button
         type="submit"
         value="submit"
-        className="justify-self-end bg-cph-ochre text-cph-navy hover:bg-amber-300 transition-colors rounded-lg text-sm w-auto inline-block p-1.5"
+        size="none"
+        className="justify-self-end w-auto p-1.5 text-sm"
       >
         Boka tågbiljett
-      </button>
+      </Button>
     </form>
   );
 }

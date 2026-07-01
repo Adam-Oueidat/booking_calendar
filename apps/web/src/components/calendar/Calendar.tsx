@@ -1,6 +1,7 @@
 "use client";
 import Month from "@/src/components/calendar/Month";
 import { useState, useEffect, Suspense, useCallback } from "react";
+import { Button } from "@repo/ui";
 
 export default function Calendar() {
   const date = new Date();
@@ -38,9 +39,10 @@ export default function Calendar() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={previousMonth}
-            className="p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
             aria-label="Previous month"
           >
             <svg
@@ -57,19 +59,21 @@ export default function Calendar() {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => {
               setMonth(date.getMonth());
               setYear(date.getFullYear());
             }}
-            className="px-4 py-2 text-sm font-medium text-cph-paper border border-cph-sky/30 hover:bg-white/5 rounded-lg transition-colors duration-200"
           >
             Today
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={nextMonth}
-            className="p-2 rounded-lg hover:bg-white/10 transition-colors duration-200"
             aria-label="Next month"
           >
             <svg
@@ -86,7 +90,7 @@ export default function Calendar() {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </button>
+          </Button>
         </div>
       </div>
 

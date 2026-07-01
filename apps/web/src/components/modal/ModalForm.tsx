@@ -3,7 +3,7 @@
 import { useFormStatus } from "react-dom";
 import { useActionState, useContext, useEffect, useState } from "react";
 import { requestEvent, blockEvent } from "@/src/app/api/server_actions/actions";
-import { DateInput, TextInput } from "@repo/ui";
+import { Button, DateInput, TextInput } from "@repo/ui";
 import { EventContext } from "@/src/components/calendar/Month";
 import { useSession } from "next-auth/react";
 
@@ -25,10 +25,10 @@ type ModalFormProps = {
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <button
+    <Button
       type="submit"
       value="submit"
-      className="bg-cph-ochre text-cph-navy hover:bg-amber-300 font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-xs hover:shadow-md"
+      className="px-6 shadow-xs hover:shadow-md"
       disabled={pending}
     >
       {pending ? (
@@ -53,7 +53,7 @@ function SubmitButton() {
           <span>Boka</span>
         </>
       )}
-    </button>
+    </Button>
   );
 }
 
@@ -137,12 +137,13 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
 
       <div className="flex justify-end gap-3 pt-4">
         {status === "authenticated" && isAdmin && (
-          <button
+          <Button
             type="submit"
             value="submit"
+            variant="destructive"
             formAction={formAction2}
             onClick={handleBlockEventClick}
-            className="bg-cph-rust hover:bg-cph-rust/80 text-cph-paper font-medium py-2 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
+            className="px-6"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +158,7 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
               />
             </svg>
             <span>Block Event</span>
-          </button>
+          </Button>
         )}
         <SubmitButton />
       </div>

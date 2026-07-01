@@ -1,6 +1,7 @@
 import React from "react";
 import ModalForm from "./ModalForm";
 import { useEffect } from "react";
+import { Button } from "@repo/ui";
 
 type EventModalProps = {
   closeModal: () => void;
@@ -40,8 +41,10 @@ export default function EventModal({
                 </h1>
                 <p className="text-lg text-cph-sky">{dateString}</p>
               </div>
-              <button
-                className="text-cph-sky/70 hover:text-cph-paper transition-colors duration-200 p-2 rounded-full hover:bg-white/5"
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full text-cph-sky/70 hover:bg-white/5 hover:text-cph-paper"
                 onClick={closeModal}
                 aria-label="Close modal"
               >
@@ -58,7 +61,7 @@ export default function EventModal({
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
-              </button>
+              </Button>
             </div>
             <ModalForm date={dateString} closeModal={closeModal} />
           </div>

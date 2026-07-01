@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Card } from "@/src/app/api/server_actions/actions";
 import { useState } from "react";
+import { Button } from "@repo/ui";
 
 type CardProps = {
   cardInfo: Card;
@@ -49,7 +50,7 @@ export default function Card({ cardInfo }: CardProps) {
 
   return (
     <div
-      className="flex items-center justify-center group h-80 w-60 perspective-[1000px]"
+      className="flex items-center justify-center group h-80 w-60 perspective-[1000px] cursor-pointer"
       onClick={() => setIsFlipped(!isFlipped)}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
@@ -96,7 +97,7 @@ export default function Card({ cardInfo }: CardProps) {
 
             <div className="flex flex-col gap-3 mt-6">
               <Link href={cardInfo?.imageUrls} passHref>
-                <button className="w-full rounded-lg bg-cph-ochre py-2 px-4 text-sm font-medium text-cph-navy hover:bg-amber-300 transition-colors duration-200 flex items-center justify-center gap-2">
+                <Button variant="primary" size="sm" className="w-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
@@ -112,10 +113,14 @@ export default function Card({ cardInfo }: CardProps) {
                     />
                   </svg>
                   Läs mer
-                </button>
+                </Button>
               </Link>
               <Link href="/calendar" passHref>
-                <button className="w-full rounded-lg bg-white/5 py-2 px-4 text-sm font-medium text-cph-paper hover:bg-white/10 transition-colors duration-200 flex items-center justify-center gap-2 border border-cph-sky/25">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full border border-cph-sky/25 bg-white/5"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
@@ -131,7 +136,7 @@ export default function Card({ cardInfo }: CardProps) {
                     />
                   </svg>
                   Gå till bokning
-                </button>
+                </Button>
               </Link>
             </div>
           </div>

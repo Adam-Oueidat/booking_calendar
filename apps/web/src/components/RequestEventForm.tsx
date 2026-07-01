@@ -5,6 +5,7 @@ import {
 } from "@/src/app/api/server_actions/actions";
 import { format } from "date-fns";
 import { sv } from "date-fns/locale";
+import { Button } from "@repo/ui";
 
 type RequestEventFormProps = {
   event: Record<string, string>;
@@ -102,9 +103,11 @@ export default function RequestEventForm({
 
       <div className="mt-auto pt-4 border-t border-cph-sky/15">
         <div className="flex gap-3">
-          <button
+          <Button
+            variant="destructive"
+            size="sm"
+            className="flex-1"
             onClick={() => handleDeleteEvent(event)}
-            className="flex-1 bg-cph-rust text-cph-paper hover:bg-cph-rust/85 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -121,11 +124,13 @@ export default function RequestEventForm({
               />
             </svg>
             Remove
-          </button>
+          </Button>
           {isAdmin && (
-            <button
+            <Button
+              variant="success"
+              size="sm"
+              className="flex-1"
               onClick={() => handleAddEvent(event)}
-              className="flex-1 bg-cph-teal text-cph-paper hover:bg-cph-teal/85 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +147,7 @@ export default function RequestEventForm({
                 />
               </svg>
               Accept
-            </button>
+            </Button>
           )}
         </div>
       </div>
