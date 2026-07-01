@@ -49,7 +49,7 @@ export default function Card({ cardInfo }: CardProps) {
 
   return (
     <div
-      className="flex items-center justify-center group h-80 w-60 perspective-[1000px]"
+      className="flex items-center justify-center group h-80 w-60 perspective-[1000px] cursor-pointer"
       onClick={() => setIsFlipped(!isFlipped)}
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
