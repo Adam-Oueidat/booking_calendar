@@ -3,6 +3,7 @@ import { deleteConfirmedEvent } from "@/src/app/api/server_actions/actions";
 import { format } from "date-fns";
 import { sv } from "date-fns/locale";
 import { useState } from "react";
+import { Button } from "@repo/ui";
 
 type ConfirmedEventFormProps = {
   event: Record<string, string>;
@@ -72,9 +73,11 @@ export default function ConfirmedEventForm({
       {isAdmin && (
         <div className="mt-auto pt-4 border-t border-cph-sky/15">
           {!confirmDelete ? (
-            <button
+            <Button
+              variant="destructive"
+              size="sm"
+              className="w-full"
               onClick={() => setConfirmDelete(true)}
-              className="w-full bg-cph-rust text-cph-paper hover:bg-cph-rust/85 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -91,19 +94,23 @@ export default function ConfirmedEventForm({
                 />
               </svg>
               Remove Event
-            </button>
+            </Button>
           ) : (
             <div className="space-y-4">
               <div className="flex gap-3">
-                <button
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1"
                   onClick={() => setConfirmDelete(false)}
-                  className="flex-1 border border-cph-sky/30 text-cph-paper hover:bg-white/5 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
                 >
                   Cancel
-                </button>
-                <button
+                </Button>
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="flex-1"
                   onClick={() => handleDeleteEvent(event)}
-                  className="flex-1 bg-cph-rust text-cph-paper hover:bg-cph-rust/85 rounded-lg py-2 px-4 text-sm font-medium transition-colors duration-200 flex items-center justify-center gap-2"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +127,7 @@ export default function ConfirmedEventForm({
                     />
                   </svg>
                   Confirm
-                </button>
+                </Button>
               </div>
             </div>
           )}

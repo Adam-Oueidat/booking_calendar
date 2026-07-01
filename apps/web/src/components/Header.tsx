@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { signOut, useSession, SessionProvider } from "next-auth/react";
+import { Button } from "@repo/ui";
 
 const sharedClasses = {
   navContainer: "mx-auto flex items-center justify-between p-4 lg:px-8",
@@ -65,8 +66,10 @@ export default function Header() {
                     {session?.user?.name}
                   </span>
                 </div>
-                <button
-                  className={`${sharedClasses.button} flex items-center gap-2`}
+                <Button
+                  variant="link"
+                  size="none"
+                  className="text-sm"
                   onClick={() => signOut({ callbackUrl: "/", redirect: true })}
                 >
                   <svg
@@ -84,7 +87,7 @@ export default function Header() {
                     />
                   </svg>
                   Logout
-                </button>
+                </Button>
               </div>
             </div>
           ) : (
