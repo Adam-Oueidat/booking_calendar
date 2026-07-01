@@ -6,7 +6,6 @@ import { requestEvent, blockEvent } from "@/src/app/api/server_actions/actions";
 import { DateInput, TextInput } from "@repo/ui";
 import { EventContext } from "@/src/components/calendar/Month";
 import { useSession } from "next-auth/react";
-import { isUserAdmin } from "@/src/app/api/admin/admin_actions";
 
 type RequestEventState = Record<string, string | boolean>;
 
@@ -69,19 +68,8 @@ export default function ModalForm({ date, closeModal }: ModalFormProps) {
   );
   const { refreshing, setRefreshing } = useContext(EventContext);
   const { data: session, status } = useSession();
-  const [isAdmin, setIsAdmin] = useState(false);
+  const isAdmin = Boolean(session?.user?.isAdmin);
   const [isBlockEvent, setIsBlockEvent] = useState(false);
-
-  useEffect(() => {
-    const checkAdminStatus = async () => {
-      if (session?.user?.email) {
-        const adminStatus = await isUserAdmin();
-        setIsAdmin(adminStatus);
-      }
-    };
-
-    checkAdminStatus();
-  }, [session?.user?.email]);
 
   useEffect(() => {
     if (state.closeModal || state2) {

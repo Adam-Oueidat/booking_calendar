@@ -34,8 +34,9 @@ yarn-error.log*
 # vercel
 .vercel
 
-# local Claude Code config
-.claude/
+# Claude Code: share skills/config, but keep per-user local files out
+.claude/settings.local.json
+.claude/worktrees/
 
 # typescript
 *.tsbuildinfo
