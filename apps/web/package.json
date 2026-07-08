@@ -39,7 +39,7 @@
     "eslint": "^9.39.4",
     "eslint-config-next": "16.2.9",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-compiler": "0.0.0-experimental-7670337-20240918",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-9627644-20250520",
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^17.7.0",
     "postcss": "^8.5.16",
